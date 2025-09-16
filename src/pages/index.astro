@@ -1,17 +1,91 @@
 ---
 import "../styles/global.css";
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// We want to use GSAP for animations https://gsap.com/docs/v3/GSAP/
 
-import { Test } from "../components/test";
-import { ComingSoon } from "../components/ComingSoon";
+import { NavbarBuna } from "../components/NavBar/navbar";
+import { HeroHighlight } from "../components/Hero/Hero";
+import { HowItWorks } from "../components/HowItWorks/HowItWorks";
+import { Beneficios } from "../components/Beneficios/Beneficios";
+import { Footer } from "../components/Footer/Footer";
 ---
+
+<script>
+  import Lenis from "lenis";
+  const lenis = new Lenis();
+  // Use requestAnimationFrame to continuously update the scroll
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+</script>
 
 <Layout>
   <!-- <Welcome /> -->
-  <!-- <Test client:load /> -->
-  <ComingSoon client:load />
+  <NavbarBuna client:load />
+  <HeroHighlight client:load />
+  <Beneficios client:load />
+  <HowItWorks client:load />
+  <Footer client:load />
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <div>asd</div>
+  <!-- <WhyBuna /> -->
+  <!-- <ComingSoon client:load /> -->
 </Layout>
