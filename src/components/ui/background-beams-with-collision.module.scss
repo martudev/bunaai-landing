@@ -1,0 +1,105 @@
+/* background-beams.module.scss */
+:root {
+  --indigo: #90f39d; /* indigo-500 aprox */
+  --purple: #b5ef7e; /* purple-500 aprox */
+  --neutral-100: #f5f5f5;
+  --neutral-800: #262626;
+  --neutral-950: #0a0a0a;
+}
+
+/* Contenedor principal (antes: h-96 md:h-[40rem] bg-gradient-to-b ... flex center ...) */
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 24rem; /* h-96 */
+  overflow: hidden;
+
+  background: linear-gradient(to bottom, #ffffff, var(--neutral-100));
+}
+
+/* Soporte “dark mode” por prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  .root {
+    background: linear-gradient(to bottom, var(--neutral-950), #3f3f46);
+  }
+}
+
+/* Soporte “dark mode” si el proyecto usa una clase .dark en html/body */
+:global(.dark) .root {
+  background: linear-gradient(to bottom, var(--neutral-950), #3f3f46);
+}
+
+/* Altura responsiva (md:h-[40rem]) */
+@media (min-width: 768px) {
+  .root {
+    height: 40rem;
+  }
+}
+
+/* Barra/sombra inferior (antes: absolute bottom-0 bg-neutral-100 w-full inset-x-0 pointer-events-none + boxShadow inline) */
+.bottomBar {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  background: var(--neutral-100);
+  /* box-shadow exacto copiado del inline style original */
+  box-shadow:
+    0 0 24px rgba(34, 42, 53, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(34, 42, 53, 0.04),
+    0 0 4px rgba(34, 42, 53, 0.08),
+    0 16px 68px rgba(47, 48, 55, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Haz (beam) vertical (antes: absolute left-0 top-20 h-14 w-px rounded-full bg-gradient-to-t ...) */
+.beam {
+  position: absolute;
+  left: 0;
+  top: 5rem;            /* top-20 */
+  width: 1px;           /* w-px */
+  height: 3.5rem;       /* h-14 */
+  border-radius: 9999px;/* rounded-full */
+  background: linear-gradient(to top, var(--indigo), var(--purple), rgba(0,0,0,0));
+}
+
+/* Variantes de altura usadas en tu array (h-6, h-12, h-20) */
+.beamH6  { height: 1.5rem; } /* 24px */
+.beamH12 { height: 3rem;   } /* 48px */
+.beamH20 { height: 5rem;   } /* 80px */
+
+/* Explosión */
+.explosion {
+  position: absolute;
+  z-index: 50;
+  width: 0.5rem;  /* w-2 */
+  height: 0.5rem; /* h-2 */
+}
+
+/* Barra brillante central de la explosión (antes: -inset-x-10 top-0 w-10 h-2 ... blur-sm) */
+.explosionBar {
+  position: absolute;
+  inset-inline: -2.5rem; /* -inset-x-10 */
+  top: 0;
+  margin-inline: auto;
+  width: 2.5rem; /* w-10 */
+  height: 0.5rem;/* h-2 */
+  border-radius: 9999px;
+  filter: blur(4px);     /* blur-sm */
+  background: linear-gradient(90deg, rgba(0,0,0,0), var(--indigo), rgba(0,0,0,0));
+}
+
+/* Partículas (antes: h-1 w-1 rounded-full bg-gradient-to-b from-indigo-500 to-purple-500) */
+.particle {
+  position: absolute;
+  width: 0.25rem;  /* w-1 */
+  height: 0.25rem; /* h-1 */
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, var(--indigo), var(--purple));
+}
