@@ -1,0 +1,37 @@
+---
+import { PLATFORM } from "../../data/content";
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../ui/Icon.astro";
+
+// El orden de los íconos acompaña al de PLATFORM en content.ts. Se mantiene
+// acá y no en el contenido para que el copy quede libre de decisiones visuales.
+const icons = ["git-branch", "server", "chart", "flask", "bell", "shield"] as const;
+---
+
+<Section id="plataforma" tone="dark">
+  <SectionHeading
+    tone="dark"
+    eyebrow="La plataforma"
+    title="Todo lo que normalmente necesita un equipo de ingeniería"
+    subtitle="Generar la lógica con IA es la parte fácil y en poco tiempo va a hacerlo cualquiera. Lo difícil es lo que hay alrededor: que corra, que se pueda medir, que se pueda deshacer y que no se caiga un sábado."
+  />
+
+  <ul class="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/12 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      PLATFORM.map((item, index) => (
+        <li class="bg-ink-900 p-7">
+          <span class="flex size-10 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300">
+            <Icon name={icons[index]} size={19} />
+          </span>
+          <h3 class="mt-5 font-sans text-lg font-semibold text-white">
+            {item.title}
+          </h3>
+          <p class="mt-2.5 text-[0.95rem] leading-relaxed text-white/65">
+            {item.body}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

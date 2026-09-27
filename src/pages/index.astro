@@ -1,34 +1,50 @@
 ---
-import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/sections/Hero.astro";
+import Contrast from "../components/sections/Contrast.astro";
+import HowItWorks from "../components/sections/HowItWorks.astro";
+import UseCases from "../components/sections/UseCases.astro";
+import Platform from "../components/sections/Platform.astro";
+import Integrations from "../components/sections/Integrations.astro";
+import Comparison from "../components/sections/Comparison.astro";
+import Pricing from "../components/sections/Pricing.astro";
+import Faq from "../components/sections/Faq.astro";
+import FinalCta from "../components/sections/FinalCta.astro";
+import { FAQS } from "../data/content";
+import { PLANS, CURRENCY } from "../data/pricing";
+import { faqSchema, softwareSchema } from "../data/schema";
 
-// We want to use GSAP for animations https://gsap.com/docs/v3/GSAP/
+const prices = PLANS.map((plan) => plan.price);
 
-import { NavbarBuna } from "../components/NavBar/navbar";
-import { HeroHighlight } from "../components/Hero/Hero";
-import { HowItWorks } from "../components/HowItWorks/HowItWorks";
-import { Beneficios } from "../components/Beneficios/Beneficios";
-import { Footer } from "../components/Footer/Footer";
+// El FAQPage es lo que puede hacer que la home aparezca en la SERP con las
+// preguntas desplegadas, que ocupa más alto y sube el CTR.
+const schema = [
+  softwareSchema({
+    lowPrice: Math.min(...prices),
+    highPrice: Math.max(...prices),
+    currency: CURRENCY,
+  }),
+  faqSchema(FAQS),
+];
 ---
 
-<script>
-  import Lenis from "lenis";
-  const lenis = new Lenis();
-  // Use requestAnimationFrame to continuously update the scroll
-  function raf(time: number) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-</script>
-
-<Layout>
-  <!-- <Welcome /> -->
-  <NavbarBuna client:load />
-  <HeroHighlight client:load />
-  <Beneficios client:load />
-  <HowItWorks client:load />
-  <Footer client:load />
-  <!-- <WhyBuna /> -->
-  <!-- <ComingSoon client:load /> -->
+<Layout
+  title="Buna | Agentes de IA y automatizaciones para WhatsApp"
+  description="Contale a Buna qué necesitás que haga tu negocio y ella lo construye y lo opera. Agentes de IA y automatizaciones para WhatsApp, con Tienda Nube."
+  schema={schema}
+>
+  <Hero />
+  <Contrast />
+  <HowItWorks />
+  <UseCases />
+  <Platform />
+  <Integrations />
+  <Comparison />
+  <Pricing compact tone="default" />
+  <Faq
+    faqs={FAQS}
+    subtitle="Y si falta alguna, escribinos: contestamos nosotros, no un bot."
+    tone="muted"
+  />
+  <FinalCta />
 </Layout>

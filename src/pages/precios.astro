@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Pricing from "../components/sections/Pricing.astro";
+import Faq from "../components/sections/Faq.astro";
+import FinalCta from "../components/sections/FinalCta.astro";
+import Section from "../components/ui/Section.astro";
+import Icon from "../components/ui/Icon.astro";
+import { PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
+import { breadcrumbSchema, faqSchema, softwareSchema } from "../data/schema";
+
+const prices = PLANS.map((plan) => plan.price);
+
+const crumbs = [
+  { name: "Inicio", path: "/" },
+  { name: "Precios", path: "/precios" },
+];
+
+const schema = [
+  breadcrumbSchema(crumbs),
+  softwareSchema({
+    lowPrice: Math.min(...prices),
+    highPrice: Math.max(...prices),
+    currency: CURRENCY,
+  }),
+  faqSchema(PRICING_FAQS),
+];
+
+const incluido = [
+  "Infraestructura, hosting y base de datos",
+  "Versionado, deploys programados y rollback",
+  "Entorno de prueba separado de producción",
+  "Actualizaciones del producto",
+  "Monitoreo y alertas",
+  "Soporte de personas, no de un bot",
+];
+---
+
+<Layout
+  title="Precios de Buna | Planes desde USD 25 al mes"
+  description="Planes de Buna desde USD 25 al mes, con infraestructura, versionado e integraciones incluidos. Sin costo de setup ni permanencia."
+  schema={schema}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <Section class="pt-10! pb-4!">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-[2.2rem] leading-[1.1] sm:text-[2.7rem]">
+        Precios simples, sin sorpresas a fin de mes
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-ink-700 md:text-xl">
+        Pagás por el plan y nada más. La infraestructura está incluida, el
+        consumo de IA lo ves en dólares en el panel y podés cambiar de plan o
+        darte de baja cuando quieras.
+      </p>
+    </div>
+  </Section>
+
+  {/* Sin título propio: el h1 de arriba ya encabeza esta sección. */}
+  <Pricing title="" subtitle="" tone="default" cardAs="h2" />
+
+  <Section tone="muted">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl md:text-3xl">Incluido en todos los planes</h2>
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          incluido.map((item) => (
+            <li class="flex items-start gap-3 text-[0.98rem] leading-relaxed text-ink-900">
+              <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-500 text-white">
+                <Icon name="check" size={12} />
+              </span>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Faq
+    faqs={PRICING_FAQS}
+    title="Preguntas sobre precios"
+    tone="default"
+  />
+
+  <FinalCta
+    title="Probalo antes de pagar nada"
+    subtitle="Creás la cuenta, conectás WhatsApp y armás tu primera automatización sin cargar una tarjeta."
+  />
+</Layout>

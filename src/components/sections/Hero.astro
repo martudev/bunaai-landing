@@ -1,0 +1,150 @@
+---
+import { HERO, HERO_DEMO } from "../../data/content";
+import { CTA } from "../../data/site";
+import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
+---
+
+<section class="relative overflow-hidden bg-white">
+  {/*
+    Fondo decorativo en CSS puro. Antes esto era un canvas animado con
+    simplex-noise que corría en el hilo principal justo cuando el navegador
+    intenta pintar el LCP. Un par de gradientes dan el mismo aire y cuestan cero.
+  */}
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60rem_40rem_at_70%_-10%,var(--color-brand-50),transparent_70%),radial-gradient(40rem_30rem_at_10%_0%,#f4f7ff,transparent_65%)]"
+  >
+  </div>
+
+  <div class="container-page grid gap-14 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
+    <div>
+      <p
+        class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-sm font-semibold text-brand-700"
+      >
+        <Icon name="sparkles" size={15} />
+        {HERO.eyebrow}
+      </p>
+
+      <h1 class="mt-6 text-[2.5rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+        {HERO.title}
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-700 md:text-xl">
+        {HERO.subtitle}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <Button href={CTA.primary.href} size="lg">
+          {CTA.primary.label}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <Button href={CTA.secondary.href} variant="secondary" size="lg">
+          {CTA.secondary.label}
+        </Button>
+      </div>
+
+      <p class="mt-4 text-sm text-ink-500">{HERO.note}</p>
+
+      <ul class="mt-9 grid gap-3 border-t border-ink-900/8 pt-8">
+        {
+          HERO.bullets.map((bullet) => (
+            <li class="flex items-start gap-3 text-[0.98rem] text-ink-700">
+              <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+                <Icon name="check" size={13} />
+              </span>
+              {bullet}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/*
+      La demo es HTML y texto, no una imagen ni un video. Pesa prácticamente
+      nada, se indexa, escala a cualquier pantalla y no genera CLS porque el
+      navegador conoce su tamaño desde el primer parseo.
+    */}
+    <div class="relative lg:pl-4">
+      <div
+        class="rounded-2xl border border-ink-900/10 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_60px_-24px_rgba(5,10,52,0.22)]"
+      >
+        <div
+          class="flex items-center gap-2 border-b border-ink-900/8 px-4 py-3"
+        >
+          <span class="size-2.5 rounded-full bg-brand-400"></span>
+          <span class="size-2.5 rounded-full bg-ink-900/15"></span>
+          <span class="size-2.5 rounded-full bg-ink-900/15"></span>
+          <span class="ml-2 text-xs font-medium text-ink-500">
+            Chat con Buna
+          </span>
+        </div>
+
+        <div class="space-y-4 p-4 sm:p-5">
+          <div class="flex justify-end">
+            <p
+              class="max-w-[85%] rounded-2xl rounded-br-md bg-ink-900 px-4 py-3 text-[0.9rem] leading-relaxed text-white"
+            >
+              {HERO_DEMO.prompt}
+            </p>
+          </div>
+
+          <div class="rounded-2xl rounded-bl-md bg-surface-muted p-4">
+            <p class="text-xs font-semibold tracking-wide text-ink-500 uppercase">
+              Buna construyó
+            </p>
+            <ul class="mt-3 space-y-2.5">
+              {
+                HERO_DEMO.steps.map((step) => (
+                  <li class="flex items-start gap-2.5 text-[0.87rem] leading-snug text-ink-700">
+                    <span class="mt-px flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-500 text-white">
+                      <Icon name="check" size={10} />
+                    </span>
+                    {step}
+                  </li>
+                ))
+              }
+            </ul>
+            <p
+              class="mt-4 border-t border-ink-900/8 pt-3 text-[0.87rem] font-medium text-ink-900"
+            >
+              {HERO_DEMO.reply}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/*
+        Previsualización del resultado. Se apoya sobre la tarjeta anterior para
+        contar la historia completa: el prompt de arriba produce esta charla.
+      */}
+      <div
+        class="mx-auto -mt-4 w-[88%] rounded-2xl border border-ink-900/10 bg-white p-4 shadow-[0_1px_2px_rgba(5,10,52,0.04),0_18px_40px_-20px_rgba(5,10,52,0.25)]"
+      >
+        <p
+          class="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-ink-500 uppercase"
+        >
+          <Icon name="message" size={13} />
+          Dos horas después, en WhatsApp
+        </p>
+        <div class="space-y-2">
+          <p
+            class="max-w-[88%] rounded-xl rounded-bl-sm bg-surface-muted px-3 py-2 text-[0.85rem] leading-snug text-ink-900"
+          >
+            {HERO_DEMO.whatsapp.business}
+          </p>
+          <p
+            class="ml-auto max-w-[88%] rounded-xl rounded-br-sm bg-brand-100 px-3 py-2 text-[0.85rem] leading-snug text-brand-900"
+          >
+            {HERO_DEMO.whatsapp.customer}
+          </p>
+          <p
+            class="max-w-[88%] rounded-xl rounded-bl-sm bg-surface-muted px-3 py-2 text-[0.85rem] leading-snug text-ink-900"
+          >
+            {HERO_DEMO.whatsapp.businessReply}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+---
+import { PLANS, CURRENCY } from "../../data/pricing";
+import { CTA } from "../../data/site";
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  tone?: "default" | "muted";
+  title?: string;
+  subtitle?: string;
+  /** En la home se muestra el bloque compacto y se linkea a /precios. */
+  compact?: boolean;
+  /**
+   * Nivel del heading de cada plan. En la home la sección tiene su propio h2
+   * ("Precios") y los planes cuelgan de él como h3; en /precios no hay h2
+   * intermedio, así que los planes son h2 y no se saltea un nivel.
+   */
+  cardAs?: "h2" | "h3";
+}
+
+const {
+  tone = "default",
+  title = "Precios",
+  subtitle = "La infraestructura, el versionado y las integraciones están incluidos. No hay costo de setup ni permanencia.",
+  compact = false,
+  cardAs: CardHeading = "h3",
+} = Astro.props;
+---
+
+<Section id="precios" tone={tone}>
+  <SectionHeading title={title} subtitle={subtitle} />
+
+  <div class="mt-14 grid gap-5 lg:grid-cols-3">
+    {
+      PLANS.map((plan) => (
+        <div
+          class:list={[
+            "relative flex flex-col rounded-2xl border p-7",
+            plan.featured
+              ? "border-brand-300 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_56px_-28px_rgba(47,172,106,0.5)] lg:-my-3 lg:py-10"
+              : "border-ink-900/10 bg-white",
+          ]}
+        >
+          {plan.featured && (
+            <span class="absolute -top-3 left-7 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white">
+              El más elegido
+            </span>
+          )}
+
+          <CardHeading class="font-sans text-lg font-bold text-ink-900">
+            {plan.name}
+          </CardHeading>
+          <p class="mt-1 text-[0.9rem] text-ink-500">{plan.tagline}</p>
+
+          <p class="mt-6 flex items-baseline gap-1.5">
+            <span class="font-display text-4xl font-bold text-ink-900">
+              {CURRENCY} {plan.price}
+            </span>
+            <span class="text-[0.95rem] text-ink-500">/mes</span>
+          </p>
+
+          <p class="mt-4 text-[0.92rem] leading-relaxed text-ink-700">
+            {plan.description}
+          </p>
+
+          <ul class="mt-6 flex-1 space-y-3 border-t border-ink-900/8 pt-6">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-2.5 text-[0.92rem] text-ink-700">
+                <span class="mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+                  <Icon name="check" size={11} />
+                </span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <Button
+            href={CTA.primary.href}
+            variant={plan.featured ? "primary" : "secondary"}
+            size="lg"
+            class="mt-7 w-full"
+          >
+            {CTA.primary.label}
+          </Button>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    compact && (
+      <p class="mt-10 text-center text-[0.95rem] text-ink-700">
+        <a
+          href="/precios"
+          class="font-semibold text-brand-600 hover:text-brand-700 hover:underline"
+        >
+          Ver el detalle de cada plan
+        </a>
+        {" · "}
+        ¿Necesitás algo distinto?{" "}
+        <a
+          href={CTA.secondary.href}
+          class="font-semibold text-brand-600 hover:text-brand-700 hover:underline"
+        >
+          Hablemos
+        </a>
+      </p>
+    )
+  }
+</Section>

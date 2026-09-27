@@ -1,0 +1,54 @@
+---
+import { INTEGRATIONS } from "../../data/content";
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../ui/Icon.astro";
+
+const icons = ["message", "store", "slack"] as const;
+---
+
+<Section id="integraciones">
+  <SectionHeading
+    eyebrow="Integraciones"
+    title="Conectado a donde ya trabajás"
+    subtitle="El agente responde con datos reales porque los consulta en el momento, no porque alguien los cargó a mano en una variable."
+  />
+
+  <ul class="mt-14 grid gap-5 md:grid-cols-3">
+    {
+      INTEGRATIONS.live.map((integration, index) => (
+        <li class="rounded-2xl border border-ink-900/10 bg-white p-7">
+          <div class="flex items-center gap-3">
+            <span class="flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+              <Icon name={icons[index]} size={19} />
+            </span>
+            <h3 class="font-sans text-lg font-semibold text-ink-900">
+              {integration.name}
+            </h3>
+          </div>
+          <p class="mt-4 text-[0.95rem] leading-relaxed text-ink-700">
+            {integration.body}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  {/*
+    Se listan las integraciones que faltan en vez de esconderlas. Que alguien
+    descubra en el onboarding que su plataforma no está es peor que no haberlo
+    traído nunca.
+  */}
+  <div
+    class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl border border-dashed border-ink-900/15 px-6 py-5 text-center"
+  >
+    <span class="text-sm font-semibold text-ink-500">En camino:</span>
+    {
+      INTEGRATIONS.soon.map((name) => (
+        <span class="rounded-lg bg-surface-muted px-2.5 py-1 text-sm text-ink-700">
+          {name}
+        </span>
+      ))
+    }
+  </div>
+</Section>

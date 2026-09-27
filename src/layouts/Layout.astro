@@ -1,19 +1,79 @@
+---
+import "../styles/global.css";
+import { SITE } from "../data/site";
+import { organizationSchema, websiteSchema } from "../data/schema";
+import Seo from "../components/seo/Seo.astro";
+import JsonLd from "../components/seo/JsonLd.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  /** Schema propio de la página (FAQPage, BreadcrumbList, etc.). */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, image, type, noindex = false, schema = [] } = Astro.props;
+
+// Organization y WebSite van en todas las páginas con el mismo @id: es lo que
+// le permite a Google consolidar la entidad en vez de ver una marca por URL.
+const globalSchema = [organizationSchema(), websiteSchema(), ...schema];
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={SITE.lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2FAC6A" />
     <meta name="generator" content={Astro.generator} />
-    <title>BunaAI - Landing</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    {/*
+      Las fuentes se descubren recién cuando el navegador parsea el CSS, que a
+      su vez llega después del HTML. El preload las arranca en el primer
+      round-trip y saca el swap de texto del camino del LCP.
+      `crossorigin` es obligatorio en fuentes aunque sean del mismo origen: sin
+      él el navegador hace una segunda request y el preload no sirve de nada.
+    */}
+    <link
+      rel="preload"
+      href="/fonts/WorkSans-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Moranga-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      noindex={noindex}
+    />
+
+    <JsonLd schema={globalSchema} />
   </head>
+
   <body>
-    <slot />
+    <a href="#contenido" class="sr-only-focusable">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

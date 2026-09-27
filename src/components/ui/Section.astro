@@ -1,0 +1,37 @@
+---
+/**
+ * Contenedor de sección: unifica el ritmo vertical y el ancho máximo para que
+ * todas las secciones respiren igual sin repetir clases.
+ *
+ * `id` es importante: es el ancla a la que apunta la navegación, y `as` deja
+ * elegir la etiqueta para no romper la semántica del documento.
+ */
+interface Props {
+  id?: string;
+  as?: "section" | "div" | "footer";
+  tone?: "default" | "muted" | "dark";
+  class?: string;
+  /** Saca el padding vertical cuando la sección trae su propio espaciado. */
+  flush?: boolean;
+}
+
+const {
+  id,
+  as: Tag = "section",
+  tone = "default",
+  class: className = "",
+  flush = false,
+} = Astro.props;
+
+const tones = {
+  default: "bg-white text-ink-900",
+  muted: "bg-surface-muted text-ink-900",
+  dark: "bg-ink-900 text-white",
+};
+---
+
+<Tag id={id} class:list={[tones[tone], !flush && "py-20 md:py-28", className]}>
+  <div class="container-page">
+    <slot />
+  </div>
+</Tag>

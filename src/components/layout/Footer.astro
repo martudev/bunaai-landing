@@ -1,0 +1,143 @@
+---
+import { SITE, CTA } from "../../data/site";
+import { SOLUTIONS } from "../../data/solutions";
+
+// El footer es lo que le da a cada página de keyword un link entrante desde
+// todas las demás. Sin esto quedan huérfanas: Google las encuentra por el
+// sitemap pero no les reparte autoridad, y tardan mucho más en rankear.
+const soluciones = SOLUTIONS.map((s) => ({
+  label: s.eyebrow,
+  href: `/${s.slug}`,
+}));
+
+const producto = [
+  { label: "Cómo funciona", href: "/#como-funciona" },
+  { label: "Qué le podés pedir", href: "/#casos" },
+  { label: "La plataforma", href: "/#plataforma" },
+  { label: "Integraciones", href: "/#integraciones" },
+  { label: "Precios", href: "/precios" },
+  { label: "Preguntas frecuentes", href: "/#faq" },
+];
+
+// Las redes sin URL quedan en null y no se renderizan. El predicado excluye
+// null en vez de afirmar `string` porque SITE.social es `as const` y sus
+// valores son tipos literales.
+const social = Object.entries(SITE.social).filter(
+  (entry): entry is [string, Exclude<(typeof entry)[1], null>] => entry[1] !== null,
+);
+
+const socialLabels: Record<string, string> = {
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  x: "X",
+  youtube: "YouTube",
+};
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink-900/8 bg-surface-muted">
+  <div class="container-page py-16">
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
+      <div class="max-w-sm">
+        <a
+          href="/"
+          class="flex items-center gap-2 font-display text-lg font-bold tracking-tight"
+        >
+          <img src="/favicon.svg" alt="" width="28" height="28" loading="lazy" />
+          <span>{SITE.name}</span>
+        </a>
+        <p class="mt-4 text-[0.95rem] leading-relaxed text-ink-700">
+          Contale a Buna qué necesitás que haga tu negocio y ella lo construye,
+          lo despliega y lo opera. Agentes de IA para WhatsApp, pensados para
+          e-commerce.
+        </p>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="mt-4 inline-block text-[0.95rem] font-medium text-brand-600 hover:text-brand-700 hover:underline"
+        >
+          {SITE.email}
+        </a>
+      </div>
+
+      <nav aria-labelledby="footer-producto">
+        <h2
+          id="footer-producto"
+          class="font-sans text-sm font-semibold tracking-wide text-ink-900 uppercase"
+        >
+          Producto
+        </h2>
+        <ul class="mt-4 space-y-2.5">
+          {
+            producto.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-[0.95rem] text-ink-700 hover:text-brand-600 hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-soluciones">
+        <h2
+          id="footer-soluciones"
+          class="font-sans text-sm font-semibold tracking-wide text-ink-900 uppercase"
+        >
+          Soluciones
+        </h2>
+        <ul class="mt-4 space-y-2.5">
+          {
+            soluciones.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-[0.95rem] text-ink-700 hover:text-brand-600 hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href={CTA.primary.href}
+              rel="noopener"
+              class="text-[0.95rem] font-medium text-brand-600 hover:underline"
+            >
+              Crear una cuenta
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-4 border-t border-ink-900/8 pt-8 text-sm text-ink-500 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} {SITE.legalName}. Hecho en Argentina.</p>
+      {
+        social.length > 0 && (
+          <ul class="flex gap-5">
+            {social.map(([key, url]) => (
+              <li>
+                <a
+                  href={url}
+                  rel="noopener"
+                  target="_blank"
+                  class="hover:text-brand-600 hover:underline"
+                >
+                  {socialLabels[key] ?? key}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</footer>

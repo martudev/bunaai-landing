@@ -1,0 +1,77 @@
+---
+/**
+ * Encabezado de sección. Recibe el nivel por prop porque el orden de los
+ * headings es una señal de estructura que Google lee y que los lectores de
+ * pantalla usan para navegar: en una página solo hay un <h1>, y las secciones
+ * cuelgan de él como <h2>.
+ */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  as?: "h2" | "h3";
+  align?: "left" | "center";
+  tone?: "light" | "dark";
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  as: Tag = "h2",
+  align = "center",
+  tone = "light",
+} = Astro.props;
+
+const isDark = tone === "dark";
+
+// Una página puede querer la sección sin encabezado (por ejemplo /precios, que
+// ya trae su propio h1 arriba). Renderizar un <h2></h2> vacío rompería el
+// esquema de headings para los lectores de pantalla y para Google.
+const hasTitle = title.trim().length > 0;
+const hasSubtitle = Boolean(subtitle?.trim());
+---
+
+<div
+  class:list={[
+    "max-w-3xl",
+    align === "center" ? "mx-auto text-center" : "text-left",
+  ]}
+>
+  {
+    eyebrow && (
+      <p
+        class:list={[
+          "mb-3 text-sm font-semibold tracking-wide uppercase",
+          isDark ? "text-brand-300" : "text-brand-600",
+        ]}
+      >
+        {eyebrow}
+      </p>
+    )
+  }
+  {
+    hasTitle && (
+      <Tag
+        class:list={[
+          "text-3xl md:text-4xl",
+          isDark ? "text-white" : "text-ink-900",
+        ]}
+      >
+        {title}
+      </Tag>
+    )
+  }
+  {
+    hasSubtitle && (
+      <p
+        class:list={[
+          "mt-5 text-lg leading-relaxed",
+          isDark ? "text-white/70" : "text-ink-700",
+        ]}
+      >
+        {subtitle}
+      </p>
+    )
+  }
+</div>

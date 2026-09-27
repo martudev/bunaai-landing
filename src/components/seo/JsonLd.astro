@@ -1,0 +1,21 @@
+---
+/**
+ * Serializa datos estructurados a un <script type="application/ld+json">.
+ *
+ * `JSON.stringify` no escapa `<`, así que un `</script>` dentro de cualquier
+ * string del schema cerraría la etiqueta antes de tiempo y el resto se
+ * interpretaría como HTML. Escapamos los tres caracteres que permiten esa fuga.
+ */
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { schema } = Astro.props;
+
+const json = JSON.stringify(schema)
+  .replace(/</g, "\\u003c")
+  .replace(/>/g, "\\u003e")
+  .replace(/&/g, "\\u0026");
+---
+
+<script type="application/ld+json" is:inline set:html={json} />

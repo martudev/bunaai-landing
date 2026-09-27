@@ -1,0 +1,151 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
+import Icon from "../components/ui/Icon.astro";
+import Faq from "../components/sections/Faq.astro";
+import RelatedLinks from "../components/sections/RelatedLinks.astro";
+import FinalCta from "../components/sections/FinalCta.astro";
+import { SOLUTIONS, type Solution } from "../data/solutions";
+import { CTA } from "../data/site";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
+
+/**
+ * Una ruta estática por cada entrada de SOLUTIONS.
+ *
+ * Las rutas explícitas (index, precios, demo, 404) tienen prioridad sobre esta
+ * dinámica, así que `[slug]` no las pisa aunque viva en la raíz de pages.
+ */
+export function getStaticPaths() {
+  return SOLUTIONS.map((solution) => ({
+    params: { slug: solution.slug },
+    props: { solution },
+  }));
+}
+
+interface Props {
+  solution: Solution;
+}
+
+const { solution } = Astro.props;
+
+const crumbs = [
+  { name: "Inicio", path: "/" },
+  { name: solution.eyebrow, path: `/${solution.slug}` },
+];
+
+const schema = [breadcrumbSchema(crumbs), faqSchema(solution.faqs)];
+---
+
+<Layout
+  title={solution.title}
+  description={solution.description}
+  schema={schema}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <Section class="pt-10! pb-14!">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">
+        {solution.eyebrow}
+      </p>
+      <h1 class="mt-4 text-[2.2rem] leading-[1.1] sm:text-[2.7rem]">
+        {solution.h1}
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-ink-700 md:text-xl">
+        {solution.lede}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href={CTA.primary.href} size="lg">
+          {CTA.primary.label}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <Button href={CTA.secondary.href} variant="secondary" size="lg">
+          {CTA.secondary.label}
+        </Button>
+      </div>
+    </div>
+
+    <ul class="mt-12 grid gap-4 border-t border-ink-900/8 pt-10 sm:grid-cols-2">
+      {
+        solution.highlights.map((highlight) => (
+          <li class="flex items-start gap-3 text-[0.98rem] leading-relaxed text-ink-900">
+            <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+              <Icon name="check" size={13} />
+            </span>
+            {highlight}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  {/*
+    El cuerpo del artículo. Va en <article> y con un ancho de línea acotado:
+    son las dos cosas que separan una página que se lee de una que se escanea
+    y se abandona, y el tiempo en página es una señal que Google mira.
+  */}
+  <Section tone="muted">
+    <article class="mx-auto max-w-3xl">
+      {
+        solution.body.map((section) => (
+          <div class="mt-14 first:mt-0">
+            <h2 class="text-2xl md:text-[1.75rem]">{section.heading}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p class="mt-5 text-[1.05rem] leading-[1.75] text-ink-700">
+                {paragraph}
+              </p>
+            ))}
+            {section.bullets && (
+              <ul class="mt-6 space-y-3">
+                {section.bullets.map((bullet) => (
+                  <li class="flex items-start gap-3 text-[1.02rem] leading-relaxed text-ink-700">
+                    <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+                      <Icon name="check" size={13} />
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </article>
+  </Section>
+
+  <Section>
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl md:text-[1.75rem]">Pedidos que podés copiar tal cual</h2>
+      <p class="mt-4 text-[1.05rem] leading-relaxed text-ink-700">
+        Así se le habla a Buna. Sin comandos ni sintaxis: le contás qué querés
+        que pase.
+      </p>
+
+      <ul class="mt-9 space-y-3">
+        {
+          solution.prompts.map((item) => (
+            <li class="rounded-2xl border border-ink-900/10 bg-white p-5">
+              <blockquote class="text-[0.98rem] leading-relaxed text-ink-900">
+                <span class="text-ink-500">“</span>{item.prompt}
+                <span class="text-ink-500">”</span>
+              </blockquote>
+              <p class="mt-3 flex items-start gap-2 border-t border-ink-900/8 pt-3 text-[0.88rem] font-medium text-ink-700">
+                <span class="mt-0.5 text-brand-500">
+                  <Icon name="arrow-right" size={14} />
+                </span>
+                {item.result}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Faq faqs={solution.faqs} tone="default" />
+  <RelatedLinks slugs={solution.related} />
+  <FinalCta />
+</Layout>

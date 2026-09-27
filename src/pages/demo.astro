@@ -1,0 +1,123 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
+import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
+import Icon from "../components/ui/Icon.astro";
+import { SITE, CTA } from "../data/site";
+import { breadcrumbSchema } from "../data/schema";
+
+const crumbs = [
+  { name: "Inicio", path: "/" },
+  { name: "Demo", path: "/demo" },
+];
+
+const agenda = [
+  "Qué parte de tu operación está hoy en WhatsApp y dónde se traba",
+  "Una automatización tuya construida en vivo, con tus casos reales",
+  "Qué hace falta para conectar tu tienda y tu número",
+  "Si Buna te sirve hoy o te conviene esperar: te lo decimos derecho",
+];
+
+/**
+ * ⚠️ PENDIENTE: enchufar acá el link real de agenda (Calendly, Cal.com o el
+ * que uses). Mientras tanto la página ofrece email y WhatsApp, que funcionan,
+ * en lugar de un formulario que no tiene backend.
+ */
+const BOOKING_URL: string | null = null;
+
+const asunto = encodeURIComponent("Quiero ver una demo de Buna");
+const mailto = `mailto:${SITE.email}?subject=${asunto}`;
+---
+
+<Layout
+  title="Agendá una demo de Buna | Te la armamos con tus casos"
+  description="Media hora, sin presentación genérica: construimos una automatización con tus casos reales y te decimos con franqueza si Buna te sirve hoy."
+  schema={[breadcrumbSchema(crumbs)]}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <Section class="pt-10!">
+    <div class="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">
+          Demo
+        </p>
+        <h1 class="mt-4 text-[2.2rem] leading-[1.1] sm:text-[2.7rem]">
+          Media hora con tus casos, no con una presentación
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-ink-700">
+          No tenemos un deck. Nos contás qué pasa hoy en tu WhatsApp y armamos
+          una automatización tuya en vivo, para que veas exactamente cómo
+          funciona con tu negocio.
+        </p>
+
+        <h2 class="mt-12 font-sans text-lg font-semibold text-ink-900">
+          Qué vemos
+        </h2>
+        <ul class="mt-5 space-y-3.5">
+          {
+            agenda.map((item) => (
+              <li class="flex items-start gap-3 text-[0.99rem] leading-relaxed text-ink-700">
+                <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+                  <Icon name="check" size={13} />
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <div class="rounded-2xl border border-ink-900/10 bg-white p-7 shadow-[0_1px_2px_rgba(5,10,52,0.04),0_20px_50px_-28px_rgba(5,10,52,0.3)]">
+          <h2 class="font-sans text-lg font-semibold text-ink-900">
+            Escribinos y coordinamos
+          </h2>
+          <p class="mt-2.5 text-[0.95rem] leading-relaxed text-ink-700">
+            Contanos qué vendés y qué te gustaría automatizar. Respondemos el
+            mismo día hábil.
+          </p>
+
+          <div class="mt-6 flex flex-col gap-3">
+            {
+              BOOKING_URL ? (
+                <Button href={BOOKING_URL} size="lg" class="w-full">
+                  Elegir un horario
+                  <Icon name="arrow-right" size={18} />
+                </Button>
+              ) : (
+                <Button href={mailto} size="lg" class="w-full">
+                  Escribir un email
+                  <Icon name="arrow-right" size={18} />
+                </Button>
+              )
+            }
+            <Button
+              href={CTA.primary.href}
+              variant="secondary"
+              size="lg"
+              class="w-full"
+            >
+              O probalo por tu cuenta
+            </Button>
+          </div>
+
+          <p class="mt-6 border-t border-ink-900/8 pt-5 text-[0.9rem] text-ink-500">
+            También podés escribirnos directo a{" "}
+            <a
+              href={mailto}
+              class="font-medium text-brand-600 hover:underline"
+            >
+              {SITE.email}
+            </a>
+          </p>
+        </div>
+
+        <p class="mt-5 text-center text-[0.9rem] text-ink-500">
+          Si preferís arrancar solo, la cuenta es gratis y no pide tarjeta.
+        </p>
+      </div>
+    </div>
+  </Section>
+</Layout>

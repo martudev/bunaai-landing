@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+import Icon from "../components/ui/Icon.astro";
+import { SOLUTIONS } from "../data/solutions";
+---
+
+{/*
+  `noindex` para que Google no sume una página vacía al índice, pero con links
+  reales para que quien llegue por un enlace roto tenga a dónde ir.
+*/}
+<Layout
+  title="Página no encontrada | Buna"
+  description="La página que buscabas no existe o cambió de dirección. Volvé al inicio o mirá las soluciones de Buna para WhatsApp."
+  noindex
+>
+  <section class="container-page py-24 md:py-32">
+    <div class="mx-auto max-w-xl text-center">
+      <p class="font-display text-6xl font-bold text-brand-500">404</p>
+      <h1 class="mt-5 text-3xl md:text-4xl">Esta página no existe</h1>
+      <p class="mt-5 text-lg leading-relaxed text-ink-700">
+        Puede que el link esté mal escrito o que la página haya cambiado de
+        dirección.
+      </p>
+
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <Button href="/" size="lg">
+          Volver al inicio
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <Button href="/precios" variant="secondary" size="lg">
+          Ver precios
+        </Button>
+      </div>
+
+      <div class="mt-14 border-t border-ink-900/8 pt-10 text-left">
+        <h2 class="text-center font-sans text-sm font-semibold tracking-wide text-ink-500 uppercase">
+          Quizá buscabas
+        </h2>
+        <ul class="mt-5 space-y-2">
+          {
+            SOLUTIONS.map((solution) => (
+              <li>
+                <a
+                  href={`/${solution.slug}`}
+                  class="flex items-center justify-between gap-4 rounded-xl border border-ink-900/10 bg-white px-5 py-3.5 text-[0.95rem] font-medium text-ink-900 transition-colors hover:border-brand-300"
+                >
+                  {solution.eyebrow}
+                  <span class="text-brand-500">
+                    <Icon name="arrow-right" size={16} />
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
