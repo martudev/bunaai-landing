@@ -18,10 +18,10 @@ export const HERO = {
   eyebrow: "Agentes de IA para WhatsApp",
   title: "Automatizá tu negocio en WhatsApp describiéndolo en una frase",
   subtitle:
-    "Buna es la plataforma donde le contás en castellano qué necesitás que pase y ella construye, prueba y despliega la automatización. Sin armar flujos nodo por nodo, sin código y sin servidores.",
+    "BunaAI es la plataforma donde le contás en castellano qué necesitás que pase y ella construye la automatización y la publica. Sin armar flujos nodo por nodo, sin código y sin servidores.",
   bullets: [
     "Conectás WhatsApp escaneando un QR",
-    "Se integra con Tienda Nube en tiempo real",
+    "Se integra con Tiendanube en tiempo real",
     "Cada cambio queda versionado y se puede revertir",
   ],
   note: "Sin tarjeta de crédito para empezar.",
@@ -35,12 +35,12 @@ export const HERO_DEMO = {
   prompt:
     "Cuando alguien abandone un carrito de más de $100.000, escribile por WhatsApp a las 2 horas. Si contesta que le parece caro, ofrecele envío gratis. Si sigue sin comprar, avisame por Slack.",
   steps: [
-    "Creé el trigger de carrito abandonado sobre Tienda Nube",
+    "Creé el trigger de carrito abandonado sobre Tiendanube",
     "Filtré por total mayor a $100.000 y esperé 2 horas",
     "Escribí el mensaje de WhatsApp y la respuesta con envío gratis",
     "Conecté la alerta de Slack a tu canal #ventas",
   ],
-  reply: "Guardado como versión 12. ¿Lo deployamos ahora o lo programamos?",
+  reply: "Guardado como versión 12. Publicala ahora o programala con fecha y hora desde Versiones.",
   whatsapp: {
     business: "Hola Sofi 👋 Vi que dejaste la campera en el carrito.",
     customer: "Sí, me gustó pero me pareció cara con el envío",
@@ -50,11 +50,11 @@ export const HERO_DEMO = {
 } as const;
 
 /**
- * El contraste con el status quo. Es la sección que explica por qué Buna no es
+ * El contraste con el status quo. Es la sección que explica por qué BunaAI no es
  * "otro chatbot": el eje no es la IA, es quién decide qué se puede cambiar.
  */
 export const CONTRAST = {
-  title: "Las otras plataformas te hacen configurar la suya. Buna construye la tuya.",
+  title: "Las otras plataformas te hacen configurar la suya. BunaAI construye la tuya.",
   subtitle:
     "La diferencia no es que tenga IA. Es que no estás limitado a las opciones que alguien decidió ponerte en un panel.",
   before: {
@@ -68,9 +68,9 @@ export const CONTRAST = {
     ],
   },
   after: {
-    label: "Como se hace con Buna",
+    label: "Como se hace con BunaAI",
     items: [
-      "Lo describís en una frase y Buna escribe la lógica que hace falta",
+      "Lo describís en una frase y BunaAI escribe la lógica que hace falta",
       "Cambiás cualquier comportamiento hablando, incluso los que nadie previó",
       "Pedís la métrica y aparece en tu dashboard",
       "Cada cambio es una versión: volvés atrás en un click",
@@ -85,16 +85,16 @@ export const STEPS = [
     body: "Le escribís qué querés que pase, igual que se lo explicarías a alguien de tu equipo. No hay sintaxis que aprender ni nodos que conectar.",
   },
   {
-    title: "Buna lo construye",
+    title: "BunaAI lo construye",
     body: "Interpreta la intención, escribe la lógica, la conecta con tus herramientas y te muestra exactamente qué va a hacer antes de tocar nada.",
   },
   {
-    title: "Lo probás y lo deployás",
-    body: "Lo probás en un entorno separado. Cuando te cierra, va a producción. Podés programar el deploy para una fecha y hora concretas.",
+    title: "Lo publicás",
+    body: "Lo publicás al instante o lo programás con fecha y hora. Con el plan Growth, al salir a producción BunaAI le corre tests automáticos y te avisa si alguno falla.",
   },
   {
     title: "Corre y se mide",
-    body: "Queda ejecutándose sobre infraestructura administrada. Ves conversaciones, resultados y costos. Si algo no funciona, rollback a la versión anterior.",
+    body: "Queda ejecutándose sobre infraestructura administrada. Ves conversaciones, resultados y costos, y podés chatear con tu agente desde el panel. Si algo no funciona, volvés a la versión anterior.",
   },
 ] as const;
 
@@ -125,7 +125,7 @@ export const USE_CASES = [
   {
     tag: "Atención",
     prompt:
-      "Respondé consultas de envíos, talles, cambios y stock consultando Tienda Nube en tiempo real.",
+      "Respondé consultas de envíos, talles, cambios y stock consultando Tiendanube en tiempo real.",
     result: "Atención al cliente 24/7 con datos reales",
   },
   {
@@ -147,15 +147,15 @@ export const USE_CASES = [
     result: "Derivación a un humano cuando hace falta",
   },
   {
-    tag: "Programado",
+    tag: "Reglas",
     prompt:
       "A partir del lunes a las 9, los pedidos de más de $200.000 llevan otro seguimiento.",
-    result: "Cambios programados con fecha y hora",
+    result: "Reglas con fecha de inicio",
   },
 ] as const;
 
 /**
- * La capa que Buna se come por el cliente. Es el argumento contra "esto lo
+ * La capa que BunaAI se come por el cliente. Es el argumento contra "esto lo
  * hago con ChatGPT": el modelo es la parte fácil, todo esto es lo difícil.
  */
 export const PLATFORM = [
@@ -164,16 +164,16 @@ export const PLATFORM = [
     body: "Cada cambio genera una versión con su historial. Programás cuándo se activa y volvés a la anterior en un click si algo sale mal.",
   },
   {
-    title: "Infraestructura administrada",
-    body: "Servidores, base de datos, colas, escalado y monitoreo corren de nuestro lado. No configurás ni mantenés nada.",
+    title: "Infraestructura dedicada",
+    body: "Tu agente corre en servidores y base de datos propios, sin compartir recursos con otros clientes: el pico o la falla de otro negocio no te afecta. Y la administramos nosotros.",
   },
   {
     title: "Observabilidad real",
     body: "Conversaciones, logs, métricas y el gasto de IA en dólares. Sabés qué hizo el agente y cuánto costó.",
   },
   {
-    title: "Entorno de prueba",
-    body: "Probás los cambios antes de que los vea un cliente. Staging y producción están separados de verdad.",
+    title: "Tests en cada publicación",
+    body: "En el plan Growth, cada vez que publicás una versión BunaAI corre tests automáticos contra ella y te avisa si alguno falla, para que lo corrijas hablándole.",
   },
   {
     title: "Alertas donde mirás",
@@ -186,21 +186,42 @@ export const PLATFORM = [
 ] as const;
 
 export const INTEGRATIONS = {
+  // `logo` viaja junto al nombre y no en un array aparte: si estuviera
+  // separado, reordenar esta lista dejaría cada tarjeta con el logo de otra.
   live: [
     {
       name: "WhatsApp",
+      logo: "whatsapp",
       body: "Conectás tu número escaneando un QR. El agente lee, responde y manda difusiones.",
     },
     {
-      name: "Tienda Nube",
+      name: "Tiendanube",
+      logo: "tiendanube",
       body: "Consulta productos, stock, pedidos y clientes en tiempo real, y puede modificarlos con tu confirmación.",
     },
     {
       name: "Slack",
+      logo: "slack",
       body: "Alertas y avisos en el canal que elijas, con el contexto de la conversación.",
     },
   ],
-  soon: ["Instagram", "Facebook", "Chat web", "Shopify", "API y webhooks"],
+  /**
+   * La integración a medida. No va como una cuarta tarjeta junto a las otras
+   * porque no es lo mismo: WhatsApp y Tiendanube se conectan solos desde el
+   * panel, y esto arranca con una conversación. Mezclarlas prometería un
+   * autoservicio que no existe.
+   *
+   * "API y webhooks" salió de la lista de "En camino" al escribirse esto: si
+   * conectamos sistemas propios hoy, no puede figurar como pendiente.
+   */
+  custom: {
+    title: "¿Tu negocio corre sobre un sistema propio?",
+    body: "Un ERP a medida, un CRM interno, la base de datos que armó tu equipo. Si expone una API o webhooks, el agente puede consultarlo y operarlo igual que a Tiendanube: leer un stock, crear un pedido, actualizar un estado.",
+    note: "Si tu sistema no tiene API, contanos igual. Casi siempre hay una forma de llegar.",
+    examples: ["API REST", "Webhooks", "Bases de datos", "ERP y CRM internos"],
+    cta: { label: "Contanos qué usás", href: "/demo" },
+  },
+  soon: ["Instagram", "Facebook", "Chat web", "Shopify"],
 } as const;
 
 /**
@@ -208,7 +229,7 @@ export const INTEGRATIONS = {
  * siga siendo cierta cuando cambie el competidor de turno.
  */
 export const COMPARISON = {
-  columns: ["Buna", "Chatbots configurables", "n8n / Make / Zapier", "Agencia a medida"],
+  columns: ["BunaAI", "Chatbots configurables", "n8n / Make / Zapier", "Agencia a medida"],
   rows: [
     {
       feature: "Cómo creás una automatización",
@@ -233,7 +254,7 @@ export const COMPARISON = {
     },
     {
       feature: "Infraestructura",
-      values: ["Administrada", "Administrada", "La ponés vos", "La ponés vos"],
+      values: ["Dedicada y administrada", "Compartida entre clientes", "La ponés vos", "La ponés vos"],
     },
     {
       feature: "Métricas nuevas",
@@ -244,9 +265,9 @@ export const COMPARISON = {
 
 export const FAQS = [
   {
-    question: "¿Necesito saber programar para usar Buna?",
+    question: "¿Necesito saber programar para usar BunaAI?",
     answer:
-      "No. Le describís en castellano qué querés que haga tu negocio y Buna escribe la lógica, la conecta con tus herramientas y la deja corriendo. Si sabés explicarle una tarea a alguien de tu equipo, sabés usar Buna.",
+      "No. Le describís en castellano qué querés que haga tu negocio y BunaAI escribe la lógica, la conecta con tus herramientas y la deja corriendo. Si sabés explicarle una tarea a alguien de tu equipo, sabés usar BunaAI.",
   },
   {
     question: "¿Cómo conecto mi WhatsApp?",
@@ -254,19 +275,19 @@ export const FAQS = [
       "Entrás a Conexiones en el panel y escaneás un código QR con el teléfono, igual que WhatsApp Web. Tarda unos dos minutos y podés usar el número que ya venís usando con tus clientes.",
   },
   {
-    question: "¿Funciona con Tienda Nube?",
+    question: "¿Funciona con Tiendanube?",
     answer:
       "Sí. Conectando tu tienda, el agente consulta productos, stock, precios, pedidos y clientes en tiempo real, así responde con datos reales en lugar de respuestas genéricas. También puede modificar datos de la tienda, siempre pidiéndote confirmación antes.",
   },
   {
     question: "¿En qué se diferencia de un chatbot común o de ManyChat?",
     answer:
-      "Un chatbot configurable te deja cambiar lo que su panel previó: mensajes, horarios, algunas reglas. Con Buna cambiás cualquier comportamiento describiéndolo, incluso cosas que nadie anticipó, y cada cambio queda versionado y se puede revertir. No estás configurando nuestro producto: estás construyendo el tuyo.",
+      "Un chatbot configurable te deja cambiar lo que su panel previó: mensajes, horarios, algunas reglas. Con BunaAI cambiás cualquier comportamiento describiéndolo, incluso cosas que nadie anticipó, y cada cambio queda versionado y se puede revertir. No estás configurando nuestro producto: estás construyendo el tuyo.",
   },
   {
     question: "¿Qué pasa si el agente responde algo que no quiero?",
     answer:
-      "Tres cosas. Antes de que salga a producción lo probás en un entorno separado. Las acciones que tocan tu tienda o tus clientes piden tu confirmación explícita. Y si algo igual sale mal, volvés a la versión anterior en un click, sin perder el resto de lo que construiste.",
+      "Varias cosas. Podés chatear con tu agente desde el panel para ver cómo responde. Con el plan Growth, cada vez que publicás una versión BunaAI corre tests automáticos y te avisa si alguno falla. Las acciones que tocan tu tienda o tus clientes piden tu confirmación explícita. Y si algo igual sale mal, volvés a la versión anterior en un click, sin perder el resto de lo que construiste.",
   },
   {
     question: "¿Puedo hacer que me pase la conversación a mí?",
@@ -276,17 +297,17 @@ export const FAQS = [
   {
     question: "¿Cuánto tarda en estar funcionando?",
     answer:
-      "Conectar WhatsApp y Tienda Nube lleva unos minutos. La primera automatización útil, como responder preguntas frecuentes con datos de tu tienda, suele quedar andando el mismo día.",
+      "Conectar WhatsApp y Tiendanube lleva unos minutos. La primera automatización útil, como responder preguntas frecuentes con datos de tu tienda, suele quedar andando el mismo día.",
   },
   {
     question: "¿Qué pasa con los datos de mis clientes?",
     answer:
-      "Cada cuenta corre aislada del resto, con su propia base de datos y credenciales. Las conversaciones se usan para que tu agente responda mejor en tu cuenta, no para entrenar modelos de terceros.",
+      "Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales propios: no compartís nada con otros clientes. Las conversaciones se usan para que tu agente responda mejor en tu cuenta, no para entrenar modelos de terceros.",
   },
 ] as const;
 
 export const FINAL_CTA = {
-  title: "Contale a Buna qué necesitás que haga tu negocio",
+  title: "Contale a BunaAI qué necesitás que haga tu negocio",
   subtitle:
     "Conectás WhatsApp, le pedís lo primero que se te ocurra y lo ves funcionando el mismo día.",
 } as const;

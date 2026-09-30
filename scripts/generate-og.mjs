@@ -23,13 +23,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <rect width="1200" height="630" fill="url(#glow)"/>
 
   <g transform="translate(80, 72)">${mark}</g>
-  <text x="196" y="138" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff">Buna</text>
+  <text x="196" y="138" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff">BunaAI</text>
 
   <text x="80" y="292" font-family="Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">Automatizá tu negocio en</text>
   <text x="80" y="372" font-family="Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#ffffff">WhatsApp describiéndolo</text>
   <text x="80" y="452" font-family="Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#4ade9a">en una frase</text>
 
-  <text x="80" y="540" font-family="Helvetica, Arial, sans-serif" font-size="29" fill="#ffffff" fill-opacity="0.62">Agentes de IA para WhatsApp · Integrado con Tienda Nube</text>
+  <text x="80" y="540" font-family="Helvetica, Arial, sans-serif" font-size="29" fill="#ffffff" fill-opacity="0.62">Agentes de IA para WhatsApp · Integrado con Tiendanube</text>
 
   <rect x="80" y="576" width="120" height="5" rx="2.5" fill="#2fac6a"/>
 </svg>`;

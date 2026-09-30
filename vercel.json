@@ -13,7 +13,7 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+          "value": "camera=(), microphone=(), geolocation=()"
         },
         {
           "key": "Strict-Transport-Security",
@@ -22,27 +22,29 @@
       ]
     },
     {
-      "comment": "Los assets con hash en el nombre nunca cambian de contenido: se cachean para siempre y un deploy nuevo genera nombres nuevos.",
       "source": "/_astro/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "comment": "Las fuentes tampoco cambian, pero no llevan hash: se cachean largo igual porque reemplazarlas implica cambiar el nombre del archivo.",
       "source": "/fonts/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "comment": "El HTML se revalida siempre para que un deploy se vea al instante, pero el CDN puede servir la copia vieja mientras revalida.",
-      "source": "/((?!_astro|fonts).*)",
+      "source": "/og/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate, s-maxage=86400, stale-while-revalidate=604800"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    },
+    {
+      "source": "/.well-known/oauth-client-metadata",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     }
   ]

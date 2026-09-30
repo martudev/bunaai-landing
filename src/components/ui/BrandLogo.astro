@@ -1,0 +1,79 @@
+---
+/**
+ * Logos oficiales de las plataformas con las que BunaAI se integra.
+ *
+ * Van inline y no como <img> por dos razones: son parte del contenido visible
+ * en el primer viewport de la sección, así que una request extra por logo
+ * agregaría latencia justo ahí; y siendo SVG inline escalan sin pedir
+ * versiones @2x.
+ *
+ * Fuentes de cada marca, para poder auditarlas:
+ *  - WhatsApp: Simple Icons (CC0), color oficial #25D366.
+ *  - Slack: marca de cuatro colores, con sus hex oficiales.
+ *  - Tiendanube: ícono de Nimbus, su propio design system. El azul #0059d5 es
+ *    su token `--color-light-primary-interactive`.
+ *
+ * Se usan tal cual los publica cada empresa, sin recolorear: alterar un logo
+ * de marca es justo lo que sus guías de uso prohíben.
+ */
+interface Props {
+  name: "whatsapp" | "tiendanube" | "slack";
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 22, class: className = "" } = Astro.props;
+
+// El título del SVG es el nombre accesible. En esta sección cada logo va
+// acompañado de un <h3> con el mismo nombre, así que se marca decorativo para
+// que un lector de pantalla no lea la marca dos veces seguidas.
+// `as const` para que `aria-hidden` se infiera como el literal "true" y no
+// como un string cualquiera: los tipos de SVG solo aceptan el literal.
+const common = {
+  width: size,
+  height: size,
+  class: className,
+  "aria-hidden": "true",
+  focusable: "false",
+  xmlns: "http://www.w3.org/2000/svg",
+} as const;
+---
+
+{
+  name === "whatsapp" && (
+    <svg {...common} viewBox="0 0 24 24" fill="#25D366">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  )
+}
+
+{
+  name === "tiendanube" && (
+    <svg {...common} viewBox="0 0 16 16" fill="#0059d5">
+      <path d="M10.25 2.24a5.8 5.8 0 0 0-4 1.63a4.48 4.48 0 1 0 0 8.26a5.76 5.76 0 1 0 4-9.89m0 10.24A4.49 4.49 0 0 1 5.76 8H4.48a5.74 5.74 0 0 0 .89 3.07a3.3 3.3 0 0 1-.88.13a3.2 3.2 0 0 1 0-6.4A3.2 3.2 0 0 1 7.69 8H9a4.42 4.42 0 0 0-1.63-3.43a4.48 4.48 0 1 1 2.88 7.91" />
+    </svg>
+  )
+}
+
+{
+  name === "slack" && (
+    <svg {...common} viewBox="0 0 256 256">
+      <path
+        fill="#e01e5a"
+        d="M53.841 161.32c0 14.832-11.987 26.82-26.819 26.82S.203 176.152.203 161.32c0-14.831 11.987-26.818 26.82-26.818H53.84zm13.41 0c0-14.831 11.987-26.818 26.819-26.818s26.819 11.987 26.819 26.819v67.047c0 14.832-11.987 26.82-26.82 26.82c-14.83 0-26.818-11.988-26.818-26.82z"
+      />
+      <path
+        fill="#36c5f0"
+        d="M94.07 53.638c-14.832 0-26.82-11.987-26.82-26.819S79.239 0 94.07 0s26.819 11.987 26.819 26.819v26.82zm0 13.613c14.832 0 26.819 11.987 26.819 26.819s-11.987 26.819-26.82 26.819H26.82C11.987 120.889 0 108.902 0 94.069c0-14.83 11.987-26.818 26.819-26.818z"
+      />
+      <path
+        fill="#2eb67d"
+        d="M201.55 94.07c0-14.832 11.987-26.82 26.818-26.82s26.82 11.988 26.82 26.82s-11.988 26.819-26.82 26.819H201.55zm-13.41 0c0 14.832-11.988 26.819-26.82 26.819c-14.831 0-26.818-11.987-26.818-26.82V26.82C134.502 11.987 146.489 0 161.32 0s26.819 11.987 26.819 26.819z"
+      />
+      <path
+        fill="#ecb22e"
+        d="M161.32 201.55c14.832 0 26.82 11.987 26.82 26.818s-11.988 26.82-26.82 26.82c-14.831 0-26.818-11.988-26.818-26.82V201.55zm0-13.41c-14.831 0-26.818-11.988-26.818-26.82c0-14.831 11.987-26.818 26.819-26.818h67.25c14.832 0 26.82 11.987 26.82 26.819s-11.988 26.819-26.82 26.819z"
+      />
+    </svg>
+  )
+}

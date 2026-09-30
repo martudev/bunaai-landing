@@ -2,9 +2,9 @@
 import { INTEGRATIONS } from "../../data/content";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
+import BrandLogo from "../ui/BrandLogo.astro";
 import Icon from "../ui/Icon.astro";
-
-const icons = ["message", "store", "slack"] as const;
+import Button from "../ui/Button.astro";
 ---
 
 <Section id="integraciones">
@@ -16,11 +16,16 @@ const icons = ["message", "store", "slack"] as const;
 
   <ul class="mt-14 grid gap-5 md:grid-cols-3">
     {
-      INTEGRATIONS.live.map((integration, index) => (
+      INTEGRATIONS.live.map((integration) => (
         <li class="rounded-2xl border border-ink-900/10 bg-white p-7">
           <div class="flex items-center gap-3">
-            <span class="flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-              <Icon name={icons[index]} size={19} />
+            {/*
+              Fondo blanco y no el verde de marca: cada logo trae sus propios
+              colores y sobre el verde de BunaAI se ensuciarían, sobre todo el
+              de WhatsApp, que es un verde parecido.
+            */}
+            <span class="flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)]">
+              <BrandLogo name={integration.logo} size={22} />
             </span>
             <h3 class="font-sans text-lg font-semibold text-ink-900">
               {integration.name}
@@ -35,12 +40,63 @@ const icons = ["message", "store", "slack"] as const;
   </ul>
 
   {/*
+    Integración a medida. Va en un bloque aparte y más ancho, no como cuarta
+    tarjeta: las de arriba se conectan solas desde el panel y esta empieza con
+    una charla, así que no deberían leerse como equivalentes.
+  */}
+  <div
+    class="mt-5 grid gap-7 rounded-2xl border border-ink-900/10 bg-surface-muted p-7 md:grid-cols-[1.6fr_1fr] md:items-center md:gap-10 md:p-9"
+  >
+    <div>
+      <div class="flex items-center gap-3">
+        <span
+          class="flex size-11 shrink-0 items-center justify-center rounded-xl border border-ink-900/8 bg-white text-ink-700 shadow-[0_1px_2px_rgba(5,10,52,0.06)]"
+        >
+          <Icon name="plug" size={21} />
+        </span>
+        <h3 class="font-sans text-lg font-semibold text-ink-900">
+          {INTEGRATIONS.custom.title}
+        </h3>
+      </div>
+
+      <p class="mt-4 text-[0.95rem] leading-relaxed text-ink-700">
+        {INTEGRATIONS.custom.body}
+      </p>
+
+      <ul class="mt-5 flex flex-wrap gap-2">
+        {
+          INTEGRATIONS.custom.examples.map((example) => (
+            <li class="rounded-lg border border-ink-900/8 bg-white px-2.5 py-1 text-sm text-ink-700">
+              {example}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="md:text-right">
+      <Button
+        href={INTEGRATIONS.custom.cta.href}
+        variant="secondary"
+        size="lg"
+        class="w-full md:w-auto"
+      >
+        {INTEGRATIONS.custom.cta.label}
+        <Icon name="arrow-right" size={17} />
+      </Button>
+      <p class="mt-4 text-[0.88rem] leading-relaxed text-ink-500">
+        {INTEGRATIONS.custom.note}
+      </p>
+    </div>
+  </div>
+
+  {/*
     Se listan las integraciones que faltan en vez de esconderlas. Que alguien
     descubra en el onboarding que su plataforma no está es peor que no haberlo
     traído nunca.
   */}
   <div
-    class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl border border-dashed border-ink-900/15 px-6 py-5 text-center"
+    class="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl border border-dashed border-ink-900/15 px-6 py-5 text-center"
   >
     <span class="text-sm font-semibold text-ink-500">En camino:</span>
     {

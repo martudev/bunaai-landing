@@ -1,0 +1,166 @@
+---
+import { PLANS, CURRENCY, PLAN_COMPARISON } from "../../data/pricing";
+import { CTA } from "../../data/site";
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
+
+// La columna destacada sale del mismo `featured` que usan las tarjetas de
+// arriba: si mañana el plan recomendado cambia, cambia en los dos lugares.
+const featuredIndex = PLANS.findIndex((plan) => plan.featured);
+
+const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" : "");
+---
+
+<Section tone="muted">
+  <SectionHeading
+    title="Compará los planes"
+    subtitle="Todo lo que incluye cada uno, fila por fila."
+  />
+
+  {/*
+    En mobile la tabla no entra: scrollea en horizontal con la primera columna
+    fija, así el nombre de la feature queda visible mientras se comparan los
+    planes. `tabindex` + `role="region"` hacen ese scroll alcanzable con teclado.
+
+    `relative` no es decorativo: los textos `sr-only` de las celdas son
+    `position: absolute`, y sin un ancestro posicionado dentro del scroll se
+    ubican respecto de la página y la ensanchan en mobile.
+  */}
+  <div
+    class="relative mt-12 overflow-x-auto rounded-2xl border border-ink-900/10 bg-white"
+    tabindex="0"
+    role="region"
+    aria-label="Comparación de planes de BunaAI"
+  >
+    <table class="w-full min-w-[36rem] border-collapse text-left">
+      <colgroup>
+        <col class="w-[31%]" />
+        {PLANS.map(() => <col class="w-[23%]" />)}
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th scope="col" class="sticky left-0 z-10 bg-white p-5 align-bottom">
+            <span class="sr-only">Característica</span>
+          </th>
+          {
+            PLANS.map((plan, index) => (
+              <th
+                scope="col"
+                class:list={[
+                  "p-5 align-bottom",
+                  index === featuredIndex
+                    ? "border-t-4 border-brand-500 bg-brand-50"
+                    : "border-t-4 border-transparent",
+                ]}
+              >
+                {index === featuredIndex && (
+                  <span class="mb-2 inline-block rounded-full bg-brand-500 px-2.5 py-0.5 text-xs font-semibold text-white">
+                    El más elegido
+                  </span>
+                )}
+                <span class="block font-sans text-base font-bold text-ink-900">
+                  {plan.name}
+                </span>
+                <span class="mt-1 block text-sm font-normal text-ink-500">
+                  <span class="font-semibold text-ink-900">
+                    {CURRENCY} {plan.price}
+                  </span>{" "}
+                  /mes
+                </span>
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+
+      {
+        PLAN_COMPARISON.map((group) => (
+          <tbody>
+            {/*
+              La fila de grupo lleva una celda por plan (y no un colspan) para
+              que la columna destacada no se corte en cada encabezado de grupo.
+            */}
+            <tr class="border-t border-ink-900/10">
+              <th
+                scope="colgroup"
+                class="sticky left-0 z-10 bg-surface-muted px-5 pt-5 pb-2 text-xs font-semibold tracking-wide text-ink-500 uppercase"
+              >
+                {group.group}
+              </th>
+              {PLANS.map((_, index) => (
+                <td
+                  class:list={[
+                    "pt-5 pb-2",
+                    index === featuredIndex ? "bg-brand-50" : "bg-surface-muted",
+                  ]}
+                />
+              ))}
+            </tr>
+
+            {group.rows.map((row) => (
+              <tr class="border-t border-ink-900/6">
+                <th
+                  scope="row"
+                  class="sticky left-0 z-10 bg-white px-5 py-3.5 text-[0.93rem] font-medium text-ink-900"
+                >
+                  {row.feature}
+                </th>
+                {row.values.map((value, index) => (
+                  <td class:list={["px-5 py-3.5 text-[0.93rem]", cellTint(index)]}>
+                    {value === true ? (
+                      <span class="flex size-5 items-center justify-center rounded-full bg-brand-500 text-white">
+                        <Icon name="check" size={12} />
+                        <span class="sr-only">Incluido</span>
+                      </span>
+                    ) : value === false ? (
+                      <span class="text-ink-900/25" aria-hidden="true">
+                        —
+                      </span>
+                    ) : (
+                      <span
+                        class:list={[
+                          index === featuredIndex
+                            ? "font-semibold text-brand-800"
+                            : "text-ink-700",
+                        ]}
+                      >
+                        {value}
+                      </span>
+                    )}
+                    {value === false && <span class="sr-only">No incluido</span>}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        ))
+      }
+
+      {/*
+        Solo en desktop: en mobile las columnas son angostas para un botón
+        entero, y cada tarjeta de arriba ya tiene su propio CTA.
+      */}
+      <tfoot class="hidden md:table-footer-group">
+        <tr class="border-t border-ink-900/10">
+          <td class="sticky left-0 z-10 bg-white p-5"></td>
+          {
+            PLANS.map((plan, index) => (
+              <td class:list={["p-5", cellTint(index)]}>
+                <Button
+                  href={CTA.primary.href}
+                  variant={plan.featured ? "primary" : "secondary"}
+                  class="w-full"
+                >
+                  {CTA.primary.label}
+                </Button>
+              </td>
+            ))
+          }
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</Section>

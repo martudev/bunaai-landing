@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
 import Pricing from "../components/sections/Pricing.astro";
+import PlanComparison from "../components/sections/PlanComparison.astro";
 import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
 import Section from "../components/ui/Section.astro";
@@ -27,18 +28,17 @@ const schema = [
 ];
 
 const incluido = [
-  "Infraestructura, hosting y base de datos",
-  "Versionado, deploys programados y rollback",
-  "Entorno de prueba separado de producción",
+  "Infraestructura dedicada: servidores y base de datos propios",
+  "Versionado y rollback",
   "Actualizaciones del producto",
   "Monitoreo y alertas",
-  "Soporte de personas, no de un bot",
+  "Automatizaciones ilimitadas",
 ];
 ---
 
 <Layout
-  title="Precios de Buna | Planes desde USD 25 al mes"
-  description="Planes de Buna desde USD 25 al mes, con infraestructura, versionado e integraciones incluidos. Sin costo de setup ni permanencia."
+  title="Precios de BunaAI | Planes desde USD 49 al mes"
+  description="Planes de BunaAI desde USD 49 al mes, con infraestructura, versionado e integraciones incluidos. Sin costo de setup ni permanencia."
   schema={schema}
 >
   <Breadcrumbs items={crumbs} />
@@ -59,7 +59,13 @@ const incluido = [
   {/* Sin título propio: el h1 de arriba ya encabeza esta sección. */}
   <Pricing title="" subtitle="" tone="default" cardAs="h2" />
 
-  <Section tone="muted">
+  <PlanComparison />
+
+  {/*
+    Los tonos alternan (blanco / gris) para que cada sección se lea separada:
+    la comparativa es gris, así que esta va en blanco y las FAQ vuelven a gris.
+  */}
+  <Section tone="default">
     <div class="mx-auto max-w-3xl">
       <h2 class="text-2xl md:text-3xl">Incluido en todos los planes</h2>
       <ul class="mt-8 grid gap-4 sm:grid-cols-2">
@@ -80,7 +86,7 @@ const incluido = [
   <Faq
     faqs={PRICING_FAQS}
     title="Preguntas sobre precios"
-    tone="default"
+    tone="muted"
   />
 
   <FinalCta

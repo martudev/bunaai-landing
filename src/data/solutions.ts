@@ -1,7 +1,7 @@
 /**
  * Páginas de intención de búsqueda.
  *
- * La home vende la visión ("decile a Buna qué necesitás"), pero nadie busca
+ * La home vende la visión ("decile a BunaAI qué necesitás"), pero nadie busca
  * eso en Google: buscan "chatbot whatsapp" o "recuperar carritos abandonados".
  * Cada entrada de acá se convierte en una página que captura una de esas
  * búsquedas y lleva a la visión, con contenido propio y no una plantilla
@@ -39,12 +39,12 @@ export interface Solution {
 export const SOLUTIONS: Solution[] = [
   {
     slug: "chatbot-whatsapp-ia",
-    title: "Chatbot de WhatsApp con IA para tu negocio | Buna",
+    title: "Chatbot de WhatsApp con IA para tu negocio | BunaAI",
     description:
       "Creá un chatbot de WhatsApp con IA sin programar: respondé con stock y pedidos reales de tu tienda y derivá a una persona cuando haga falta.",
     eyebrow: "Chatbot de WhatsApp con IA",
     h1: "Un chatbot de WhatsApp que entiende tu negocio, no solo un árbol de opciones",
-    lede: "La mayoría de los chatbots de WhatsApp son menús: el cliente escribe 1, después 3, y si su pregunta no está en la lista, se va. Buna arma un agente que lee lo que le escriben, consulta los datos reales de tu tienda y contesta como contestaría alguien de tu equipo.",
+    lede: "La mayoría de los chatbots de WhatsApp son menús: el cliente escribe 1, después 3, y si su pregunta no está en la lista, se va. BunaAI arma un agente que lee lo que le escriben, consulta los datos reales de tu tienda y contesta como contestaría alguien de tu equipo.",
     highlights: [
       "Responde con stock, precios y estado de pedidos en tiempo real",
       "Se configura describiendo lo que querés, no armando flujos",
@@ -75,12 +75,12 @@ export const SOLUTIONS: Solution[] = [
       {
         heading: "Cómo se configura: hablando, no armando flujos",
         paragraphs: [
-          "En vez de abrir un editor de nodos, le escribís a Buna lo que querés que pase. “Si preguntan por envíos a Córdoba, aclarales que tarda 3 a 5 días hábiles.” “Si el pedido es mayor a $150.000, ofreceles envío sin cargo.” “Si alguien escribe fuera del horario, avisale cuándo le respondemos.”",
-          "Buna interpreta la intención, escribe la lógica, te muestra qué va a hacer y lo deja listo para que lo pruebes. Cuando te cierra, lo deployás. Si el resultado no es el que esperabas, volvés a la versión anterior sin perder el resto de lo que construiste.",
+          "En vez de abrir un editor de nodos, le escribís a BunaAI lo que querés que pase. “Si preguntan por envíos a Córdoba, aclarales que tarda 3 a 5 días hábiles.” “Si el pedido es mayor a $150.000, ofreceles envío sin cargo.” “Si alguien escribe fuera del horario, avisale cuándo le respondemos.”",
+          "BunaAI interpreta la intención, escribe la lógica, te muestra qué va a hacer. Cuando te cierra, lo publicás, y con el plan Growth en ese momento corre tests automáticos contra la versión nueva. Si el resultado no es el que esperabas, volvés a la versión anterior sin perder el resto de lo que construiste.",
         ],
       },
       {
-        heading: "Cuándo el bot tiene que dejar de ser un bot",
+        heading: "Cuándo el agente te pasa la conversación",
         paragraphs: [
           "Un buen agente sabe cuándo frenar. Le definís en qué situaciones tiene que pasarte la conversación —un cliente molesto, un pedido grande, alguien que pide explícitamente hablar con una persona— y el agente se detiene y te avisa por donde le digas, típicamente Slack o el mismo panel.",
           "Esa derivación es la diferencia entre un chatbot que protege la experiencia de tu cliente y uno que la arruina intentando resolver algo que no le corresponde.",
@@ -89,7 +89,7 @@ export const SOLUTIONS: Solution[] = [
     ],
     prompts: [
       {
-        prompt: "Respondé consultas de talles y stock consultando Tienda Nube en tiempo real.",
+        prompt: "Respondé consultas de talles y stock consultando Tiendanube en tiempo real.",
         result: "Atención con datos reales, sin respuestas genéricas",
       },
       {
@@ -132,15 +132,15 @@ export const SOLUTIONS: Solution[] = [
 
   {
     slug: "automatizaciones-whatsapp",
-    title: "Automatizaciones de WhatsApp para e-commerce | Buna",
+    title: "Automatizaciones de WhatsApp para e-commerce | BunaAI",
     description:
-      "Automatizá ventas, cobranzas y atención en WhatsApp describiendo lo que necesitás. Sin nodos ni código: Buna escribe la lógica y la deja corriendo.",
+      "Automatizá ventas, cobranzas y atención en WhatsApp describiendo lo que necesitás. Sin nodos ni código: BunaAI escribe la lógica y la deja corriendo.",
     eyebrow: "Automatizaciones de WhatsApp",
     h1: "Automatizaciones de WhatsApp que describís en una frase",
-    lede: "Automatizar no debería significar pasar una tarde conectando nodos y mapeando campos. Le contás a Buna qué querés que pase y cuándo, y ella construye la automatización, la prueba y la deja corriendo sobre infraestructura que no tenés que administrar.",
+    lede: "Automatizar no debería significar pasar una tarde conectando nodos y mapeando campos. Le contás a BunaAI qué querés que pase y cuándo, y ella construye la automatización y la deja corriendo sobre infraestructura que no tenés que administrar. Con el plan Growth, además, corre tests automáticos cada vez que publicás un cambio.",
     highlights: [
       "Triggers por evento, por horario o por lo que diga el cliente",
-      "Se conecta con Tienda Nube, Slack y tu WhatsApp",
+      "Se conecta con Tiendanube, Slack y tu WhatsApp",
       "Deploys programados con fecha y hora",
       "Historial de versiones y vuelta atrás en un click",
     ],
@@ -155,7 +155,7 @@ export const SOLUTIONS: Solution[] = [
       {
         heading: "Describir el resultado en vez de dibujar el proceso",
         paragraphs: [
-          "Buna invierte el orden. No describís los pasos, describís el resultado que querés, y ella resuelve los pasos. “Cuando alguien abandone un carrito de más de $100.000, escribile a las dos horas; si contesta que es caro, ofrecele envío gratis; si igual no compra, avisame por Slack.”",
+          "BunaAI invierte el orden. No describís los pasos, describís el resultado que querés, y ella resuelve los pasos. “Cuando alguien abandone un carrito de más de $100.000, escribile a las dos horas; si contesta que es caro, ofrecele envío gratis; si igual no compra, avisame por Slack.”",
           "Eso es un trigger, una condición sobre el monto, una espera, un mensaje, una rama según la respuesta del cliente y una notificación. Todo eso se construye solo, y vos podés seguir ajustándolo hablando: “esperá una hora en vez de dos”, “subí el corte a $150.000”, “no le escribas a los que ya compraron esta semana”.",
         ],
         bullets: [
@@ -169,13 +169,14 @@ export const SOLUTIONS: Solution[] = [
         heading: "Cambios versionados, no cambios a ciegas",
         paragraphs: [
           "Toda modificación genera una versión nueva, con su historial de qué cambió y cuándo. Podés programar que una versión se active un día y hora determinados, algo útil cuando el cambio acompaña una promo o un fin de semana largo.",
+          "Con el plan Growth, apenas una versión sale a producción, BunaAI corre tests automáticos contra ella. Si alguno falla, la versión sigue publicada y te avisa: podés volver a correr los tests o pedirle al agente que lo corrija.",
           "Y si una automatización se comporta distinto a lo que esperabas, volvés a la versión anterior en un click. Es la diferencia entre poder experimentar y tenerle miedo a tocar lo que funciona.",
         ],
       },
       {
         heading: "Sin infraestructura de tu lado",
         paragraphs: [
-          "Las automatizaciones corren sobre servidores, base de datos, colas y monitoreo que administramos nosotros. No configurás un servidor, no pagás hosting aparte y no te enterás de que algo se cayó por un cliente enojado.",
+          "Las automatizaciones corren sobre servidores, base de datos, colas y monitoreo dedicados a tu negocio, que no compartís con otros clientes y que administramos nosotros. No configurás un servidor, no pagás hosting aparte y no te enterás de que algo se cayó por un cliente enojado.",
           "En el panel ves qué ejecutó cada automatización, cuántas veces, con qué resultado y cuánto costó en dólares de consumo de IA.",
         ],
       },
@@ -195,24 +196,24 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         prompt: "A partir del lunes, los pedidos de más de $200.000 llevan otro seguimiento.",
-        result: "Cambio programado con fecha de activación",
+        result: "Regla con fecha de inicio",
       },
     ],
     faqs: [
       {
         question: "¿En qué se diferencia de n8n, Make o Zapier?",
         answer:
-          "En quién arma la lógica. En esas herramientas la armás vos nodo por nodo y después la mantenés. En Buna la describís y se construye sola, queda versionada y corre sobre infraestructura administrada. Además no necesitás saber qué campo de la API va en qué lugar.",
+          "En quién arma la lógica. En esas herramientas la armás vos nodo por nodo y después la mantenés. En BunaAI la describís y se construye sola, queda versionada y corre sobre infraestructura administrada. Además no necesitás saber qué campo de la API va en qué lugar.",
       },
       {
         question: "¿Puedo tener varias automatizaciones a la vez?",
         answer:
-          "Sí, y es lo habitual: atención de consultas, recuperación de carritos, seguimiento de pagos y difusiones conviviendo. Buna las coordina para que un mismo cliente no reciba tres mensajes en simultáneo.",
+          "Sí, y es lo habitual: atención de consultas, recuperación de carritos, seguimiento de pagos y difusiones conviviendo. BunaAI las coordina para que un mismo cliente no reciba tres mensajes en simultáneo.",
       },
       {
         question: "¿Qué pasa si quiero frenar una automatización?",
         answer:
-          "La pausás desde el panel o se lo pedís a Buna. También podés volver a una versión anterior si el problema es un cambio puntual en vez de la automatización entera.",
+          "La pausás desde el panel o se lo pedís a BunaAI. También podés volver a una versión anterior si el problema es un cambio puntual en vez de la automatización entera.",
       },
       {
         question: "¿Se puede automatizar algo que toque datos de mi tienda?",
@@ -225,12 +226,12 @@ export const SOLUTIONS: Solution[] = [
 
   {
     slug: "tiendanube-whatsapp",
-    title: "Conectar Tienda Nube con WhatsApp y IA | Buna",
+    title: "Conectar Tiendanube con WhatsApp y IA | BunaAI",
     description:
-      "Conectá Tienda Nube con WhatsApp y dejá que un agente de IA responda con stock, precios y pedidos reales, recupere carritos y siga pagos. Se configura hablando.",
-    eyebrow: "Tienda Nube + WhatsApp",
-    h1: "Tu Tienda Nube atendiendo por WhatsApp con datos reales",
-    lede: "Si vendés con Tienda Nube, la mitad de tu operación pasa por WhatsApp: consultas antes de comprar, comprobantes de transferencia, seguimiento de envíos, cambios. Buna conecta las dos puntas para que esas conversaciones se resuelvan con la información real de tu tienda.",
+      "Conectá Tiendanube con WhatsApp y dejá que un agente de IA responda con stock, precios y pedidos reales, recupere carritos y siga pagos. Se configura hablando.",
+    eyebrow: "Tiendanube + WhatsApp",
+    h1: "Tu Tiendanube atendiendo por WhatsApp con datos reales",
+    lede: "Si vendés con Tiendanube, la mitad de tu operación pasa por WhatsApp: consultas antes de comprar, comprobantes de transferencia, seguimiento de envíos, cambios. BunaAI conecta las dos puntas para que esas conversaciones se resuelvan con la información real de tu tienda.",
     highlights: [
       "Stock, precios, pedidos y clientes consultados en vivo",
       "Recuperación de carritos abandonados por WhatsApp",
@@ -241,7 +242,7 @@ export const SOLUTIONS: Solution[] = [
       {
         heading: "El agujero entre la tienda y la conversación",
         paragraphs: [
-          "Tienda Nube sabe todo sobre tu catálogo y tus pedidos. WhatsApp es donde tus clientes efectivamente preguntan. Entre las dos cosas suele haber una persona copiando datos de una pantalla a la otra: buscar si hay stock, fijarse si entró la transferencia, revisar en qué anda el envío.",
+          "Tiendanube sabe todo sobre tu catálogo y tus pedidos. WhatsApp es donde tus clientes efectivamente preguntan. Entre las dos cosas suele haber una persona copiando datos de una pantalla a la otra: buscar si hay stock, fijarse si entró la transferencia, revisar en qué anda el envío.",
           "Ese trabajo manual es el que limita cuánto podés vender sin sumar gente. Y es también donde se pierden las ventas: el cliente que pregunta un sábado a la noche y recibe respuesta el lunes ya compró en otro lado.",
         ],
       },
@@ -261,21 +262,21 @@ export const SOLUTIONS: Solution[] = [
       {
         heading: "Los tres casos que más rinden al principio",
         paragraphs: [
-          "No hace falta automatizar todo el primer día. En los negocios que venden con Tienda Nube hay tres cosas que suelen justificar la herramienta solas.",
+          "No hace falta automatizar todo el primer día. En los negocios que venden con Tiendanube hay tres cosas que suelen justificar la herramienta solas.",
           "La primera es responder consultas de producto con stock real, que es el grueso del volumen. La segunda es recuperar carritos abandonados por WhatsApp, que va directo a ingresos que hoy se pierden. La tercera es la verificación de transferencias, que es tedioso, pasa a toda hora y es fácil de equivocar.",
         ],
       },
       {
         heading: "Cómo se conecta",
         paragraphs: [
-          "Desde Conexiones en el panel cargás el ID de tu tienda y el token de tu app de Tienda Nube, y escaneás el QR de WhatsApp con el teléfono. Son dos pasos y unos minutos.",
-          "A partir de ahí le pedís a Buna lo que necesites y ella resuelve qué datos consultar. No tenés que saber qué endpoint devuelve qué ni mapear campos.",
+          "Desde Conexiones en el panel cargás el ID de tu tienda y el token de tu app de Tiendanube, y escaneás el QR de WhatsApp con el teléfono. Son dos pasos y unos minutos.",
+          "A partir de ahí le pedís a BunaAI lo que necesites y ella resuelve qué datos consultar. No tenés que saber qué endpoint devuelve qué ni mapear campos.",
         ],
       },
     ],
     prompts: [
       {
-        prompt: "Si preguntan por un producto, fijate el stock en Tienda Nube y contestá con los talles disponibles.",
+        prompt: "Si preguntan por un producto, fijate el stock en Tiendanube y contestá con los talles disponibles.",
         result: "Consultas de catálogo resueltas en el momento",
       },
       {
@@ -293,9 +294,9 @@ export const SOLUTIONS: Solution[] = [
     ],
     faqs: [
       {
-        question: "¿Qué necesito para conectar Tienda Nube?",
+        question: "¿Qué necesito para conectar Tiendanube?",
         answer:
-          "El ID de tu tienda y un access token de tu app de Tienda Nube. Los cargás una vez desde la sección Conexiones del panel y quedan guardados de forma cifrada.",
+          "El ID de tu tienda y un access token de tu app de Tiendanube. Los cargás una vez desde la sección Conexiones del panel y quedan guardados de forma cifrada.",
       },
       {
         question: "¿El agente puede modificar cosas en mi tienda?",
@@ -305,12 +306,12 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿Funciona con Shopify o WooCommerce?",
         answer:
-          "Hoy la integración nativa es con Tienda Nube. Shopify está en el roadmap, y para otras plataformas se puede trabajar con API y webhooks. Si estás en esa situación, escribinos y te decimos con franqueza si te sirve hoy o conviene esperar.",
+          "Hoy la integración nativa es con Tiendanube. Shopify está en el roadmap, y para otras plataformas se puede trabajar con API y webhooks. Si estás en esa situación, escribinos y te decimos con franqueza si te sirve hoy o conviene esperar.",
       },
       {
         question: "¿Los datos de la tienda se comparten con otros?",
         answer:
-          "No. Cada cuenta corre aislada, con su propia base de datos y sus propias credenciales. Los datos de tu tienda se usan para responder en tu cuenta y nada más.",
+          "No. Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales propios, sin compartir nada con otros clientes. Los datos de tu tienda se usan para responder en tu cuenta y nada más.",
       },
     ],
     related: ["recuperar-carritos-abandonados", "chatbot-whatsapp-ia", "automatizaciones-whatsapp"],
@@ -318,14 +319,14 @@ export const SOLUTIONS: Solution[] = [
 
   {
     slug: "recuperar-carritos-abandonados",
-    title: "Recuperar carritos abandonados por WhatsApp | Buna",
+    title: "Recuperar carritos abandonados por WhatsApp | BunaAI",
     description:
       "Recuperá carritos abandonados escribiendo por WhatsApp en el momento justo, con el producto que dejaron y una respuesta distinta según la objeción del cliente.",
     eyebrow: "Carritos abandonados",
     h1: "Recuperá carritos abandonados donde tu cliente sí responde",
     lede: "El mail de carrito abandonado se abre poco y se responde menos. WhatsApp se lee casi siempre, pero solo funciona si el mensaje llega en el momento justo, menciona lo que la persona dejó y sabe qué contestar cuando dice que le parece caro.",
     highlights: [
-      "Mensaje disparado por el carrito real de Tienda Nube",
+      "Mensaje disparado por el carrito real de Tiendanube",
       "Esperas y montos mínimos que definís vos",
       "Respuestas distintas según la objeción del cliente",
       "Alertas a tu equipo cuando el carrito es grande",
@@ -401,7 +402,7 @@ export const SOLUTIONS: Solution[] = [
           "El agente verifica el estado del carrito y del pedido antes de escribir, así que no le manda un recordatorio a alguien que ya completó la compra.",
       },
       {
-        question: "¿Necesito Tienda Nube para esto?",
+        question: "¿Necesito Tiendanube para esto?",
         answer:
           "Para el disparo automático sí, porque el evento de carrito abandonado viene de la tienda. Sin esa integración podés armar seguimientos basados en la conversación, pero no vas a tener el carrito real como disparador.",
       },
@@ -411,9 +412,9 @@ export const SOLUTIONS: Solution[] = [
 
   {
     slug: "alternativa-manychat",
-    title: "Alternativa a ManyChat para e-commerce en WhatsApp | Buna",
+    title: "Alternativa a ManyChat para e-commerce en WhatsApp | BunaAI",
     description:
-      "¿Buscás una alternativa a ManyChat que no te limite a lo que su panel permite? En Buna describís el comportamiento que querés y se construye solo.",
+      "¿Buscás una alternativa a ManyChat que no te limite a lo que su panel permite? En BunaAI describís el comportamiento que querés y se construye solo.",
     eyebrow: "Comparativa",
     h1: "Una alternativa a ManyChat para cuando el panel se te queda corto",
     lede: "ManyChat y las plataformas parecidas resuelven bien el arranque: armás un flujo, conectás WhatsApp y empezás. El techo aparece después, cuando querés algo que su editor no contempla y la respuesta es que no se puede.",
@@ -434,8 +435,8 @@ export const SOLUTIONS: Solution[] = [
       {
         heading: "El cambio de enfoque",
         paragraphs: [
-          "Buna no te da un editor con bloques. Le describís el comportamiento que querés y escribe la lógica que hace falta, incluida la que nadie previó al diseñar un panel.",
-          "La frase que mejor resume la diferencia es esta: en las otras plataformas configurás su producto, en Buna construís el tuyo. Lo que en un editor visual es “esa opción no existe”, acá es una frase más.",
+          "BunaAI no te da un editor con bloques. Le describís el comportamiento que querés y escribe la lógica que hace falta, incluida la que nadie previó al diseñar un panel.",
+          "La frase que mejor resume la diferencia es esta: en las otras plataformas configurás su producto, en BunaAI construís el tuyo. Lo que en un editor visual es “esa opción no existe”, acá es una frase más.",
         ],
       },
       {
@@ -444,10 +445,10 @@ export const SOLUTIONS: Solution[] = [
           "Para que la comparación sea útil conviene mirar cuatro cosas: cómo creás una automatización, qué pasa cuando querés algo no previsto, qué control tenés sobre los cambios y de dónde salen los datos con los que responde el agente.",
         ],
         bullets: [
-          "Creación: en ManyChat armás el flujo; en Buna lo describís",
-          "Fuera del catálogo: en ManyChat no se puede; en Buna se lo pedís",
+          "Creación: en ManyChat armás el flujo; en BunaAI lo describís",
+          "Fuera del catálogo: en ManyChat no se puede; en BunaAI se lo pedís",
           "Control de cambios: versiones, deploy programado y rollback incluidos",
-          "Datos: consulta de Tienda Nube en vivo, no variables cargadas a mano",
+          "Datos: consulta de Tiendanube en vivo, no variables cargadas a mano",
           "Métricas: las nuevas se piden hablando y aparecen en el dashboard",
         ],
       },
@@ -455,7 +456,7 @@ export const SOLUTIONS: Solution[] = [
         heading: "Cuándo ManyChat sigue siendo la mejor opción",
         paragraphs: [
           "Vale decirlo: si tu caso es un flujo simple y estable, tu volumen es bajo y ya lo tenés andando, no hay razón urgente para cambiar. Migrar tiene un costo y la herramienta que ya funciona tiene valor.",
-          "Buna rinde cuando el negocio empieza a pedir comportamientos propios, cuando el catálogo cambia seguido y las respuestas tienen que salir de datos reales, o cuando estás pagando a alguien para que toque el flujo cada vez que se te ocurre algo.",
+          "BunaAI rinde cuando el negocio empieza a pedir comportamientos propios, cuando el catálogo cambia seguido y las respuestas tienen que salir de datos reales, o cuando estás pagando a alguien para que toque el flujo cada vez que se te ocurre algo.",
         ],
       },
     ],
@@ -481,17 +482,17 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿Puedo migrar los flujos que ya tengo?",
         answer:
-          "No hay una importación automática, pero en la práctica no suele hacer falta: le describís a Buna qué hace tu flujo actual y lo reconstruye. Suele tomar menos tiempo que haberlo armado la primera vez.",
+          "No hay una importación automática, pero en la práctica no suele hacer falta: le describís a BunaAI qué hace tu flujo actual y lo reconstruye. Suele tomar menos tiempo que haberlo armado la primera vez.",
       },
       {
-        question: "¿Buna usa la API oficial de WhatsApp?",
+        question: "¿BunaAI usa la API oficial de WhatsApp?",
         answer:
           "Hoy la conexión se hace vinculando tu número con un QR, como WhatsApp Web, lo que te deja empezar sin trámites ni aprobación previa. El soporte de WhatsApp Business Platform está en el roadmap para las cuentas que necesiten volumen alto y plantillas oficiales.",
       },
       {
         question: "¿Qué pasa si quiero volver atrás?",
         answer:
-          "Tus automatizaciones y su historial son tuyos y podés exportarlos. Y dentro de Buna, cualquier cambio puntual se revierte volviendo a una versión anterior, sin tener que rehacer nada.",
+          "Tus automatizaciones y su historial son tuyos y podés exportarlos. Y dentro de BunaAI, cualquier cambio puntual se revierte volviendo a una versión anterior, sin tener que rehacer nada.",
       },
       {
         question: "¿Cuál es la diferencia de precio?",

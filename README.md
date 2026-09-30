@@ -1,4 +1,4 @@
-# Landing de Buna
+# Landing de BunaAI
 
 Sitio estático en Astro para [buna.ai](https://buna.ai). La app del producto vive
 aparte, en `app.buna.ai` (repo `bunaai-app`).
@@ -25,7 +25,7 @@ npm run og        # regenera public/og/default.png
 
 ## La decisión de arquitectura de contenido
 
-Buna no se vende como "un chatbot". Se vende como *decile a Buna qué necesitás
+BunaAI no se vende como "un chatbot". Se vende como *decile a BunaAI qué necesitás
 que haga tu negocio y ella lo construye, lo despliega y lo opera*.
 
 El problema es que nadie busca eso en Google. La gente busca "chatbot whatsapp",
@@ -40,7 +40,7 @@ La solución es la separación de roles entre páginas:
   propio.
 
 Hoy son cinco: chatbot de WhatsApp con IA, automatizaciones de WhatsApp,
-Tienda Nube + WhatsApp, recuperación de carritos abandonados y alternativa a
+Tiendanube + WhatsApp, recuperación de carritos abandonados y alternativa a
 ManyChat.
 
 ### Agregar una página de keyword
@@ -136,10 +136,9 @@ en el layout se la lleva puesta.
 
 ## Pendientes antes de publicar
 
-1. **Confirmar los precios de `src/data/pricing.ts`.** Los montos actuales
-   (USD 25 / 80 / 249) son los de la última estructura discutida, no una
-   decisión cerrada. Es el dato más caro de cambiar después, porque queda
-   cacheado en Google y citado por terceros.
+1. **Precios.** Quedaron en USD 49 / 99 / 249, definidos "por ahora". El
+   motivo del piso de Starter está explicado arriba de todo en
+   `src/data/pricing.ts`. Todavía falta sumar el costo de IA a la cuenta.
 2. **Enchufar el link de agenda en `src/pages/demo.astro`** (`BOOKING_URL`).
    Mientras esté en `null`, la página ofrece email, que funciona.
 3. **Confirmar el dominio.** Todo sale de `SITE.url` en `src/data/site.ts`.

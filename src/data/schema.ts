@@ -20,7 +20,6 @@ export function organizationSchema() {
     "@type": "Organization",
     "@id": ORG_ID,
     name: SITE.name,
-    legalName: SITE.legalName,
     url: SITE.url,
     logo: {
       "@type": "ImageObject",
@@ -71,8 +70,10 @@ export function softwareSchema(opts: { lowPrice: number; highPrice: number; curr
       "Agentes de IA para WhatsApp",
       "Automatizaciones descritas en lenguaje natural",
       "Recuperación de carritos abandonados",
-      "Integración con Tienda Nube",
+      "Integración con Tiendanube",
+      "Integraciones a medida por API y webhooks",
       "Versionado y rollback de automatizaciones",
+      "Infraestructura dedicada por cliente, no compartida",
       "Métricas y analíticas conversacionales",
     ],
   };

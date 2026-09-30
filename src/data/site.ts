@@ -5,14 +5,13 @@
  */
 export const SITE = {
   url: "https://buna.ai",
-  name: "Buna",
-  legalName: "BunaAI",
+  name: "BunaAI",
   /** Se usa como sufijo de <title> en todas las páginas menos la home. */
-  titleSuffix: "Buna",
+  titleSuffix: "BunaAI",
   locale: "es_AR",
   lang: "es-AR",
   description:
-    "Buna construye y opera las automatizaciones de tu negocio en WhatsApp. Le describís en una frase lo que necesitás y lo despliega: atención, ventas, carritos abandonados y seguimiento. Integrado con Tienda Nube.",
+    "BunaAI construye y opera las automatizaciones de tu negocio en WhatsApp. Le describís en una frase lo que necesitás y lo despliega: atención, ventas, carritos abandonados y seguimiento. Integrado con Tiendanube.",
   /** Imagen de Open Graph por defecto. 1200x630. */
   ogImage: "/og/default.png",
   email: "hola@buna.ai",

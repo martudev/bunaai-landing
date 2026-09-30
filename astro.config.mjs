@@ -1,9 +1,20 @@
 // @ts-check
+import fs from "node:fs";
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 import { SITE } from "./src/data/site.ts";
+
+// HTTPS local en https://local.buna.ai:4321. Los certificados los genera
+// mkcert en .certs/ (ignorado por git); si no existen, el dev server sigue en
+// HTTP y el build en Vercel no se entera.
+const CERT = ".certs/local.buna.ai.pem";
+const KEY = ".certs/local.buna.ai-key.pem";
+const https =
+  fs.existsSync(CERT) && fs.existsSync(KEY)
+    ? { cert: fs.readFileSync(CERT), key: fs.readFileSync(KEY) }
+    : undefined;
 
 // https://astro.build/config
 export default defineConfig({
@@ -42,7 +53,16 @@ export default defineConfig({
     defaultStrategy: "hover",
   },
 
+  server: {
+    host: "local.buna.ai",
+    port: 4321,
+  },
+
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      https,
+      allowedHosts: ["local.buna.ai"],
+    },
   },
 });
