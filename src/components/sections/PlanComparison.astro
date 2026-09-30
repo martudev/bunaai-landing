@@ -1,5 +1,5 @@
 ---
-import { PLANS, CURRENCY, PLAN_COMPARISON } from "../../data/pricing";
+import { PLANS, CURRENCY, PLAN_COMPARISON, CUSTOM_PLAN_CTA } from "../../data/pricing";
 import { CTA } from "../../data/site";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
@@ -29,20 +29,20 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
     ubican respecto de la página y la ensanchan en mobile.
   */}
   <div
-    class="relative mt-12 overflow-x-auto rounded-2xl border border-ink-900/10 bg-white"
+    class="relative mt-12 overflow-x-auto rounded-2xl border border-ink-900/10 bg-card"
     tabindex="0"
     role="region"
     aria-label="Comparación de planes de BunaAI"
   >
-    <table class="w-full min-w-[36rem] border-collapse text-left">
+    <table class="w-full min-w-[44rem] border-collapse text-left">
       <colgroup>
-        <col class="w-[31%]" />
-        {PLANS.map(() => <col class="w-[23%]" />)}
+        <col class="w-[28%]" />
+        {PLANS.map(() => <col class="w-[18%]" />)}
       </colgroup>
 
       <thead>
         <tr>
-          <th scope="col" class="sticky left-0 z-10 bg-white p-5 align-bottom">
+          <th scope="col" class="sticky left-0 z-10 bg-card p-5 align-bottom">
             <span class="sr-only">Característica</span>
           </th>
           {
@@ -65,10 +65,16 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
                   {plan.name}
                 </span>
                 <span class="mt-1 block text-sm font-normal text-ink-500">
-                  <span class="font-semibold text-ink-900">
-                    {CURRENCY} {plan.price}
-                  </span>{" "}
-                  /mes
+                  {plan.price === null ? (
+                    <span class="font-semibold text-ink-900">A medida</span>
+                  ) : (
+                    <>
+                      <span class="font-semibold text-ink-900">
+                        {CURRENCY} {plan.price}
+                      </span>{" "}
+                      /mes
+                    </>
+                  )}
                 </span>
               </th>
             ))
@@ -104,7 +110,7 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
               <tr class="border-t border-ink-900/6">
                 <th
                   scope="row"
-                  class="sticky left-0 z-10 bg-white px-5 py-3.5 text-[0.93rem] font-medium text-ink-900"
+                  class="sticky left-0 z-10 bg-card px-5 py-3.5 text-[0.93rem] font-medium text-ink-900"
                 >
                   {row.feature}
                 </th>
@@ -140,21 +146,22 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
       }
 
       {/*
-        Solo en desktop: en mobile las columnas son angostas para un botón
-        entero, y cada tarjeta de arriba ya tiene su propio CTA.
+        Solo en pantallas anchas (xl): con cuatro planes, por debajo de 1280px
+        las columnas son angostas para un botón entero, y cada tarjeta de
+        arriba ya tiene su propio CTA.
       */}
-      <tfoot class="hidden md:table-footer-group">
+      <tfoot class="hidden xl:table-footer-group">
         <tr class="border-t border-ink-900/10">
-          <td class="sticky left-0 z-10 bg-white p-5"></td>
+          <td class="sticky left-0 z-10 bg-card p-5"></td>
           {
             PLANS.map((plan, index) => (
               <td class:list={["p-5", cellTint(index)]}>
                 <Button
-                  href={CTA.primary.href}
+                  href={plan.price === null ? CUSTOM_PLAN_CTA.href : CTA.primary.href}
                   variant={plan.featured ? "primary" : "secondary"}
                   class="w-full"
                 >
-                  {CTA.primary.label}
+                  {plan.price === null ? CUSTOM_PLAN_CTA.label : CTA.primary.label}
                 </Button>
               </td>
             ))

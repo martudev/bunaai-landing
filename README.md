@@ -105,8 +105,23 @@ Números reales del build, comprimidos con brotli, que es lo que viaja:
 
 Cinco peticiones en total, todas del mismo origen. Las decisiones detrás:
 
-- **Cero JavaScript de framework.** No hay React ni islas hidratadas. El único
-  JS del sitio es el toggle del menú mobile y el prefetch de Astro.
+- **Cero JavaScript de framework.** No hay React ni islas hidratadas. El JS
+  del sitio es el menú mobile, el selector de tema y el prefetch de Astro,
+  todo vanilla y en pocos cientos de bytes.
+
+## Tema claro / oscuro
+
+Funciona igual que en la app: `data-theme="dark"` en `<html>`, preferencia
+Sistema / Oscuro / Claro guardada en `localStorage` con la clave `"theme"`.
+
+- Un script inline en el `<head>` (Layout.astro) aplica el tema **antes del
+  primer render**. Sin él, alguien en oscuro vería un flash claro al navegar.
+- Los colores son tokens que se reasignan en `[data-theme="dark"]`
+  (global.css), no clases `dark:` sueltas. Para colores nuevos: `bg-surface`
+  para secciones, `bg-card` para tarjetas, `ink-*` para texto y bordes.
+- `bg-contrast` es para paneles que son oscuros en los dos temas. No uses
+  `bg-ink-900` como fondo: se invierte y queda claro en modo oscuro.
+- Los chips de logos de marca son `bg-white` fijo a propósito.
 - **CSS inline.** `inlineStylesheets: "always"` mete el CSS en el HTML y
   elimina el único recurso que bloqueaba el render.
 - **Fuentes self-hosted y precargadas.** Nada de `fonts.googleapis.com`: evita

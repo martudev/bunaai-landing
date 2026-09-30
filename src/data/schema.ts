@@ -47,7 +47,13 @@ export function websiteSchema() {
  * El producto en sí. `SoftwareApplication` es el tipo que Google usa para
  * mostrar precio y categoría en resultados enriquecidos.
  */
-export function softwareSchema(opts: { lowPrice: number; highPrice: number; currency: string }) {
+export function softwareSchema(opts: {
+  lowPrice: number;
+  highPrice: number;
+  currency: string;
+  /** Solo los planes con precio publicado: el plan a medida no es una oferta. */
+  offerCount: number;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -64,13 +70,14 @@ export function softwareSchema(opts: { lowPrice: number; highPrice: number; curr
       priceCurrency: opts.currency,
       lowPrice: opts.lowPrice,
       highPrice: opts.highPrice,
-      offerCount: 3,
+      offerCount: opts.offerCount,
     },
     featureList: [
       "Agentes de IA para WhatsApp",
       "Automatizaciones descritas en lenguaje natural",
       "Recuperación de carritos abandonados",
       "Integración con Tiendanube",
+      "Atención por Telegram",
       "Integraciones a medida por API y webhooks",
       "Versionado y rollback de automatizaciones",
       "Infraestructura dedicada por cliente, no compartida",

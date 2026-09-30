@@ -1,0 +1,177 @@
+---
+/**
+ * Menú desplegable de tema: Sistema / Oscuro / Claro, con el mismo
+ * comportamiento que el selector de la app (app-web/src/stores/themeStore.ts).
+ *
+ * Es un `popover` nativo y se abre desde ThemeTrigger.astro con
+ * `popovertarget`. El navegador se encarga de abrir, cerrar con Esc o click
+ * afuera, y de ponerlo por encima de todo. El script de abajo lo ubica debajo
+ * del botón, aplica el tema elegido y cierra.
+ *
+ * Va una sola vez por página, fuera del menú mobile: ese menú tiene el
+ * atributo `hidden` cuando está cerrado, y un popover dentro de un elemento
+ * oculto no se puede mostrar.
+ */
+import Icon from "./Icon.astro";
+
+const options = [
+  { value: "system", icon: "monitor", label: "Sistema" },
+  { value: "dark", icon: "moon", label: "Oscuro" },
+  { value: "light", icon: "sun", label: "Claro" },
+] as const;
+---
+
+{/*
+  `inset-auto m-0` anula el centrado que el navegador le da por defecto a un
+  popover: la posición la fija el script, justo debajo del botón que lo abrió.
+*/}
+<div
+  id="theme-dialog"
+  popover
+  role="group"
+  aria-label="Tema"
+  class="inset-auto m-0 w-44 rounded-xl border border-ink-900/10 bg-card p-1.5 text-ink-900 shadow-[0_12px_32px_-8px_rgba(5,10,52,0.28)]"
+>
+  {
+    options.map((option, index) => (
+      <button
+        type="button"
+        data-theme-choice={option.value}
+        aria-pressed="false"
+        autofocus={index === 0}
+        class="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[0.93rem] font-medium text-ink-700 transition-colors hover:bg-ink-900/[0.05] hover:text-ink-900"
+      >
+        <Icon name={option.icon} size={16} />
+        <span class="flex-1">{option.label}</span>
+        {/* Tilde de la opción activa: lo muestra el CSS según `data-theme-pref`. */}
+        <span data-theme-show={option.value} class="text-brand-600">
+          <Icon name="check" size={16} />
+        </span>
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  type Preference = "system" | "light" | "dark";
+
+  const STORAGE_KEY = "theme";
+  const root = document.documentElement;
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // localStorage puede tirar (modo privado, cookies bloqueadas): en ese caso el
+  // sitio sigue al sistema y el cambio vale solo para esta página.
+  function readPreference(): Preference {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored === "light" || stored === "dark" ? stored : "system";
+    } catch {
+      return "system";
+    }
+  }
+
+  function savePreference(preference: Preference) {
+    try {
+      if (preference === "system") localStorage.removeItem(STORAGE_KEY);
+      else localStorage.setItem(STORAGE_KEY, preference);
+    } catch {
+      /* sin persistencia, pero el tema igual se aplica */
+    }
+  }
+
+  function applyPreference(preference: Preference) {
+    const isDark = preference === "dark" || (preference === "system" && systemDark.matches);
+    if (isDark) root.setAttribute("data-theme", "dark");
+    else root.removeAttribute("data-theme");
+
+    root.setAttribute("data-theme-pref", preference);
+    document.querySelectorAll<HTMLElement>("[data-theme-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.themeChoice === preference));
+    });
+  }
+
+  applyPreference(readPreference());
+
+  // --- Posición del menú -------------------------------------------------
+  // Se abre debajo del botón que lo disparó, alineado a su borde derecho. Hay
+  // dos botones (header desktop y fila del menú mobile), así que se recuerda
+  // cuál fue. No se usa CSS anchor positioning porque Firefox no lo soporta.
+  const menu = document.getElementById("theme-dialog");
+  let lastTrigger: HTMLElement | null = null;
+
+  document.addEventListener(
+    "click",
+    (event) => {
+      const trigger = (event.target as HTMLElement).closest<HTMLElement>(
+        '[popovertarget="theme-dialog"]',
+      );
+      if (trigger) lastTrigger = trigger;
+    },
+    // En captura: tiene que correr antes de que el navegador abra el popover.
+    true,
+  );
+
+  // `beforetoggle` corre antes del primer frame visible, así el menú nunca se
+  // ve en otro lugar. Todavía no tiene caja, por eso el ancho sale del CSS
+  // (w-44 es un valor fijo, así que el valor computado ya está en px).
+  menu?.addEventListener("beforetoggle", (event) => {
+    if ((event as ToggleEvent).newState !== "open" || !lastTrigger) return;
+    const rect = lastTrigger.getBoundingClientRect();
+    const width = parseFloat(getComputedStyle(menu).width) || 176;
+    const gutter = 8;
+    const left = Math.min(Math.max(gutter, rect.right - width), window.innerWidth - width - gutter);
+    menu.style.top = `${rect.bottom + gutter}px`;
+    menu.style.left = `${left}px`;
+  });
+
+  // Si cambia el tamaño de la ventana, la posición calculada deja de valer.
+  window.addEventListener("resize", () => menu?.hidePopover());
+
+  // En modo sistema, seguir los cambios del sistema operativo en vivo.
+  systemDark.addEventListener("change", () => {
+    if (readPreference() === "system") applyPreference("system");
+  });
+
+  document.addEventListener("click", (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLElement>("[data-theme-choice]");
+    if (!button) return;
+
+    // Se cierra antes de la transición para que el modal no quede capturado
+    // en la foto del tema nuevo.
+    document.getElementById("theme-dialog")?.hidePopover();
+
+    const preference = button.dataset.themeChoice as Preference;
+    if (root.getAttribute("data-theme-pref") === preference) return;
+    savePreference(preference);
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || reduceMotion) {
+      applyPreference(preference);
+      return;
+    }
+
+    // Círculo que se expande desde el click, como en la app. Si se eligió con
+    // teclado no hay coordenadas del puntero: sale del centro del botón.
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX || rect.left + rect.width / 2;
+    const y = event.clientY || rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    const transition = document.startViewTransition(() => applyPreference(preference));
+    transition.ready.then(() => {
+      root.animate(
+        {
+          clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    });
+  });
+</script>

@@ -1,5 +1,5 @@
 ---
-import { PLANS, CURRENCY } from "../../data/pricing";
+import { PLANS, CURRENCY, CUSTOM_PLAN_CTA } from "../../data/pricing";
 import { CTA } from "../../data/site";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
@@ -32,15 +32,21 @@ const {
 <Section id="precios" tone={tone}>
   <SectionHeading title={title} subtitle={subtitle} />
 
-  <div class="mt-14 grid gap-5 lg:grid-cols-3">
+  {/*
+    Cuatro columnas recién en xl: por debajo de 1280px las tarjetas quedan
+    demasiado angostas para las listas de features, así que van de a dos.
+  */}
+  <div class="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
     {
       PLANS.map((plan) => (
         <div
           class:list={[
             "relative flex flex-col rounded-2xl border p-7",
             plan.featured
-              ? "border-brand-300 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_56px_-28px_rgba(47,172,106,0.5)] lg:-my-3 lg:py-10"
-              : "border-ink-900/10 bg-white",
+              ? "border-brand-300 bg-card shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_56px_-28px_rgba(47,172,106,0.5)] xl:-my-3 xl:py-10"
+              : plan.price === null
+                ? "border-ink-900/10 bg-surface-muted"
+                : "border-ink-900/10 bg-card",
           ]}
         >
           {plan.featured && (
@@ -55,10 +61,16 @@ const {
           <p class="mt-1 text-[0.9rem] text-ink-500">{plan.tagline}</p>
 
           <p class="mt-6 flex items-baseline gap-1.5">
-            <span class="font-display text-4xl font-bold text-ink-900">
-              {CURRENCY} {plan.price}
-            </span>
-            <span class="text-[0.95rem] text-ink-500">/mes</span>
+            {plan.price === null ? (
+              <span class="font-display text-4xl font-bold text-ink-900">A medida</span>
+            ) : (
+              <>
+                <span class="font-display text-4xl font-bold text-ink-900">
+                  {CURRENCY} {plan.price}
+                </span>
+                <span class="text-[0.95rem] text-ink-500">/mes</span>
+              </>
+            )}
           </p>
 
           <p class="mt-4 text-[0.92rem] leading-relaxed text-ink-700">
@@ -77,12 +89,12 @@ const {
           </ul>
 
           <Button
-            href={CTA.primary.href}
+            href={plan.price === null ? CUSTOM_PLAN_CTA.href : CTA.primary.href}
             variant={plan.featured ? "primary" : "secondary"}
             size="lg"
             class="mt-7 w-full"
           >
-            {CTA.primary.label}
+            {plan.price === null ? CUSTOM_PLAN_CTA.label : CTA.primary.label}
           </Button>
         </div>
       ))
@@ -96,15 +108,7 @@ const {
           href="/precios"
           class="font-semibold text-brand-600 hover:text-brand-700 hover:underline"
         >
-          Ver el detalle de cada plan
-        </a>
-        {" · "}
-        ¿Necesitás algo distinto?{" "}
-        <a
-          href={CTA.secondary.href}
-          class="font-semibold text-brand-600 hover:text-brand-700 hover:underline"
-        >
-          Hablemos
+          Compará los planes en detalle
         </a>
       </p>
     )

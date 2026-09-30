@@ -81,10 +81,97 @@
   --color-surface: #ffffff;
   --color-surface-muted: #f7f9f8;
 
+  /* Fondo de tarjetas, tablas y botones secundarios. En claro coincide con la
+     página; en oscuro se levanta un escalón para que las tarjetas se separen. */
+  --color-card: #ffffff;
+
+  /* Paneles "invertidos" (La plataforma, el CTA final, la burbuja del hero):
+     oscuros en los dos temas. No usar ink-900 para esto, que se invierte. */
+  --color-contrast: #050a34;
+
+  /* Segundo tono del degradé del hero. */
+  --color-glow: #f4f7ff;
+
   --radius-card: 1rem;
 
   /* Ritmo vertical único para todas las secciones. */
   --spacing-section: 6rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Tema oscuro
+
+   Mismo mecanismo que la app (app-web/src/stores/themeStore.ts): el atributo
+   `data-theme="dark"` en <html>, puesto antes del primer render por el script
+   inline de Layout.astro y cambiado después por el toggle del header.
+
+   En vez de un `dark:` por clase, se reasignan los tokens: ink pasa a ser el
+   texto claro, surface el fondo oscuro, y la escala de brand se invierte para
+   que los chips verdes claros no encandilen. Grises tomados de la paleta
+   oscura de la app para que landing y producto se sientan iguales.
+
+   Va fuera de cualquier @layer a propósito: los tokens de @theme viven en una
+   capa, y lo que no tiene capa siempre les gana.
+--------------------------------------------------------------------------- */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+html {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-surface: #0f0f0f;
+  --color-surface-muted: #151515;
+  --color-card: #1a1a1a;
+  --color-contrast: #1a1a1a;
+  --color-glow: #0f0f0f;
+
+  --color-ink-900: #e5e5e5;
+  --color-ink-700: #c9c9c9;
+  --color-ink-500: #9ca3af;
+
+  --color-brand-50: #0f2a1d;
+  --color-brand-100: #133626;
+  --color-brand-200: #1b4a34;
+  --color-brand-600: #4cc28b;
+  --color-brand-700: #7bd2a8;
+  --color-brand-800: #b0e5c9;
+  --color-brand-900: #d6f2e2;
+}
+
+/* Estado del tema elegido, resuelto por CSS contra `data-theme-pref`, que pone
+   el script inline del <head>. Así el ícono del botón y el tilde del modal
+   están bien desde el primer frame, sin esperar a ningún JS.
+
+   `data-theme-show="x"`: solo visible si el tema elegido es x (el ícono del
+   botón del header, el nombre en el menú mobile, el tilde del modal). */
+[data-theme-show] {
+  display: none;
+}
+
+[data-theme-pref="system"] [data-theme-show="system"],
+[data-theme-pref="light"] [data-theme-show="light"],
+[data-theme-pref="dark"] [data-theme-show="dark"] {
+  display: inline-flex;
+}
+
+/* La opción elegida dentro del menú. */
+[data-theme-pref="system"] [data-theme-choice="system"],
+[data-theme-pref="light"] [data-theme-choice="light"],
+[data-theme-pref="dark"] [data-theme-choice="dark"] {
+  background-color: var(--color-brand-50);
+  color: var(--color-ink-900);
+}
+
+/* Transición del cambio de tema: el círculo que se expande desde el click,
+   igual que en la app. Sin esto, el navegador haría su fundido por defecto. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 /* ---------------------------------------------------------------------------
@@ -148,11 +235,20 @@
   }
 
   /* Reserva el espacio de las imágenes desde el HTML para no acumular CLS. */
-  img,
-  svg {
+  img {
     display: block;
     max-width: 100%;
     height: auto;
+  }
+
+  /* Los SVG del sitio son íconos con width/height fijos, así que no llevan
+     `max-width: 100%`. Con esa regla, un SVG dentro de un contenedor flex que
+     se achica cuenta como "comprimible" y colapsa a 0×0: pasaba con el
+     selector de tema en el header a ~1280px, donde los íconos desaparecían.
+     `flex-shrink: 0` evita lo mismo por el lado del flexbox. */
+  svg {
+    display: block;
+    flex-shrink: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -206,7 +302,7 @@
     margin: 0;
     padding: 0.75rem 1.25rem;
     clip-path: none;
-    background: var(--color-ink-900);
+    background: var(--color-contrast);
     color: white;
     border-radius: 0.5rem;
   }

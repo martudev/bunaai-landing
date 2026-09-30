@@ -5,7 +5,7 @@ import Button from "../ui/Button.astro";
 import Icon from "../ui/Icon.astro";
 ---
 
-<section class="relative overflow-hidden bg-white">
+<section class="relative overflow-hidden bg-surface">
   {/*
     Fondo decorativo en CSS puro. Antes esto era un canvas animado con
     simplex-noise que corría en el hilo principal justo cuando el navegador
@@ -13,7 +13,7 @@ import Icon from "../ui/Icon.astro";
   */}
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60rem_40rem_at_70%_-10%,var(--color-brand-50),transparent_70%),radial-gradient(40rem_30rem_at_10%_0%,#f4f7ff,transparent_65%)]"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60rem_40rem_at_70%_-10%,var(--color-brand-50),transparent_70%),radial-gradient(40rem_30rem_at_10%_0%,var(--color-glow),transparent_65%)]"
   >
   </div>
 
@@ -67,7 +67,7 @@ import Icon from "../ui/Icon.astro";
     */}
     <div class="relative lg:pl-4">
       <div
-        class="rounded-2xl border border-ink-900/10 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_60px_-24px_rgba(5,10,52,0.22)]"
+        class="rounded-2xl border border-ink-900/10 bg-card shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_60px_-24px_rgba(5,10,52,0.22)]"
       >
         <div
           class="flex items-center gap-2 border-b border-ink-900/8 px-4 py-3"
@@ -83,7 +83,7 @@ import Icon from "../ui/Icon.astro";
         <div class="space-y-4 p-4 sm:p-5">
           <div class="flex justify-end">
             <p
-              class="max-w-[85%] rounded-2xl rounded-br-md bg-ink-900 px-4 py-3 text-[0.9rem] leading-relaxed text-white"
+              class="max-w-[85%] rounded-2xl rounded-br-md bg-contrast px-4 py-3 dark:bg-ink-900/12 text-[0.9rem] leading-relaxed text-white"
             >
               {HERO_DEMO.prompt}
             </p>
@@ -117,7 +117,7 @@ import Icon from "../ui/Icon.astro";
         contar la historia completa: el prompt de arriba produce esta charla.
       */}
       <div
-        class="mx-auto -mt-4 w-[88%] rounded-2xl border border-ink-900/10 bg-white p-4 shadow-[0_1px_2px_rgba(5,10,52,0.04),0_18px_40px_-20px_rgba(5,10,52,0.25)]"
+        class="mx-auto -mt-4 w-[88%] rounded-2xl border border-ink-900/10 bg-card p-4 shadow-[0_1px_2px_rgba(5,10,52,0.04),0_18px_40px_-20px_rgba(5,10,52,0.25)]"
       >
         <p
           class="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-ink-500 uppercase"

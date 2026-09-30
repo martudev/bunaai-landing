@@ -7,10 +7,10 @@ import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
 import Section from "../components/ui/Section.astro";
 import Icon from "../components/ui/Icon.astro";
-import { PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
+import { PRICED_PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
 import { breadcrumbSchema, faqSchema, softwareSchema } from "../data/schema";
 
-const prices = PLANS.map((plan) => plan.price);
+const prices = PRICED_PLANS.map((plan) => plan.price);
 
 const crumbs = [
   { name: "Inicio", path: "/" },
@@ -23,6 +23,7 @@ const schema = [
     lowPrice: Math.min(...prices),
     highPrice: Math.max(...prices),
     currency: CURRENCY,
+    offerCount: prices.length,
   }),
   faqSchema(PRICING_FAQS),
 ];

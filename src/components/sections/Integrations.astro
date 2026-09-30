@@ -14,15 +14,19 @@ import Button from "../ui/Button.astro";
     subtitle="El agente responde con datos reales porque los consulta en el momento, no porque alguien los cargó a mano en una variable."
   />
 
-  <ul class="mt-14 grid gap-5 md:grid-cols-3">
+  {/* De a 2 en tablet y de a 4 en desktop: con 4 integraciones, 3 columnas
+      dejarían una tarjeta sola en la segunda fila. */}
+  <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
     {
       INTEGRATIONS.live.map((integration) => (
-        <li class="rounded-2xl border border-ink-900/10 bg-white p-7">
+        <li class="rounded-2xl border border-ink-900/10 bg-card p-7">
           <div class="flex items-center gap-3">
             {/*
               Fondo blanco y no el verde de marca: cada logo trae sus propios
               colores y sobre el verde de BunaAI se ensuciarían, sobre todo el
-              de WhatsApp, que es un verde parecido.
+              de WhatsApp, que es un verde parecido. Es `bg-white` fijo y no
+              `bg-card` a propósito: en tema oscuro el azul de Tiendanube casi
+              no se ve sobre gris, y los logos se leen como íconos de app.
             */}
             <span class="flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)]">
               <BrandLogo name={integration.logo} size={22} />
@@ -50,7 +54,7 @@ import Button from "../ui/Button.astro";
     <div>
       <div class="flex items-center gap-3">
         <span
-          class="flex size-11 shrink-0 items-center justify-center rounded-xl border border-ink-900/8 bg-white text-ink-700 shadow-[0_1px_2px_rgba(5,10,52,0.06)]"
+          class="flex size-11 shrink-0 items-center justify-center rounded-xl border border-ink-900/8 bg-card text-ink-700 shadow-[0_1px_2px_rgba(5,10,52,0.06)]"
         >
           <Icon name="plug" size={21} />
         </span>
@@ -66,7 +70,7 @@ import Button from "../ui/Button.astro";
       <ul class="mt-5 flex flex-wrap gap-2">
         {
           INTEGRATIONS.custom.examples.map((example) => (
-            <li class="rounded-lg border border-ink-900/8 bg-white px-2.5 py-1 text-sm text-ink-700">
+            <li class="rounded-lg border border-ink-900/8 bg-card px-2.5 py-1 text-sm text-ink-700">
               {example}
             </li>
           ))

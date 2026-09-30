@@ -195,6 +195,11 @@ export const INTEGRATIONS = {
       body: "Conectás tu número escaneando un QR. El agente lee, responde y manda difusiones.",
     },
     {
+      name: "Telegram",
+      logo: "telegram",
+      body: "Otro canal para tu agente: atiende las conversaciones que te llegan por Telegram, además de WhatsApp.",
+    },
+    {
       name: "Tiendanube",
       logo: "tiendanube",
       body: "Consulta productos, stock, pedidos y clientes en tiempo real, y puede modificarlos con tu confirmación.",

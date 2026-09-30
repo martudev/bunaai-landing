@@ -1,0 +1,63 @@
+---
+/**
+ * Botón que abre el menú de tema (ThemeToggle.astro).
+ *
+ * Abre con `popovertarget`, la Popover API nativa: no necesita JS para abrir
+ * ni cerrar. Muestra el ícono (y en la variante "row", el nombre) del tema
+ * elegido; cuál se ve lo decide el CSS contra `data-theme-pref` en <html>,
+ * así que es correcto desde el primer frame.
+ */
+import Icon from "./Icon.astro";
+
+interface Props {
+  /** "icon": botón cuadrado del header desktop · "row": fila del menú mobile. */
+  variant?: "icon" | "row";
+  class?: string;
+}
+
+const { variant = "icon", class: className = "" } = Astro.props;
+
+const options = [
+  { value: "system", icon: "monitor", label: "Sistema" },
+  { value: "dark", icon: "moon", label: "Oscuro" },
+  { value: "light", icon: "sun", label: "Claro" },
+] as const;
+---
+
+{
+  variant === "icon" ? (
+    <button
+      type="button"
+      popovertarget="theme-dialog"
+      aria-label="Cambiar tema"
+      title="Cambiar tema"
+      class:list={[
+        "flex size-9 shrink-0 items-center justify-center rounded-lg border border-ink-900/12 text-ink-700 transition-colors hover:bg-ink-900/[0.04] hover:text-ink-900",
+        className,
+      ]}
+    >
+      {options.map((option) => (
+        <span data-theme-show={option.value}>
+          <Icon name={option.icon} size={17} />
+        </span>
+      ))}
+    </button>
+  ) : (
+    <button
+      type="button"
+      popovertarget="theme-dialog"
+      class:list={[
+        "flex w-full items-center justify-between rounded-lg px-3 py-2.5 font-medium text-ink-700 hover:bg-ink-900/[0.04] hover:text-ink-900",
+        className,
+      ]}
+    >
+      <span>Tema</span>
+      {options.map((option) => (
+        <span data-theme-show={option.value} class="items-center gap-2 text-ink-500">
+          <Icon name={option.icon} size={16} />
+          {option.label}
+        </span>
+      ))}
+    </button>
+  )
+}

@@ -69,7 +69,33 @@ export const PLANS = [
     ],
     featured: false,
   },
+  {
+    // `price: null` marca el plan a medida: los componentes muestran
+    // "A medida" en vez de un monto, mandan el CTA a /demo en vez de al
+    // registro, y el schema de Google lo deja fuera del rango de precios.
+    id: "custom",
+    name: "Custom",
+    price: null,
+    tagline: "Para operaciones que no entran en un plan",
+    description:
+      "Sistemas propios, volumen alto o procesos particulares. Definimos el alcance y el precio con vos.",
+    features: [
+      "Todo lo de Business",
+      "Números, canales y usuarios según tu operación",
+      "Implementación a medida de tus procesos",
+      "Precio según tu volumen",
+    ],
+    featured: false,
+  },
 ] as const;
+
+/** Los planes con precio fijo, para el rango del schema y los textos "desde". */
+export const PRICED_PLANS = PLANS.filter(
+  (plan): plan is Extract<(typeof PLANS)[number], { price: number }> => plan.price !== null,
+);
+
+/** CTA del plan a medida: no se contrata solo, arranca con una charla. */
+export const CUSTOM_PLAN_CTA = { label: "Hablemos", href: "/demo" } as const;
 
 /**
  * Tabla comparativa de /precios.
@@ -78,55 +104,66 @@ export const PLANS = [
  * resumen ("Todo lo de Starter"), la tabla muestra cada fila completa. Si se
  * agrega, saca o mueve una feature de plan, hay que tocar los dos lugares.
  *
- * Cada valor va en el orden de PLANS (starter, growth, business):
+ * Cada valor va en el orden de PLANS (starter, growth, business, custom):
  *  - `true`: incluido · `false`: no incluido · string: el valor concreto.
  */
 type ComparisonValue = boolean | string;
+type Values = [ComparisonValue, ComparisonValue, ComparisonValue, ComparisonValue];
 
 export const PLAN_COMPARISON: {
   group: string;
-  rows: { feature: string; values: [ComparisonValue, ComparisonValue, ComparisonValue] }[];
+  rows: { feature: string; values: Values }[];
 }[] = [
   {
     group: "Infraestructura",
     rows: [
-      { feature: "Servidores y base de datos dedicados", values: [true, true, true] },
+      { feature: "Servidores y base de datos dedicados", values: [true, true, true, true] },
     ],
   },
   {
     group: "Canales e integraciones",
     rows: [
-      { feature: "Números de WhatsApp", values: ["1", "1", "Varios"] },
-      { feature: "Integración con Tiendanube", values: [true, true, true] },
-      { feature: "Alertas en Slack", values: [false, true, true] },
-      { feature: "Integraciones a medida por API", values: [false, false, true] },
+      { feature: "Números de WhatsApp", values: ["1", "1", "Varios", "A medida"] },
+      { feature: "Integración con Tiendanube", values: [true, true, true, true] },
+      { feature: "Alertas en Slack", values: [false, true, true, true] },
+      { feature: "Integraciones a medida por API", values: [false, false, true, true] },
     ],
   },
   {
     group: "Automatizaciones",
     rows: [
-      { feature: "Automatizaciones", values: ["Ilimitadas", "Ilimitadas", "Ilimitadas"] },
-      { feature: "Difusiones segmentadas", values: [false, true, true] },
+      {
+        feature: "Automatizaciones",
+        values: ["Ilimitadas", "Ilimitadas", "Ilimitadas", "Ilimitadas"],
+      },
+      { feature: "Difusiones segmentadas", values: [false, true, true, true] },
     ],
   },
   {
     group: "Publicación y control de cambios",
     rows: [
-      { feature: "Versionado y rollback", values: [true, true, true] },
-      { feature: "Tests automáticos en cada publicación", values: [false, true, true] },
-      { feature: "Deploys programados", values: [false, true, true] },
+      { feature: "Versionado y rollback", values: [true, true, true, true] },
+      { feature: "Tests automáticos en cada publicación", values: [false, true, true, true] },
+      { feature: "Deploys programados", values: [false, true, true, true] },
     ],
   },
   {
     group: "Métricas",
-    rows: [{ feature: "Métricas", values: ["Básicas", "A medida", "A medida"] }],
+    rows: [{ feature: "Métricas", values: ["Básicas", "A medida", "A medida", "A medida"] }],
   },
   {
     group: "Equipo y soporte",
     rows: [
-      { feature: "Usuarios y permisos", values: [false, false, true] },
-      { feature: "Acompañamiento en la implementación", values: [false, false, true] },
-      { feature: "Soporte", values: ["Email y WhatsApp", "Prioritario", "Canal directo"] },
+      { feature: "Usuarios y permisos", values: [false, false, true, true] },
+      { feature: "Acompañamiento en la implementación", values: [false, false, true, true] },
+      {
+        feature: "Implementación a medida de tus procesos",
+        values: [false, false, false, true],
+      },
+      {
+        feature: "Soporte",
+        values: ["Email y WhatsApp", "Prioritario", "Canal directo", "Canal directo"],
+      },
     ],
   },
 ];
