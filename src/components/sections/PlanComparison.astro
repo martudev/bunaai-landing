@@ -1,6 +1,5 @@
 ---
-import { PLANS, CURRENCY, PLAN_COMPARISON, CUSTOM_PLAN_CTA } from "../../data/pricing";
-import { CTA } from "../../data/site";
+import { PLANS, CURRENCY, PLAN_COMPARISON, planCta } from "../../data/pricing";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Button from "../ui/Button.astro";
@@ -34,10 +33,10 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
     role="region"
     aria-label="Comparación de planes de BunaAI"
   >
-    <table class="w-full min-w-[44rem] border-collapse text-left">
+    <table class="w-full min-w-[40rem] border-collapse text-left">
       <colgroup>
-        <col class="w-[28%]" />
-        {PLANS.map(() => <col class="w-[18%]" />)}
+        <col class="w-[34%]" />
+        {PLANS.map(() => <col class="w-[22%]" />)}
       </colgroup>
 
       <thead>
@@ -65,16 +64,11 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
                   {plan.name}
                 </span>
                 <span class="mt-1 block text-sm font-normal text-ink-500">
-                  {plan.price === null ? (
-                    <span class="font-semibold text-ink-900">A medida</span>
-                  ) : (
-                    <>
-                      <span class="font-semibold text-ink-900">
-                        {CURRENCY} {plan.price}
-                      </span>{" "}
-                      /mes
-                    </>
-                  )}
+                  {plan.priceFrom && "Desde "}
+                  <span class="font-semibold text-ink-900">
+                    {CURRENCY} {plan.price}
+                  </span>{" "}
+                  /mes
                 </span>
               </th>
             ))
@@ -146,22 +140,22 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
       }
 
       {/*
-        Solo en pantallas anchas (xl): con cuatro planes, por debajo de 1280px
+        Solo en pantallas anchas (lg): por debajo de 1024px
         las columnas son angostas para un botón entero, y cada tarjeta de
         arriba ya tiene su propio CTA.
       */}
-      <tfoot class="hidden xl:table-footer-group">
+      <tfoot class="hidden lg:table-footer-group">
         <tr class="border-t border-ink-900/10">
           <td class="sticky left-0 z-10 bg-card p-5"></td>
           {
             PLANS.map((plan, index) => (
               <td class:list={["p-5", cellTint(index)]}>
                 <Button
-                  href={plan.price === null ? CUSTOM_PLAN_CTA.href : CTA.primary.href}
+                  href={planCta(plan).href}
                   variant={plan.featured ? "primary" : "secondary"}
                   class="w-full"
                 >
-                  {plan.price === null ? CUSTOM_PLAN_CTA.label : CTA.primary.label}
+                  {planCta(plan).label}
                 </Button>
               </td>
             ))

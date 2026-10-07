@@ -7,10 +7,10 @@ import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
 import Section from "../components/ui/Section.astro";
 import Icon from "../components/ui/Icon.astro";
-import { PRICED_PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
+import { PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
 import { breadcrumbSchema, faqSchema, softwareSchema } from "../data/schema";
 
-const prices = PRICED_PLANS.map((plan) => plan.price);
+const prices = PLANS.map((plan) => plan.price);
 
 const crumbs = [
   { name: "Inicio", path: "/" },
@@ -29,17 +29,19 @@ const schema = [
 ];
 
 const incluido = [
-  "Infraestructura dedicada: servidores y base de datos propios",
-  "Versionado y rollback",
+  "Infraestructura dedicada: servidores y base de datos exclusivos para tu cuenta",
+  "Historial de cambios y vuelta atrás en un click",
   "Actualizaciones del producto",
   "Monitoreo y alertas",
   "Automatizaciones ilimitadas",
+  "Recuperación de carritos abandonados",
+  "Métricas a medida",
 ];
 ---
 
 <Layout
   title="Precios de BunaAI | Planes desde USD 49 al mes"
-  description="Planes de BunaAI desde USD 49 al mes, con infraestructura, versionado e integraciones incluidos. Sin costo de setup ni permanencia."
+  description="Planes de BunaAI desde USD 49 al mes, con infraestructura, historial de cambios e integraciones incluidos. Sin costo de setup ni permanencia."
   schema={schema}
 >
   <Breadcrumbs items={crumbs} />
@@ -50,9 +52,9 @@ const incluido = [
         Precios simples, sin sorpresas a fin de mes
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-ink-700 md:text-xl">
-        Pagás por el plan y nada más. La infraestructura está incluida, el
-        consumo de IA lo ves en dólares en el panel y podés cambiar de plan o
-        darte de baja cuando quieras.
+        Pagás por el plan y nada más. La infraestructura y el consumo de IA
+        están incluidos, y podés cambiar de plan o darte de baja cuando
+        quieras.
       </p>
     </div>
   </Section>
@@ -91,7 +93,7 @@ const incluido = [
   />
 
   <FinalCta
-    title="Probalo antes de pagar nada"
-    subtitle="Creás la cuenta, conectás WhatsApp y armás tu primera automatización sin cargar una tarjeta."
+    title="Probalo 15 días gratis"
+    subtitle="Sin cargar una tarjeta. Creás la cuenta, conectás WhatsApp y armás tu primera automatización hoy mismo."
   />
 </Layout>

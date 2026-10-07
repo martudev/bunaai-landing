@@ -4,7 +4,7 @@ import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
 import Section from "../components/ui/Section.astro";
 import Button from "../components/ui/Button.astro";
 import Icon from "../components/ui/Icon.astro";
-import { SITE, CTA } from "../data/site";
+import { SITE, CTA, whatsappLink } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
 
 const crumbs = [
@@ -20,11 +20,10 @@ const agenda = [
 ];
 
 /**
- * ⚠️ PENDIENTE: enchufar acá el link real de agenda (Calendly, Cal.com o el
- * que uses). Mientras tanto la página ofrece email y WhatsApp, que funcionan,
- * en lugar de un formulario que no tiene backend.
+ * WhatsApp es el canal principal: es donde ya está el cliente y donde
+ * respondemos más rápido. El email queda como alternativa.
  */
-const BOOKING_URL: string | null = null;
+const whatsapp = whatsappLink("Hola, quiero ver una demo de BunaAI.");
 
 const asunto = encodeURIComponent("Quiero ver una demo de BunaAI");
 const mailto = `mailto:${SITE.email}?subject=${asunto}`;
@@ -80,42 +79,21 @@ const mailto = `mailto:${SITE.email}?subject=${asunto}`;
           </p>
 
           <div class="mt-6 flex flex-col gap-3">
-            {
-              BOOKING_URL ? (
-                <Button href={BOOKING_URL} size="lg" class="w-full">
-                  Elegir un horario
-                  <Icon name="arrow-right" size={18} />
-                </Button>
-              ) : (
-                <Button href={mailto} size="lg" class="w-full">
-                  Escribir un email
-                  <Icon name="arrow-right" size={18} />
-                </Button>
-              )
-            }
-            <Button
-              href={CTA.primary.href}
-              variant="secondary"
-              size="lg"
-              class="w-full"
-            >
-              O probalo por tu cuenta
+            <Button href={whatsapp} size="lg" class="w-full">
+              Escribinos por WhatsApp
+              <Icon name="arrow-right" size={18} />
+            </Button>
+            <Button href={mailto} variant="secondary" size="lg" class="w-full">
+              Escribir un email
             </Button>
           </div>
 
-          <p class="mt-6 border-t border-ink-900/8 pt-5 text-[0.9rem] text-ink-500">
-            También podés escribirnos directo a{" "}
-            <a
-              href={mailto}
-              class="font-medium text-brand-600 hover:underline"
-            >
-              {SITE.email}
-            </a>
-          </p>
         </div>
 
         <p class="mt-5 text-center text-[0.9rem] text-ink-500">
-          Si preferís arrancar solo, la cuenta es gratis y no pide tarjeta.
+          Si preferís arrancar solo,{" "}
+          <a href={CTA.primary.href} class="font-medium text-brand-600 hover:underline">
+            probalo 15 días gratis</a>, sin tarjeta.
         </p>
       </div>
     </div>

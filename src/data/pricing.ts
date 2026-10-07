@@ -1,5 +1,5 @@
 /**
- * Precios vigentes "por ahora": 49 / 99 / 249.
+ * Precios vigentes "por ahora": 49 / 99 / desde 249.
  *
  * Por qué el piso es USD 49 y no menos: cada cliente corre sobre
  * infraestructura propia, que cuesta ~USD 20/mes solo en servidores. Es una
@@ -7,12 +7,14 @@
  * evita que la falla de un cliente afecte a otro. Con Starter a USD 25 ese
  * costo se comía todo el margen, antes incluso de la comisión de Stripe.
  *
- * El consumo de IA todavía no entra en esta cuenta. Cuando entre, conviene
- * revisar si cada plan necesita un crédito de IA con tope.
+ * El consumo de IA está incluido en el precio: Starter trae USD 5 por mes y
+ * desde Growth es ilimitado.
  *
  * El schema de SoftwareApplication lee lowPrice/highPrice de acá, así que
  * cambiando los planes se actualiza también lo que ve Google.
  */
+
+import { CTA, whatsappLink } from "./site";
 
 export const CURRENCY = "USD";
 
@@ -21,15 +23,18 @@ export const PLANS = [
     id: "starter",
     name: "Starter",
     price: 49,
+    priceFrom: false,
     tagline: "Para validar el primer caso de uso",
     description:
       "Un negocio que quiere dejar de responder a mano las mismas diez preguntas.",
     features: [
       "1 número de WhatsApp",
       "Integración con Tiendanube",
+      "Recuperación de carritos abandonados",
       "Automatizaciones ilimitadas",
-      "Versionado y rollback",
-      "Métricas básicas",
+      "USD 5 de consumo de IA incluidos por mes",
+      "Historial de cambios y vuelta atrás en un click",
+      "Métricas a medida",
       "Soporte por email y WhatsApp",
     ],
     featured: false,
@@ -38,64 +43,58 @@ export const PLANS = [
     id: "growth",
     name: "Growth",
     price: 99,
+    priceFrom: false,
     tagline: "Para el e-commerce que ya vende todos los días",
     description:
-      "Carritos abandonados, seguimiento de pagos y difusiones corriendo en simultáneo.",
+      "IA sin tope para atender todo el volumen, difusiones a tus clientes y avisos cuando algo importa.",
     features: [
       "Todo lo de Starter",
+      "Consumo de IA ilimitado",
       "Difusiones segmentadas",
-      "Alertas en Slack",
-      "Métricas a medida",
-      "Tests automáticos en cada publicación",
-      "Deploys programados",
+      "Alertas por WhatsApp, email y Slack",
+      "Aviso automático si un cambio publicado no responde bien",
+      "Cambios programados con fecha y hora",
       "Soporte prioritario",
     ],
     featured: true,
   },
   {
+    // `priceFrom` muestra "Desde" antes del monto: Business se arma según la
+    // operación de cada cliente, así que 249 es el piso y no el precio final.
     id: "business",
     name: "Business",
     price: 249,
-    tagline: "Para operaciones con volumen y equipo",
+    priceFrom: true,
+    tagline: "Para operaciones con volumen, equipo o sistemas propios",
     description:
-      "Varios canales, varios usuarios y automatizaciones que tocan más de un sistema.",
+      "Varios canales, varios usuarios y procesos particulares. Definimos el alcance y el precio final con vos.",
     features: [
       "Todo lo de Growth",
       "Varios números y canales",
       "Usuarios y permisos",
-      "Integraciones a medida por API",
-      "Acompañamiento en la implementación",
-      "Canal directo de soporte",
-    ],
-    featured: false,
-  },
-  {
-    // `price: null` marca el plan a medida: los componentes muestran
-    // "A medida" en vez de un monto, mandan el CTA a /demo en vez de al
-    // registro, y el schema de Google lo deja fuera del rango de precios.
-    id: "custom",
-    name: "Custom",
-    price: null,
-    tagline: "Para operaciones que no entran en un plan",
-    description:
-      "Sistemas propios, volumen alto o procesos particulares. Definimos el alcance y el precio con vos.",
-    features: [
-      "Todo lo de Business",
-      "Números, canales y usuarios según tu operación",
+      "Conexión con tus propios sistemas (ERP, CRM)",
       "Implementación a medida de tus procesos",
-      "Precio según tu volumen",
+      "Canal directo de soporte",
     ],
     featured: false,
   },
 ] as const;
 
-/** Los planes con precio fijo, para el rango del schema y los textos "desde". */
-export const PRICED_PLANS = PLANS.filter(
-  (plan): plan is Extract<(typeof PLANS)[number], { price: number }> => plan.price !== null,
-);
+/**
+ * Planes que no arrancan con el registro sino con una charla por WhatsApp:
+ * Business se arma según la operación de cada cliente y hoy los varios
+ * números se configuran con nosotros. El resto va a "Empezar gratis".
+ */
+const SALES_PLANS: readonly string[] = ["business"];
 
-/** CTA del plan a medida: no se contrata solo, arranca con una charla. */
-export const CUSTOM_PLAN_CTA = { label: "Hablemos", href: "/demo" } as const;
+/** El CTA de cada plan. El mensaje ya viene escrito con el nombre del plan. */
+export function planCta(plan: (typeof PLANS)[number]) {
+  if (!SALES_PLANS.includes(plan.id)) return CTA.primary;
+  return {
+    label: "Hablemos",
+    href: whatsappLink(`Hola, quiero saber más del plan ${plan.name} de BunaAI.`),
+  };
+}
 
 /**
  * Tabla comparativa de /precios.
@@ -104,66 +103,54 @@ export const CUSTOM_PLAN_CTA = { label: "Hablemos", href: "/demo" } as const;
  * resumen ("Todo lo de Starter"), la tabla muestra cada fila completa. Si se
  * agrega, saca o mueve una feature de plan, hay que tocar los dos lugares.
  *
- * Cada valor va en el orden de PLANS (starter, growth, business, custom):
+ * Cada valor va en el orden de PLANS (starter, growth, business):
  *  - `true`: incluido · `false`: no incluido · string: el valor concreto.
  */
 type ComparisonValue = boolean | string;
-type Values = [ComparisonValue, ComparisonValue, ComparisonValue, ComparisonValue];
+type Values = [ComparisonValue, ComparisonValue, ComparisonValue];
 
 export const PLAN_COMPARISON: {
   group: string;
   rows: { feature: string; values: Values }[];
 }[] = [
   {
-    group: "Infraestructura",
+    group: "Infraestructura e IA",
     rows: [
-      { feature: "Servidores y base de datos dedicados", values: [true, true, true, true] },
+      { feature: "Servidores y base de datos dedicados", values: [true, true, true] },
+      { feature: "Consumo de IA incluido", values: ["USD 5 por mes", "Ilimitado", "Ilimitado"] },
     ],
   },
   {
     group: "Canales e integraciones",
     rows: [
-      { feature: "Números de WhatsApp", values: ["1", "1", "Varios", "A medida"] },
-      { feature: "Integración con Tiendanube", values: [true, true, true, true] },
-      { feature: "Alertas en Slack", values: [false, true, true, true] },
-      { feature: "Integraciones a medida por API", values: [false, false, true, true] },
+      { feature: "Números de WhatsApp", values: ["1", "1", "Varios"] },
+      { feature: "Integración con Tiendanube", values: [true, true, true] },
+      { feature: "Alertas por WhatsApp, email y Slack", values: [false, true, true] },
+      { feature: "Conexión con tus propios sistemas (ERP, CRM)", values: [false, false, true] },
     ],
   },
   {
     group: "Automatizaciones",
     rows: [
-      {
-        feature: "Automatizaciones",
-        values: ["Ilimitadas", "Ilimitadas", "Ilimitadas", "Ilimitadas"],
-      },
-      { feature: "Difusiones segmentadas", values: [false, true, true, true] },
+      { feature: "Automatizaciones", values: ["Ilimitadas", "Ilimitadas", "Ilimitadas"] },
+      { feature: "Recuperación de carritos abandonados", values: [true, true, true] },
+      { feature: "Difusiones segmentadas", values: [false, true, true] },
     ],
   },
   {
     group: "Publicación y control de cambios",
     rows: [
-      { feature: "Versionado y rollback", values: [true, true, true, true] },
-      { feature: "Tests automáticos en cada publicación", values: [false, true, true, true] },
-      { feature: "Deploys programados", values: [false, true, true, true] },
+      { feature: "Historial de cambios y vuelta atrás en un click", values: [true, true, true] },
+      { feature: "Aviso automático si un cambio publicado no responde bien", values: [false, true, true] },
+      { feature: "Cambios programados con fecha y hora", values: [false, true, true] },
     ],
-  },
-  {
-    group: "Métricas",
-    rows: [{ feature: "Métricas", values: ["Básicas", "A medida", "A medida", "A medida"] }],
   },
   {
     group: "Equipo y soporte",
     rows: [
-      { feature: "Usuarios y permisos", values: [false, false, true, true] },
-      { feature: "Acompañamiento en la implementación", values: [false, false, true, true] },
-      {
-        feature: "Implementación a medida de tus procesos",
-        values: [false, false, false, true],
-      },
-      {
-        feature: "Soporte",
-        values: ["Email y WhatsApp", "Prioritario", "Canal directo", "Canal directo"],
-      },
+      { feature: "Usuarios y permisos", values: [false, false, true] },
+      { feature: "Implementación a medida de tus procesos", values: [false, false, true] },
+      { feature: "Soporte", values: ["Email y WhatsApp", "Prioritario", "Canal directo"] },
     ],
   },
 ];
@@ -172,21 +159,21 @@ export const PRICING_FAQS = [
   {
     question: "¿Hay un plan gratis o una prueba?",
     answer:
-      "Podés crear tu cuenta y armar tu primera automatización sin cargar una tarjeta. Recién pagás cuando querés dejarla corriendo en producción con tus clientes reales.",
+      "Sí: tenés 15 días de prueba gratis, sin cargar una tarjeta. Creás tu cuenta, conectás WhatsApp y armás tus automatizaciones con tus clientes reales; recién pagás si decidís seguir. Si al terminar la prueba no cargaste una tarjeta, el agente se pausa hasta que hagas el pago, y tus automatizaciones quedan guardadas tal como las dejaste.",
   },
   {
-    question: "¿Qué cuenta como conversación de IA?",
+    question: "¿El consumo de IA está incluido?",
     answer:
-      "Una conversación es un ida y vuelta con un cliente dentro de una misma ventana de atención, no cada mensaje suelto. En el panel ves el consumo en dólares en tiempo real, así que nunca hay una factura sorpresa.",
+      "Sí. Starter incluye USD 5 de consumo de IA por mes, y desde Growth el consumo es ilimitado. En el panel ves cuánto llevás usado en tiempo real, así que nunca hay una factura sorpresa.",
   },
   {
     question: "¿Puedo cambiar de plan o darme de baja?",
     answer:
-      "Sí, cuando quieras y desde el panel. Si bajás de plan mantenés tus automatizaciones y tu historial de versiones; solo cambian los límites.",
+      "Sí, cuando quieras. Entre Starter y Growth lo cambiás desde el panel; para pasar a Business escribinos y lo armamos con vos. Si bajás de plan mantenés tus automatizaciones y tu historial de versiones; solo cambian los límites.",
   },
   {
     question: "¿El precio incluye la infraestructura?",
     answer:
-      "Sí, y no es compartida: cada cliente tiene sus propios servidores y su propia base de datos, así que la falla o el pico de otro negocio no te afecta. Servidores, almacenamiento, monitoreo y deploys están incluidos. Montar algo equivalente por tu cuenta costaría parecido solo en servidores, antes de sumar el tiempo de mantenerlo.",
+      "Sí, y no es compartida: cada cliente tiene servidores y base de datos exclusivos para su cuenta, así que la falla o el pico de otro negocio no te afecta. Servidores, almacenamiento, monitoreo y actualizaciones están incluidos. Montar algo equivalente por tu cuenta costaría parecido solo en servidores, antes de sumar el tiempo de mantenerlo.",
   },
 ] as const;

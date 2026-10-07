@@ -11,10 +11,10 @@ import Pricing from "../components/sections/Pricing.astro";
 import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
 import { FAQS } from "../data/content";
-import { PRICED_PLANS, CURRENCY } from "../data/pricing";
+import { PLANS, CURRENCY } from "../data/pricing";
 import { faqSchema, softwareSchema } from "../data/schema";
 
-const prices = PRICED_PLANS.map((plan) => plan.price);
+const prices = PLANS.map((plan) => plan.price);
 
 // El FAQPage es lo que puede hacer que la home aparezca en la SERP con las
 // preguntas desplegadas, que ocupa más alto y sube el CTR.

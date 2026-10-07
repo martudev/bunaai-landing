@@ -51,7 +51,7 @@ export function softwareSchema(opts: {
   lowPrice: number;
   highPrice: number;
   currency: string;
-  /** Solo los planes con precio publicado: el plan a medida no es una oferta. */
+  /** Cantidad de planes con precio publicado. */
   offerCount: number;
 }) {
   return {
@@ -80,6 +80,10 @@ export function softwareSchema(opts: {
       "Atención por Telegram",
       "Integraciones a medida por API y webhooks",
       "Versionado y rollback de automatizaciones",
+      "Historial de cambios y vuelta atrás en un click",
+      "Deploys programados: cambios programados con fecha y hora",
+      "Tests automáticos: aviso si un cambio publicado no responde bien",
+      "Conexión con sistemas propios (ERP, CRM)",
       "Infraestructura dedicada por cliente, no compartida",
       "Métricas y analíticas conversacionales",
     ],

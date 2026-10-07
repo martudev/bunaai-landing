@@ -15,6 +15,8 @@ export const SITE = {
   /** Imagen de Open Graph por defecto. 1200x630. */
   ogImage: "/og/default.png",
   email: "hola@buna.ai",
+  /** Número de ventas, en formato internacional sin "+" para armar links de wa.me. */
+  whatsapp: "5491134793609",
   app: {
     base: "https://app.buna.ai",
     register: "https://app.buna.ai/register",
@@ -28,6 +30,11 @@ export const SITE = {
     youtube: null,
   },
 } as const;
+
+/** Link a nuestro WhatsApp con el primer mensaje ya escrito. */
+export function whatsappLink(text: string) {
+  return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
+}
 
 /** Etiquetas de los CTAs, centralizadas para poder testear variantes. */
 export const CTA = {

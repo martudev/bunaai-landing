@@ -49,7 +49,7 @@ export const SOLUTIONS: Solution[] = [
       "Responde con stock, precios y estado de pedidos en tiempo real",
       "Se configura describiendo lo que querés, no armando flujos",
       "Deriva a una persona cuando la conversación lo pide",
-      "Cada cambio queda versionado y se puede revertir",
+      "Cada cambio queda guardado y podés volver atrás",
     ],
     body: [
       {
@@ -76,13 +76,13 @@ export const SOLUTIONS: Solution[] = [
         heading: "Cómo se configura: hablando, no armando flujos",
         paragraphs: [
           "En vez de abrir un editor de nodos, le escribís a BunaAI lo que querés que pase. “Si preguntan por envíos a Córdoba, aclarales que tarda 3 a 5 días hábiles.” “Si el pedido es mayor a $150.000, ofreceles envío sin cargo.” “Si alguien escribe fuera del horario, avisale cuándo le respondemos.”",
-          "BunaAI interpreta la intención, escribe la lógica, te muestra qué va a hacer. Cuando te cierra, lo publicás, y con el plan Growth en ese momento corre tests automáticos contra la versión nueva. Si el resultado no es el que esperabas, volvés a la versión anterior sin perder el resto de lo que construiste.",
+          "BunaAI interpreta la intención, escribe la lógica, te muestra qué va a hacer. Cuando te cierra, lo publicás, y con el plan Growth, apenas queda publicado, BunaAI lo prueba y te avisa si algo no responde bien. Si el resultado no es el que esperabas, volvés a la versión anterior sin perder el resto de lo que construiste.",
         ],
       },
       {
         heading: "Cuándo el agente te pasa la conversación",
         paragraphs: [
-          "Un buen agente sabe cuándo frenar. Le definís en qué situaciones tiene que pasarte la conversación —un cliente molesto, un pedido grande, alguien que pide explícitamente hablar con una persona— y el agente se detiene y te avisa por donde le digas, típicamente Slack o el mismo panel.",
+          "Un buen agente sabe cuándo frenar. Le definís en qué situaciones tiene que pasarte la conversación —un cliente molesto, un pedido grande, alguien que pide explícitamente hablar con una persona— y el agente se detiene y te avisa por donde le digas: WhatsApp, email, Slack o el mismo panel.",
           "Esa derivación es la diferencia entre un chatbot que protege la experiencia de tu cliente y uno que la arruina intentando resolver algo que no le corresponde.",
         ],
       },
@@ -137,11 +137,11 @@ export const SOLUTIONS: Solution[] = [
       "Automatizá ventas, cobranzas y atención en WhatsApp describiendo lo que necesitás. Sin nodos ni código: BunaAI escribe la lógica y la deja corriendo.",
     eyebrow: "Automatizaciones de WhatsApp",
     h1: "Automatizaciones de WhatsApp que describís en una frase",
-    lede: "Automatizar no debería significar pasar una tarde conectando nodos y mapeando campos. Le contás a BunaAI qué querés que pase y cuándo, y ella construye la automatización y la deja corriendo sobre infraestructura que no tenés que administrar. Con el plan Growth, además, corre tests automáticos cada vez que publicás un cambio.",
+    lede: "Automatizar no debería significar pasar una tarde conectando nodos y mapeando campos. Le contás a BunaAI qué querés que pase y cuándo, y ella construye la automatización y la deja corriendo sobre infraestructura que no tenés que administrar. Con el plan Growth, además, prueba cada cambio apenas lo publicás y te avisa si algo falla.",
     highlights: [
       "Triggers por evento, por horario o por lo que diga el cliente",
       "Se conecta con Tiendanube, Slack y tu WhatsApp",
-      "Deploys programados con fecha y hora",
+      "Cambios programados con fecha y hora",
       "Historial de versiones y vuelta atrás en un click",
     ],
     body: [
@@ -166,10 +166,10 @@ export const SOLUTIONS: Solution[] = [
         ],
       },
       {
-        heading: "Cambios versionados, no cambios a ciegas",
+        heading: "Cada cambio guardado, nada a ciegas",
         paragraphs: [
-          "Toda modificación genera una versión nueva, con su historial de qué cambió y cuándo. Podés programar que una versión se active un día y hora determinados, algo útil cuando el cambio acompaña una promo o un fin de semana largo.",
-          "Con el plan Growth, apenas una versión sale a producción, BunaAI corre tests automáticos contra ella. Si alguno falla, la versión sigue publicada y te avisa: podés volver a correr los tests o pedirle al agente que lo corrija.",
+          "Cada modificación queda guardada en un historial de qué cambió y cuándo. Podés programar que un cambio se active un día y hora determinados, algo útil cuando el cambio acompaña una promo o un fin de semana largo.",
+          "Con el plan Growth, apenas publicás un cambio, BunaAI lo prueba solo. Si algo no responde como debería, el cambio sigue activo y te avisa: podés volver a probarlo o pedirle al agente que lo corrija.",
           "Y si una automatización se comporta distinto a lo que esperabas, volvés a la versión anterior en un click. Es la diferencia entre poder experimentar y tenerle miedo a tocar lo que funciona.",
         ],
       },
@@ -203,7 +203,7 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿En qué se diferencia de n8n, Make o Zapier?",
         answer:
-          "En quién arma la lógica. En esas herramientas la armás vos nodo por nodo y después la mantenés. En BunaAI la describís y se construye sola, queda versionada y corre sobre infraestructura administrada. Además no necesitás saber qué campo de la API va en qué lugar.",
+          "En quién arma la lógica. En esas herramientas la armás vos nodo por nodo y después la mantenés. En BunaAI la describís y se construye sola, queda guardada con su historial de cambios y corre sobre servidores que administramos nosotros. Además no necesitás saber cómo se conectan los sistemas por dentro.",
       },
       {
         question: "¿Puedo tener varias automatizaciones a la vez?",
@@ -218,7 +218,7 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿Se puede automatizar algo que toque datos de mi tienda?",
         answer:
-          "Sí, con una salvedad importante: las acciones que modifican tu tienda o impactan en un cliente te piden confirmación explícita antes de ejecutarse. Podés aprobarlas en el momento o dejarlas para cuando deployes la versión.",
+          "Sí, con una salvedad importante: las acciones que modifican tu tienda o impactan en un cliente te piden confirmación explícita antes de ejecutarse. Podés aprobarlas en el momento o dejarlas para cuando publiques el cambio.",
       },
     ],
     related: ["recuperar-carritos-abandonados", "chatbot-whatsapp-ia", "tiendanube-whatsapp"],
@@ -301,17 +301,17 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿El agente puede modificar cosas en mi tienda?",
         answer:
-          "Sí, pero nunca por su cuenta. Cualquier acción que modifique la tienda te pide confirmación explícita, y podés elegir aplicarla en el momento o dejarla guardada para que se aplique al deployar la versión.",
+          "Sí, pero nunca por su cuenta. Cualquier acción que modifique la tienda te pide confirmación explícita, y podés elegir aplicarla en el momento o dejarla guardada para que se aplique cuando publiques el cambio.",
       },
       {
         question: "¿Funciona con Shopify o WooCommerce?",
         answer:
-          "Hoy la integración nativa es con Tiendanube. Shopify está en el roadmap, y para otras plataformas se puede trabajar con API y webhooks. Si estás en esa situación, escribinos y te decimos con franqueza si te sirve hoy o conviene esperar.",
+          "Hoy la integración nativa es con Tiendanube. Shopify está en camino, y otras plataformas se pueden conectar con una integración a medida. Si estás en esa situación, escribinos y te decimos con franqueza si te sirve hoy o conviene esperar.",
       },
       {
         question: "¿Los datos de la tienda se comparten con otros?",
         answer:
-          "No. Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales propios, sin compartir nada con otros clientes. Los datos de tu tienda se usan para responder en tu cuenta y nada más.",
+          "No. Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales exclusivos para tu cuenta, sin compartir nada con otros clientes. Los datos de tu tienda se usan para responder en tu cuenta y nada más.",
       },
     ],
     related: ["recuperar-carritos-abandonados", "chatbot-whatsapp-ia", "automatizaciones-whatsapp"],
@@ -421,7 +421,7 @@ export const SOLUTIONS: Solution[] = [
     highlights: [
       "Cambiás cualquier comportamiento describiéndolo, no eligiendo opciones",
       "Datos de tu tienda consultados en vivo, no variables cargadas a mano",
-      "Versionado, deploys programados y rollback",
+      "Historial de cambios, cambios programados y vuelta atrás en un click",
       "Métricas nuevas creadas hablando",
     ],
     body: [
@@ -447,7 +447,7 @@ export const SOLUTIONS: Solution[] = [
         bullets: [
           "Creación: en ManyChat armás el flujo; en BunaAI lo describís",
           "Fuera del catálogo: en ManyChat no se puede; en BunaAI se lo pedís",
-          "Control de cambios: versiones, deploy programado y rollback incluidos",
+          "Control de cambios: historial, cambios programados y vuelta atrás incluidos",
           "Datos: consulta de Tiendanube en vivo, no variables cargadas a mano",
           "Métricas: las nuevas se piden hablando y aparecen en el dashboard",
         ],
@@ -475,7 +475,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         prompt: "Volvé a como respondía la semana pasada.",
-        result: "Rollback a una versión anterior",
+        result: "Vuelta atrás a una versión anterior",
       },
     ],
     faqs: [
@@ -487,7 +487,7 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿BunaAI usa la API oficial de WhatsApp?",
         answer:
-          "Hoy la conexión se hace vinculando tu número con un QR, como WhatsApp Web, lo que te deja empezar sin trámites ni aprobación previa. El soporte de WhatsApp Business Platform está en el roadmap para las cuentas que necesiten volumen alto y plantillas oficiales.",
+          "Hoy la conexión se hace vinculando tu número con un QR, como WhatsApp Web, lo que te deja empezar sin trámites ni aprobación previa. El soporte de WhatsApp Business Platform está en camino para las cuentas que necesiten volumen alto y plantillas oficiales.",
       },
       {
         question: "¿Qué pasa si quiero volver atrás?",
@@ -497,7 +497,7 @@ export const SOLUTIONS: Solution[] = [
       {
         question: "¿Cuál es la diferencia de precio?",
         answer:
-          "Los planes arrancan en un rango comparable al de las plataformas de chatbot, con la diferencia de que la infraestructura, el versionado y las integraciones están incluidos en vez de cobrarse aparte o requerir otra herramienta.",
+          "Los planes arrancan en un rango comparable al de las plataformas de chatbot, con la diferencia de que la infraestructura, el historial de cambios y las integraciones están incluidos en vez de cobrarse aparte o requerir otra herramienta.",
       },
     ],
     related: ["chatbot-whatsapp-ia", "automatizaciones-whatsapp", "tiendanube-whatsapp"],

@@ -24,7 +24,7 @@ export const HERO = {
     "Se integra con Tiendanube en tiempo real",
     "Cada cambio queda versionado y se puede revertir",
   ],
-  note: "Sin tarjeta de crédito para empezar.",
+  note: "15 días gratis, sin tarjeta de crédito.",
 } as const;
 
 /**
@@ -90,7 +90,7 @@ export const STEPS = [
   },
   {
     title: "Lo publicás",
-    body: "Lo publicás al instante o lo programás con fecha y hora. Con el plan Growth, al salir a producción BunaAI le corre tests automáticos y te avisa si alguno falla.",
+    body: "Lo publicás al instante o lo programás con fecha y hora. Con el plan Growth, BunaAI prueba cada cambio apenas queda publicado y te avisa si algo no responde como debería.",
   },
   {
     title: "Corre y se mide",
@@ -160,24 +160,24 @@ export const USE_CASES = [
  */
 export const PLATFORM = [
   {
-    title: "Versionado y rollback",
-    body: "Cada cambio genera una versión con su historial. Programás cuándo se activa y volvés a la anterior en un click si algo sale mal.",
+    title: "Historial de cambios",
+    body: "Cada cambio queda guardado en un historial. Programás cuándo se activa y volvés a la anterior en un click si algo sale mal.",
   },
   {
     title: "Infraestructura dedicada",
-    body: "Tu agente corre en servidores y base de datos propios, sin compartir recursos con otros clientes: el pico o la falla de otro negocio no te afecta. Y la administramos nosotros.",
+    body: "Tu agente corre en servidores y base de datos exclusivos para tu cuenta, sin compartir recursos con otros clientes: el pico o la falla de otro negocio no te afecta. Y la administramos nosotros.",
   },
   {
-    title: "Observabilidad real",
-    body: "Conversaciones, logs, métricas y el gasto de IA en dólares. Sabés qué hizo el agente y cuánto costó.",
+    title: "Todo a la vista",
+    body: "Conversaciones, registro de actividad, métricas y el gasto de IA en dólares. Sabés qué hizo el agente y cuánto costó.",
   },
   {
-    title: "Tests en cada publicación",
-    body: "En el plan Growth, cada vez que publicás una versión BunaAI corre tests automáticos contra ella y te avisa si alguno falla, para que lo corrijas hablándole.",
+    title: "Aviso si algo falla",
+    body: "En el plan Growth, cada vez que publicás un cambio BunaAI lo prueba ya en funcionamiento y te avisa si algo no responde como debería, para que lo corrijas hablándole o vuelvas atrás en un click.",
   },
   {
     title: "Alertas donde mirás",
-    body: "Un lead grande, un reclamo o una caída te llegan por Slack en el momento, sin entrar al panel.",
+    body: "Un lead grande, un reclamo o una caída te llegan por WhatsApp, email o Slack en el momento, sin entrar al panel.",
   },
   {
     title: "Confirmación antes de actuar",
@@ -254,7 +254,7 @@ export const COMPARISON = {
       values: ["Minutos", "Horas", "Horas o días", "Semanas"],
     },
     {
-      feature: "Versionado y rollback",
+      feature: "Historial de cambios y vuelta atrás",
       values: ["Incluido", "Casi nunca", "Manual", "Depende del proveedor"],
     },
     {
@@ -292,7 +292,7 @@ export const FAQS = [
   {
     question: "¿Qué pasa si el agente responde algo que no quiero?",
     answer:
-      "Varias cosas. Podés chatear con tu agente desde el panel para ver cómo responde. Con el plan Growth, cada vez que publicás una versión BunaAI corre tests automáticos y te avisa si alguno falla. Las acciones que tocan tu tienda o tus clientes piden tu confirmación explícita. Y si algo igual sale mal, volvés a la versión anterior en un click, sin perder el resto de lo que construiste.",
+      "Varias cosas. Podés chatear con tu agente desde el panel para ver cómo responde. Con el plan Growth, cada vez que publicás un cambio BunaAI lo prueba ya en funcionamiento y te avisa si algo no responde como debería. Las acciones que tocan tu tienda o tus clientes piden tu confirmación explícita. Y si algo igual sale mal, volvés a la versión anterior en un click, sin perder el resto de lo que construiste.",
   },
   {
     question: "¿Puedo hacer que me pase la conversación a mí?",
@@ -307,7 +307,7 @@ export const FAQS = [
   {
     question: "¿Qué pasa con los datos de mis clientes?",
     answer:
-      "Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales propios: no compartís nada con otros clientes. Las conversaciones se usan para que tu agente responda mejor en tu cuenta, no para entrenar modelos de terceros.",
+      "Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales exclusivos para tu cuenta: no compartís nada con otros clientes. Las conversaciones se usan para que tu agente responda mejor en tu cuenta, no para entrenar modelos de terceros.",
   },
 ] as const;
 
