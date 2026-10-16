@@ -54,6 +54,7 @@ export const PLANS = [
       "Alertas por WhatsApp, email y Slack",
       "Aviso automático si un cambio publicado no responde bien",
       "Cambios programados con fecha y hora",
+      "Hasta 5 usuarios para tu equipo, con permisos",
       "Soporte prioritario",
     ],
     featured: true,
@@ -71,7 +72,7 @@ export const PLANS = [
     features: [
       "Todo lo de Growth",
       "Varios números y canales",
-      "Usuarios y permisos",
+      "Usuarios ilimitados para tu equipo, con permisos",
       "Conexión con tus propios sistemas (ERP, CRM)",
       "Implementación a medida de tus procesos",
       "Canal directo de soporte",
@@ -148,7 +149,7 @@ export const PLAN_COMPARISON: {
   {
     group: "Equipo y soporte",
     rows: [
-      { feature: "Usuarios y permisos", values: [false, false, true] },
+      { feature: "Usuarios para tu equipo, con permisos", values: [false, "Hasta 5", "Ilimitados"] },
       { feature: "Implementación a medida de tus procesos", values: [false, false, true] },
       { feature: "Soporte", values: ["Email y WhatsApp", "Prioritario", "Canal directo"] },
     ],
