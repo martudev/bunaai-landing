@@ -4,7 +4,7 @@ import Breadcrumbs from "../components/ui/Breadcrumbs.astro";
 import Section from "../components/ui/Section.astro";
 import Button from "../components/ui/Button.astro";
 import Icon from "../components/ui/Icon.astro";
-import { SITE, CTA, whatsappLink } from "../data/site";
+import { SITE, whatsappLink } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
 
 const crumbs = [
@@ -91,9 +91,8 @@ const mailto = `mailto:${SITE.email}?subject=${asunto}`;
         </div>
 
         <p class="mt-5 text-center text-[0.9rem] text-ink-500">
-          Si preferís arrancar solo,{" "}
-          <a href={CTA.primary.href} class="font-medium text-brand-600 hover:underline">
-            probalo 15 días gratis</a>, sin tarjeta.
+          Si te sirve, te creamos la cuenta y activás el plan desde
+          Configuración, con Mercado Pago.
         </p>
       </div>
     </div>

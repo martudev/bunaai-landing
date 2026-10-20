@@ -24,7 +24,7 @@ export const HERO = {
     "Se integra con Tiendanube en tiempo real",
     "Cada cambio queda versionado y se puede revertir",
   ],
-  note: "15 días gratis, sin tarjeta de crédito.",
+  note: "Demo de media hora con tus casos reales, sin compromiso.",
 } as const;
 
 /**
@@ -314,5 +314,5 @@ export const FAQS = [
 export const FINAL_CTA = {
   title: "Contale a BunaAI qué necesitás que haga tu negocio",
   subtitle:
-    "Conectás WhatsApp, le pedís lo primero que se te ocurra y lo ves funcionando el mismo día.",
+    "En una demo de media hora armamos en vivo tu primera automatización, con tus casos reales.",
 } as const;

@@ -36,9 +36,18 @@ export function whatsappLink(text: string) {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
-/** Etiquetas de los CTAs, centralizadas para poder testear variantes. */
+/**
+ * Etiquetas de los CTAs, centralizadas para poder testear variantes.
+ *
+ * Por ahora no hay registro abierto: se entra con una demo, después creamos
+ * la cuenta nosotros y el cliente activa el plan desde Configuración con
+ * Mercado Pago. Por eso el CTA principal es la demo y no `SITE.app.register`.
+ */
 export const CTA = {
-  primary: { label: "Empezar gratis", href: SITE.app.register },
-  secondary: { label: "Ver una demo", href: "/demo" },
+  primary: { label: "Pedir una demo", href: "/demo" },
+  secondary: {
+    label: "Escribinos por WhatsApp",
+    href: whatsappLink("Hola, tengo una consulta sobre BunaAI."),
+  },
   login: { label: "Iniciar sesión", href: SITE.app.login },
 } as const;

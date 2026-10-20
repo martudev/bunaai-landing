@@ -1,5 +1,5 @@
 ---
-import { PLANS, CURRENCY, PLAN_COMPARISON, planCta } from "../../data/pricing";
+import { PLANS, formatPrice, PLAN_COMPARISON, planCta } from "../../data/pricing";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Button from "../ui/Button.astro";
@@ -66,7 +66,7 @@ const cellTint = (index: number) => (index === featuredIndex ? "bg-brand-50/70" 
                 <span class="mt-1 block text-sm font-normal text-ink-500">
                   {plan.priceFrom && "Desde "}
                   <span class="font-semibold text-ink-900">
-                    {CURRENCY} {plan.price}
+                    {formatPrice(plan.price)}
                   </span>{" "}
                   /mes
                 </span>

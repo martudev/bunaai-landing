@@ -7,7 +7,7 @@ import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
 import Section from "../components/ui/Section.astro";
 import Icon from "../components/ui/Icon.astro";
-import { PLANS, CURRENCY, PRICING_FAQS } from "../data/pricing";
+import { PLANS, CURRENCY, PRICING_FAQS, formatPrice } from "../data/pricing";
 import { breadcrumbSchema, faqSchema, softwareSchema } from "../data/schema";
 
 const prices = PLANS.map((plan) => plan.price);
@@ -36,12 +36,13 @@ const incluido = [
   "Automatizaciones ilimitadas",
   "Recuperación de carritos abandonados",
   "Métricas a medida",
+  "IA al costo exacto, sin margen, con el límite de gasto que elijas",
 ];
 ---
 
 <Layout
-  title="Precios de BunaAI | Planes desde USD 49 al mes"
-  description="Planes de BunaAI desde USD 49 al mes, con infraestructura, historial de cambios e integraciones incluidos. Sin costo de setup ni permanencia."
+  title={`Precios de BunaAI | Planes desde ${formatPrice(Math.min(...prices))} al mes`}
+  description={`Planes de BunaAI desde ${formatPrice(Math.min(...prices))} al mes, con infraestructura, historial de cambios e integraciones incluidos. Pagás en pesos con Mercado Pago, sin setup ni permanencia.`}
   schema={schema}
 >
   <Breadcrumbs items={crumbs} />
@@ -52,9 +53,9 @@ const incluido = [
         Precios simples, sin sorpresas a fin de mes
       </h1>
       <p class="mt-6 text-lg leading-relaxed text-ink-700 md:text-xl">
-        Pagás por el plan y nada más. La infraestructura y el consumo de IA
-        están incluidos, y podés cambiar de plan o darte de baja cuando
-        quieras.
+        El plan incluye la infraestructura. La IA se paga aparte, por lo que
+        uses y al costo exacto del proveedor, sin margen. Podés cambiar de plan
+        o darte de baja cuando quieras.
       </p>
     </div>
   </Section>
@@ -93,7 +94,7 @@ const incluido = [
   />
 
   <FinalCta
-    title="Probalo 15 días gratis"
-    subtitle="Sin cargar una tarjeta. Creás la cuenta, conectás WhatsApp y armás tu primera automatización hoy mismo."
+    title="Miralo funcionando con tus casos"
+    subtitle="En una demo de media hora armamos una automatización tuya en vivo. Si te sirve, te creamos la cuenta y activás el plan con Mercado Pago."
   />
 </Layout>

@@ -1,5 +1,5 @@
 ---
-import { PLANS, CURRENCY, planCta } from "../../data/pricing";
+import { PLANS, formatPrice, planCta, annualMonthly, annualTotal } from "../../data/pricing";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Button from "../ui/Button.astro";
@@ -22,7 +22,7 @@ interface Props {
 const {
   tone = "default",
   title = "Precios",
-  subtitle = "La infraestructura, el historial de cambios y las integraciones están incluidos. No hay costo de setup ni permanencia.",
+  subtitle = "La infraestructura, el historial de cambios y las integraciones están incluidos. No hay costo de setup ni permanencia. Precios en pesos, pagás con Mercado Pago.",
   compact = false,
   cardAs: CardHeading = "h3",
 } = Astro.props;
@@ -32,11 +32,47 @@ const {
   <SectionHeading title={title} subtitle={subtitle} />
 
   {/*
+    Mensual / anual: los dos precios se renderizan y el toggle solo cambia
+    `data-billing` del contenedor; las clases group-data-* muestran uno u
+    otro. Sin JS queda el mensual, que es el default.
+  */}
+  <div data-billing-root data-billing="monthly" class="group">
+  <div class="mt-10 flex justify-center">
+    <div
+      role="radiogroup"
+      aria-label="Frecuencia de pago"
+      class="inline-flex rounded-full border border-ink-900/10 bg-card p-1 text-[0.92rem] font-semibold"
+    >
+      <button
+        type="button"
+        role="radio"
+        data-billing-option="monthly"
+        aria-checked="true"
+        class="rounded-full px-4 py-2 text-ink-700 transition-colors group-data-[billing=monthly]:bg-brand-500 group-data-[billing=monthly]:text-white"
+      >
+        Mensual
+      </button>
+      <button
+        type="button"
+        role="radio"
+        data-billing-option="annual"
+        aria-checked="false"
+        class="flex items-center gap-2 rounded-full px-4 py-2 text-ink-700 transition-colors group-data-[billing=annual]:bg-brand-500 group-data-[billing=annual]:text-white"
+      >
+        Anual
+        <span class="rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
+          2 meses gratis
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {/*
     Tres columnas recién en lg: por debajo de 1024px las tarjetas quedan
     demasiado angostas para las listas de features, así que van una abajo de
     la otra.
   */}
-  <div class="mx-auto mt-14 grid max-w-6xl gap-5 lg:grid-cols-3">
+  <div class="mx-auto mt-12 grid max-w-6xl gap-5 lg:grid-cols-3">
     {
       PLANS.map((plan) => (
         <div
@@ -61,9 +97,26 @@ const {
           <p class="mt-6 flex items-baseline gap-1.5">
             {plan.priceFrom && <span class="text-[0.95rem] text-ink-500">Desde</span>}
             <span class="font-display text-4xl font-bold text-ink-900">
-              {CURRENCY} {plan.price}
+              {plan.priceFrom ? (
+                formatPrice(plan.price)
+              ) : (
+                <>
+                  <span class="group-data-[billing=annual]:hidden">{formatPrice(plan.price)}</span>
+                  <span class="hidden group-data-[billing=annual]:inline">
+                    {formatPrice(annualMonthly(plan.price))}
+                  </span>
+                </>
+              )}
             </span>
             <span class="text-[0.95rem] text-ink-500">/mes</span>
+          </p>
+          {/* Reserva la línea también en mensual para que las tarjetas no salten al cambiar. */}
+          <p class="mt-1 min-h-[1.4em] text-[0.85rem] text-ink-500">
+            <span class="hidden group-data-[billing=annual]:inline">
+              {plan.priceFrom
+                ? "Precio anual a convenir"
+                : `${formatPrice(annualTotal(plan.price))} facturados una vez al año`}
+            </span>
           </p>
 
           <p class="mt-4 text-[0.92rem] leading-relaxed text-ink-700">
@@ -93,6 +146,7 @@ const {
       ))
     }
   </div>
+  </div>
 
   {
     compact && (
@@ -107,3 +161,15 @@ const {
     )
   }
 </Section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-billing-root]").forEach((root) => {
+    const options = root.querySelectorAll<HTMLButtonElement>("[data-billing-option]");
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        root.dataset.billing = option.dataset.billingOption;
+        options.forEach((o) => o.setAttribute("aria-checked", String(o === option)));
+      });
+    });
+  });
+</script>
