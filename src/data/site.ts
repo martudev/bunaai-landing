@@ -19,7 +19,8 @@ export const SITE = {
   whatsapp: "5491134793609",
   app: {
     base: "https://app.buna.ai",
-    register: "https://app.buna.ai/register",
+    // Registro público deshabilitado: la cuenta la crea el equipo (alta por admin).
+    // register: "https://app.buna.ai/register",
     login: "https://app.buna.ai/login",
   },
   /** Dejar en null los que todavía no existan: no se renderiza el link. */
@@ -41,7 +42,7 @@ export function whatsappLink(text: string) {
  *
  * Por ahora no hay registro abierto: se entra con una demo, después creamos
  * la cuenta nosotros y el cliente activa el plan desde Configuración con
- * Mercado Pago. Por eso el CTA principal es la demo y no `SITE.app.register`.
+ * Mercado Pago. Por eso el CTA principal es la demo (`SITE.app.register` está comentado).
  */
 export const CTA = {
   primary: { label: "Pedir una demo", href: "/demo" },
