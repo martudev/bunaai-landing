@@ -8,9 +8,9 @@
  * y Growth es donde está el margen.
  *
  * La IA no está incluida en ningún plan: se paga aparte, por uso, al costo
- * exacto del proveedor y sin margen. Cada cliente elige en su panel si la
- * quiere sin límite (paga a fin de mes) o con un límite mensual, por separado
- * para el agente de la web y para el bot.
+ * exacto del proveedor y sin margen, con crédito prepago en USD (se carga
+ * pagando en pesos con Mercado Pago). Cada cliente puede poner además un
+ * límite mensual propio, por separado para el agente de la web y para el bot.
  *
  * El schema de SoftwareApplication lee lowPrice/highPrice de acá, así que
  * cambiando los planes se actualiza también lo que ve Google.
@@ -213,7 +213,7 @@ export const PRICING_FAQS = [
   {
     question: "¿Cómo se cobra la IA?",
     answer:
-      "Aparte del plan, por lo que uses, y al costo exacto que nos cobra el proveedor de IA: no le sumamos margen. Desde tu panel elegís, por separado para el agente y para el bot, si la querés sin límite o con un límite mensual y un aviso por email al porcentaje que elijas. Si llega al límite, la IA se frena hasta el mes siguiente o hasta que lo subas. El consumo se mide en dólares, que es como lo cobra el proveedor, y a fin de mes te lo cobramos en pesos con Mercado Pago, al dólar oficial del día del cobro. En el panel ves cuánto llevás gastado en tiempo real.",
+      "Aparte del plan, por lo que uses, y al costo exacto que nos cobra el proveedor de IA: no le sumamos margen. Funciona con crédito prepago: cargás dólares desde tu panel (desde USD 10), pagás en pesos con Mercado Pago al dólar oficial del día, y la IA se descuenta de ese saldo a medida que el bot y el agente la usan. La comisión de Mercado Pago se suma al pago y la ves antes de pagar. Si el crédito se termina, la IA se frena hasta que cargues más; te avisamos por email cuando queda poco. Además podés poner un límite mensual propio para el agente y para el bot. En el panel ves tu saldo y cuánto llevás gastado en tiempo real.",
   },
   {
     question: "¿Hay descuento si pago por año?",
