@@ -95,6 +95,7 @@ export const PLANS = [
       "Difusiones segmentadas",
       "Hasta 5 usuarios para tu equipo, con permisos",
       "Alertas por WhatsApp, email y Slack",
+      "Sugerencias: lo que tu bot no supo resolver, con la solución",
       "Soporte prioritario",
       "Cambios programados con fecha y hora",
       "Aviso automático si un cambio publicado no responde bien",
@@ -187,6 +188,7 @@ export const PLAN_COMPARISON: {
       { feature: "Historial de cambios y vuelta atrás en un click", values: [true, true, true] },
       { feature: "Aviso automático si un cambio publicado no responde bien", values: [false, true, true] },
       { feature: "Cambios programados con fecha y hora", values: [false, true, true] },
+      { feature: "Sugerencias: lo que tu bot no supo resolver, con la solución", values: [false, true, true] },
     ],
   },
   {

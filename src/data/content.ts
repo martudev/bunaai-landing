@@ -173,7 +173,7 @@ export const PLATFORM = [
   },
   {
     title: "Aviso si algo falla",
-    body: "En el plan Growth, cada vez que publicás un cambio BunaAI lo prueba ya en funcionamiento y te avisa si algo no responde como debería, para que lo corrijas hablándole o vuelvas atrás en un click.",
+    body: "En el plan Growth, cada vez que publicás un cambio BunaAI lo prueba ya en funcionamiento y te avisa si algo no responde como debería. Y en Sugerencias te muestra lo que tu bot no supo resolver, ordenado por importancia, con la solución para aplicarla en un click.",
   },
   {
     title: "Alertas donde mirás",
@@ -293,6 +293,11 @@ export const FAQS = [
     question: "¿Qué pasa si el agente responde algo que no quiero?",
     answer:
       "Varias cosas. Podés chatear con tu agente desde el panel para ver cómo responde. Con el plan Growth, cada vez que publicás un cambio BunaAI lo prueba ya en funcionamiento y te avisa si algo no responde como debería. Las acciones que tocan tu tienda o tus clientes piden tu confirmación explícita. Y si algo igual sale mal, volvés a la versión anterior en un click, sin perder el resto de lo que construiste.",
+  },
+  {
+    question: "¿Cómo sé qué le falta a mi bot?",
+    answer:
+      "Con el plan Growth tenés la sección Sugerencias. BunaAI revisa lo que tu bot no supo resolver, como alguien que escribe desde un anuncio que el bot no conoce, te explica qué pasó, cuántas veces y por qué importa, y te propone la solución. La aplicás en un click o se la pedís al agente.",
   },
   {
     question: "¿Puedo hacer que me pase la conversación a mí?",
