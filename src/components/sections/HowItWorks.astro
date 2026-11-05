@@ -2,6 +2,15 @@
 import { STEPS } from "../../data/content";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../ui/Icon.astro";
+
+// Duración de cada paso en la secuencia de desktop (los 4 a la vista a la vez).
+// En mobile cada tarjeta arranca sola cuando entra en pantalla: ver `.how-step`
+// en global.css.
+const STEP_MS = 1100;
+
+// Alturas de la mini gráfica del paso 4, en % del alto disponible.
+const BARS = [38, 52, 45, 64, 58, 78, 92];
 ---
 
 <Section id="como-funciona">
@@ -11,12 +20,27 @@ import SectionHeading from "../ui/SectionHeading.astro";
     subtitle="Cuatro pasos, y los cuatro pasan dentro del panel. No hay nada que instalar ni que configurar por afuera."
   />
 
+  {/*
+    Cada tarjeta trae una mini escena (decorativa, aria-hidden) que muestra el
+    paso en vez de solo describirlo. En desktop se reproducen en orden, una
+    detrás de la otra; el texto de cada paso está siempre en el HTML.
+  */}
   <ol data-reveal-stagger class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
     {
       STEPS.map((step, index) => (
-        <li class="relative rounded-2xl border border-ink-900/10 bg-card p-6 card-hover">
+        <li
+          data-seq
+          class="how-step relative flex flex-col overflow-hidden rounded-2xl border border-ink-900/10 bg-card p-6 card-hover"
+          style={`--base: ${index * STEP_MS}ms`}
+        >
           <span
-            class="flex size-9 items-center justify-center rounded-xl bg-brand-500 font-display text-base font-bold text-white"
+            aria-hidden="true"
+            class="seq-fill absolute inset-x-0 top-0 h-0.5 bg-brand-500"
+            style="--d: var(--b); --dur: 1s"
+          />
+          <span
+            class="seq-light flex size-9 items-center justify-center rounded-xl bg-brand-500 font-display text-base font-bold text-white"
+            style="--d: var(--b)"
             aria-hidden="true"
           >
             {index + 1}
@@ -27,6 +51,78 @@ import SectionHeading from "../ui/SectionHeading.astro";
           <p class="mt-2.5 text-[0.95rem] leading-relaxed text-ink-700">
             {step.body}
           </p>
+
+          <div
+            aria-hidden="true"
+            class="mt-auto pt-6"
+          >
+            <div class="relative flex h-[5.5rem] flex-col justify-center overflow-hidden rounded-xl bg-surface-muted px-3.5">
+              {index === 0 && (
+                <p
+                  class="seq ml-auto max-w-[95%] rounded-xl rounded-br-sm bg-contrast px-3 py-2 text-[0.78rem] leading-snug text-white dark:bg-ink-900/12"
+                  style="--d: calc(var(--b) + 150ms)"
+                >
+                  Avisame si un pedido no se paga
+                  <span class="caret ml-0.5 inline-block h-3 w-px translate-y-0.5 bg-white/80" />
+                </p>
+              )}
+
+              {index === 1 && (
+                <ul class="space-y-2">
+                  {[78, 58, 68].map((width, j) => (
+                    <li class="flex items-center gap-2">
+                      <span
+                        class="seq-pop flex size-3.5 shrink-0 items-center justify-center rounded-full bg-brand-500 text-white"
+                        style={`--d: calc(var(--b) + ${350 + j * 230}ms)`}
+                      >
+                        <Icon name="check" size={8} />
+                      </span>
+                      <span
+                        class="seq-fill block h-1.5 rounded-full bg-ink-900/15"
+                        style={`width: ${width}%; --d: calc(var(--b) + ${150 + j * 230}ms); --dur: 0.45s`}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {index === 2 && (
+                <div class="flex items-center justify-between gap-3">
+                  <div>
+                    <p class="text-[0.78rem] font-semibold text-ink-900">Versión 12</p>
+                    <p class="mt-0.5 text-[0.72rem] text-ink-500">Carritos abandonados</p>
+                  </div>
+                  <span class="relative inline-grid text-[0.72rem] font-semibold">
+                    <span
+                      class="seq-out col-start-1 row-start-1 inline-flex items-center gap-1.5 rounded-full border border-ink-900/12 bg-card px-2.5 py-1 text-ink-500"
+                      style="--d: calc(var(--b) + 550ms)"
+                    >
+                      <span class="size-1.5 rounded-full bg-ink-500/60" />
+                      Borrador
+                    </span>
+                    <span
+                      class="seq col-start-1 row-start-1 inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-2.5 py-1 text-brand-700"
+                      style="--d: calc(var(--b) + 600ms)"
+                    >
+                      <span class="live-dot size-1.5 rounded-full bg-brand-500" />
+                      Publicada
+                    </span>
+                  </span>
+                </div>
+              )}
+
+              {index === 3 && (
+                <div class="flex h-12 items-end gap-1.5">
+                  {BARS.map((height, k) => (
+                    <span
+                      class="seq-rise flex-1 rounded-t-[3px] bg-brand-400/70 last:bg-brand-500"
+                      style={`height: ${height}%; --d: calc(var(--b) + ${100 + k * 70}ms)`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </li>
       ))
     }

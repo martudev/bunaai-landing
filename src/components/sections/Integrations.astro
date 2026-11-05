@@ -5,6 +5,7 @@ import SectionHeading from "../ui/SectionHeading.astro";
 import BrandLogo from "../ui/BrandLogo.astro";
 import Icon from "../ui/Icon.astro";
 import Button from "../ui/Button.astro";
+import IntegrationsFlow from "./IntegrationsFlow.astro";
 ---
 
 <Section id="integraciones">
@@ -14,9 +15,11 @@ import Button from "../ui/Button.astro";
     subtitle="El agente responde con datos reales porque los consulta en el momento, no porque alguien los cargó a mano en una variable."
   />
 
+  <IntegrationsFlow />
+
   {/* De a 2 en tablet y de a 4 en desktop: con 4 integraciones, 3 columnas
       dejarían una tarjeta sola en la segunda fila. */}
-  <ul data-reveal-stagger class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+  <ul data-reveal-stagger class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
     {
       INTEGRATIONS.live.map((integration) => (
         <li class="rounded-2xl border border-ink-900/10 bg-card p-7 card-hover">

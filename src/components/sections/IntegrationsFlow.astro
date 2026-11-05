@@ -1,0 +1,145 @@
+---
+/**
+ * Diagrama de "Integraciones": una consulta real recorriendo las herramientas.
+ * Cliente pregunta por WhatsApp → BunaAI consulta el stock en Tiendanube →
+ * responde con el dato → avisa en Slack. Es lo que dice el subtítulo de la
+ * sección ("consulta los datos en el momento"), mostrado en vez de contado.
+ *
+ * Todo es decorativo (aria-hidden): la información está en las tarjetas de
+ * abajo. Las líneas son SVG y los nodos HTML ubicados en los mismos
+ * porcentajes, así el texto no se deforma. El recorrido es un loop de CSS
+ * (`.flow-*` en global.css); sin JS o con movimiento reducido se ve el
+ * diagrama quieto con los cuatro mensajes.
+ */
+import BrandLogo from "../ui/BrandLogo.astro";
+
+// Posiciones en % del contenedor. El contenedor tiene la misma proporción que
+// el viewBox de cada SVG (uno para mobile, otro desde md), así los trazos no se
+// deforman y los nodos HTML caen justo sobre las puntas de las líneas.
+const WA = { x: 11, y: 50 };
+const BUNA = { x: 50, y: 50 };
+const TN = { x: 89, y: 22 };
+const SLACK = { x: 89, y: 70 };
+
+const CANVASES = [
+  { w: 360, h: 380, class: "md:hidden" },
+  { w: 900, h: 260, class: "hidden md:block" },
+];
+
+type Point = { x: number; y: number };
+const curve = (a: Point, b: Point, w: number, h: number) => {
+  const ax = (a.x * w) / 100, ay = (a.y * h) / 100;
+  const bx = (b.x * w) / 100, by = (b.y * h) / 100;
+  const mid = (ax + bx) / 2;
+  return `M${ax} ${ay} C${mid} ${ay} ${mid} ${by} ${bx} ${by}`;
+};
+
+const LINKS = { wa: [WA, BUNA], tn: [BUNA, TN], slack: [BUNA, SLACK] } as const;
+
+// Cada cometa recorre una línea en un momento del loop (--d). `rev` va del
+// final al principio del trazo.
+const COMETS = [
+  { link: "wa", d: 0, rev: false },
+  { link: "tn", d: 1.2, rev: false },
+  { link: "tn", d: 2.5, rev: true },
+  { link: "wa", d: 3.7, rev: true },
+  { link: "slack", d: 5, rev: false },
+] as const;
+
+const node =
+  "absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5";
+const logoBox =
+  "flow-node relative flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)] sm:size-12";
+const chip =
+  "flow-chip absolute z-10 w-max max-w-[7.5rem] rounded-xl px-2.5 py-1.5 text-[0.72rem] leading-snug shadow-[0_6px_20px_-10px_rgba(5,10,52,0.35)] md:max-w-[13rem] md:text-[0.78rem]";
+---
+
+<div
+  aria-hidden="true"
+  data-seq
+  class="relative mx-auto mt-14 aspect-[360/380] max-w-4xl rounded-2xl md:aspect-[900/260] border border-ink-900/10 bg-surface-muted"
+>
+  {
+    CANVASES.map(({ w, h, class: visibility }) => (
+      <svg
+        class:list={["absolute inset-0 size-full", visibility]}
+        viewBox={`0 0 ${w} ${h}`}
+        fill="none"
+      >
+        {Object.values(LINKS).map(([a, b]) => (
+          <path
+            d={curve(a, b, w, h)}
+            stroke="currentColor"
+            class="text-ink-900/15"
+            stroke-width="1.5"
+            stroke-dasharray="4 5"
+          />
+        ))}
+        {COMETS.map((comet) => {
+          const [a, b] = LINKS[comet.link];
+          return (
+            <path
+              d={curve(a, b, w, h)}
+              pathLength="100"
+              class:list={["flow-comet text-brand-500", comet.rev && "flow-comet-rev"]}
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              style={`--d: ${comet.d}s`}
+            />
+          );
+        })}
+      </svg>
+    ))
+  }
+
+  {/* Nodos */}
+  <div class={node} style={`left: ${WA.x}%; top: ${WA.y}%`}>
+    <span class={logoBox} style="--d: 4.8s"><BrandLogo name="whatsapp" size={22} /></span>
+    <span class="text-[0.72rem] font-semibold text-ink-500">Cliente</span>
+  </div>
+
+  <div class={node} style={`left: ${BUNA.x}%; top: ${BUNA.y}%`}>
+    <span
+      class="flow-node relative flex size-14 items-center justify-center rounded-2xl bg-contrast shadow-[0_12px_30px_-12px_rgba(47,172,106,0.6)] sm:size-16"
+      style="--d: 1s"
+    >
+      <img src="/favicon.svg" alt="" width="30" height="30" loading="lazy" decoding="async" />
+    </span>
+    <span class="text-[0.72rem] font-semibold text-ink-700">Tu agente</span>
+  </div>
+
+  <div class={node} style={`left: ${TN.x}%; top: ${TN.y}%`}>
+    <span class={logoBox} style="--d: 2.3s"><BrandLogo name="tiendanube" size={22} /></span>
+  </div>
+
+  <div class={node} style={`left: ${SLACK.x}%; top: ${SLACK.y}%`}>
+    <span class={logoBox} style="--d: 6s"><BrandLogo name="slack" size={22} /></span>
+  </div>
+
+  {/* Mensajes del recorrido */}
+  <p
+    class={`${chip} rounded-bl-sm bg-card text-ink-900`}
+    style="left: 4%; top: 6%; --d: 0s"
+  >
+    ¿Tienen la campera en talle M?
+  </p>
+  <p
+    class={`${chip} rounded-tr-sm bg-card text-ink-700`}
+    style="right: 4%; top: 37%; --d: 2.3s"
+  >
+    <span class="font-semibold text-ink-900">Stock talle M:</span> 3 unidades
+  </p>
+  <p
+    class={`${chip} rounded-tl-sm bg-brand-100 text-brand-900`}
+    style="left: 4%; bottom: 6%; --d: 4.8s"
+  >
+    ¡Sí! Quedan 3. ¿Te la reservo?
+  </p>
+  <p
+    class={`${chip} rounded-br-sm bg-card text-ink-700`}
+    style="right: 4%; bottom: 2%; --d: 6s"
+  >
+    <span class="font-semibold text-ink-900">#ventas</span> · consulta por talle M
+  </p>
+</div>
