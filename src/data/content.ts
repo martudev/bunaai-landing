@@ -15,10 +15,9 @@ export const NAV = [
 ] as const;
 
 export const HERO = {
-  eyebrow: "Agentes de IA para WhatsApp",
   title: "Automatizá tu negocio en WhatsApp describiéndolo en una frase",
   subtitle:
-    "BunaAI es la plataforma donde le contás en castellano qué necesitás que pase y ella construye la automatización y la publica. Sin armar flujos nodo por nodo, sin código y sin servidores.",
+    "Escribile a BunaAI lo que necesitás, como se lo pedirías a alguien de tu equipo, y la automatización queda funcionando en tu WhatsApp. No tenés que configurar nada técnico.",
   bullets: [
     "Conectás WhatsApp escaneando un QR",
     "Se integra con Tiendanube en tiempo real",
@@ -315,6 +314,31 @@ export const FAQS = [
       "Cada cuenta corre en su propia infraestructura, con servidores, base de datos y credenciales exclusivos para tu cuenta: no compartís nada con otros clientes. Las conversaciones se usan para que tu agente responda mejor en tu cuenta, no para entrenar modelos de terceros.",
   },
 ] as const;
+
+/**
+ * "Probalo en nuestro WhatsApp". Nuestro número lo atiende un agente hecho con
+ * BunaAI: en vez de pedir que nos crean, invitamos a probarlo. La charla de
+ * ejemplo es desde el lado de quien nos escribe (sus mensajes a la derecha).
+ */
+export const TRY_WHATSAPP = {
+  eyebrow: "Probalo en vivo",
+  title: "No vendemos humo: probá BunaAI en nuestro WhatsApp",
+  subtitle:
+    "Nuestro WhatsApp lo atiende un agente hecho con BunaAI. Lo que te ofrecemos lo usamos nosotros todos los días, así que la mejor forma de conocerlo es hablarle.",
+  ideas: [
+    "Preguntale por planes y precios",
+    "Contale qué hace tu negocio y qué te gustaría automatizar",
+    "Fijate cómo responde, igual que le respondería a tus clientes",
+  ],
+  cta: "Escribirle a nuestro agente",
+  message: "Hola, quiero probar el agente de BunaAI.",
+  chat: {
+    visitor: "Hola, ¿esto lo responde una persona?",
+    agent:
+      "¡Hola! Te responde un agente hecho con BunaAI 🙂 El mismo tipo de agente que podés tener en tu negocio. ¿Qué te gustaría automatizar?",
+    visitorReply: "Responder consultas de stock y precios",
+  },
+} as const;
 
 export const FINAL_CTA = {
   title: "Contale a BunaAI qué necesitás que haga tu negocio",
