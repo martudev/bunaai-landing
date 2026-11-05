@@ -141,7 +141,8 @@ import Icon from "../ui/Icon.astro";
       </div>
 
       {/*
-        Previsualización del resultado. Se apoya sobre la tarjeta anterior para
+        Previsualización del resultado. Como en WhatsApp: lo que manda el
+        negocio (tu agente) va a la derecha y en verde; el cliente, a la izquierda. Se apoya sobre la tarjeta anterior para
         contar la historia completa: el prompt de arriba produce esta charla.
       */}
       <div
@@ -156,19 +157,19 @@ import Icon from "../ui/Icon.astro";
         </p>
         <div class="space-y-2">
           <p
-            class="seq max-w-[88%] rounded-xl rounded-bl-sm bg-surface-muted px-3 py-2 text-[0.85rem] leading-snug text-ink-900"
+            class="seq ml-auto max-w-[88%] rounded-xl rounded-br-sm bg-brand-100 px-3 py-2 text-[0.85rem] leading-snug text-brand-900"
             style="--d: 4750ms"
           >
             {HERO_DEMO.whatsapp.business}
           </p>
           <p
-            class="seq ml-auto max-w-[88%] rounded-xl rounded-br-sm bg-brand-100 px-3 py-2 text-[0.85rem] leading-snug text-brand-900"
+            class="seq max-w-[88%] rounded-xl rounded-bl-sm bg-surface-muted px-3 py-2 text-[0.85rem] leading-snug text-ink-900"
             style="--d: 5450ms"
           >
             {HERO_DEMO.whatsapp.customer}
           </p>
           <p
-            class="seq max-w-[88%] rounded-xl rounded-bl-sm bg-surface-muted px-3 py-2 text-[0.85rem] leading-snug text-ink-900"
+            class="seq ml-auto max-w-[88%] rounded-xl rounded-br-sm bg-brand-100 px-3 py-2 text-[0.85rem] leading-snug text-brand-900"
             style="--d: 6150ms"
           >
             {HERO_DEMO.whatsapp.businessReply}
