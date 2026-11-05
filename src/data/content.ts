@@ -8,8 +8,7 @@
 
 export const NAV = [
   { label: "Cómo funciona", href: "/#como-funciona" },
-  { label: "Qué le podés pedir", href: "/#casos" },
-  { label: "La plataforma", href: "/#plataforma" },
+  { label: "Ejemplos", href: "/#casos" },
   { label: "Integraciones", href: "/#integraciones" },
   { label: "Precios", href: "/precios" },
 ] as const;

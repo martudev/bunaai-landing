@@ -120,8 +120,20 @@ const options = [
     const width = parseFloat(getComputedStyle(menu).width) || 176;
     const gutter = 8;
     const left = Math.min(Math.max(gutter, rect.right - width), window.innerWidth - width - gutter);
-    menu.style.top = `${rect.bottom + gutter}px`;
+    // Abajo del botón si entra; si no (el botón del footer), arriba. La altura
+    // todavía no se puede medir, así que se estima: 3 opciones de ~40px.
+    const height = 140;
+    const below = rect.bottom + gutter + height <= window.innerHeight;
+    menu.style.top = `${below ? rect.bottom + gutter : rect.top - gutter - height}px`;
     menu.style.left = `${left}px`;
+  });
+
+  // Ya abierto, si quedó arriba del botón se corrige con la altura real.
+  menu?.addEventListener("toggle", (event) => {
+    if ((event as ToggleEvent).newState !== "open" || !lastTrigger) return;
+    const rect = lastTrigger.getBoundingClientRect();
+    const box = menu.getBoundingClientRect();
+    if (box.top < rect.top) menu.style.top = `${rect.top - 8 - box.height}px`;
   });
 
   // Si cambia el tamaño de la ventana, la posición calculada deja de valer.

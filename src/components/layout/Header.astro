@@ -16,10 +16,10 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
   class="sticky top-0 z-50 border-b border-ink-900/8 bg-surface/85 backdrop-blur-md"
 >
   {/*
-    El header completo (logo, 5 links, selector de tema y 2 botones) entra
-    justo en el ancho máximo del contenedor. Si se agrega algo, medir que
-    `nav.scrollWidth` no supere a `nav.clientWidth`: cuando no entra, el flex
-    achica lo que puede y los íconos del selector llegaron a desaparecer.
+    Header liviano a propósito: 4 links cortos y las 2 acciones que importan
+    (entrar y pedir demo). "La plataforma" no está en el menú (se llega con
+    el scroll) y el selector de tema vive en el footer. Si se agrega algo,
+    medir que `nav.scrollWidth` no supere a `nav.clientWidth`.
   */}
   <nav class="container-page flex h-16 items-center gap-4" aria-label="Principal">
     <a
@@ -31,7 +31,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       <span>{SITE.name}</span>
     </a>
 
-    <ul class="ml-2 hidden items-center gap-1 xl:flex">
+    <ul class="ml-6 hidden items-center gap-2 lg:flex">
       {
         NAV.map((item) => (
           <li>
@@ -52,16 +52,15 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       }
     </ul>
 
-    <div class="ml-auto hidden items-center gap-2 xl:flex">
+    <div class="ml-auto hidden items-center gap-2 lg:flex">
       <Button href={CTA.login.href} variant="ghost">{CTA.login.label}</Button>
       <Button href={CTA.primary.href}>{CTA.primary.label}</Button>
-      <ThemeTrigger class="ml-1" />
     </div>
 
     <button
       type="button"
       id="nav-toggle"
-      class="-mr-2 ml-auto rounded-lg p-2 text-ink-900 xl:hidden"
+      class="-mr-2 ml-auto rounded-lg p-2 text-ink-900 lg:hidden"
       aria-expanded="false"
       aria-controls="nav-mobile"
       aria-label="Abrir menú"
@@ -73,7 +72,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
   <div
     id="nav-mobile"
     hidden
-    class="border-t border-ink-900/8 bg-surface xl:hidden"
+    class="border-t border-ink-900/8 bg-surface lg:hidden"
   >
     <ul class="container-page flex flex-col gap-1 py-4">
       {
