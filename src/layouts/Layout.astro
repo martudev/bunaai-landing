@@ -6,6 +6,7 @@ import Seo from "../components/seo/Seo.astro";
 import JsonLd from "../components/seo/JsonLd.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import Reveal from "../components/ui/Reveal.astro";
 
 interface Props {
   title: string;
@@ -41,6 +42,16 @@ const globalSchema = [organizationSchema(), websiteSchema(), ...schema];
     <script is:inline>
       (function () {
         var root = document.documentElement;
+        // Habilita las animaciones de entrada (ver "Movimiento" en global.css).
+        // Si no hay IntersectionObserver no se esconde nada.
+        // Si el script de Reveal.astro no llega a correr (bloqueado, error de
+        // red) se saca la clase y la página se ve completa, sin animar.
+        if ("IntersectionObserver" in window) {
+          root.classList.add("js");
+          setTimeout(function () {
+            if (!root.hasAttribute("data-reveal-ready")) root.classList.remove("js");
+          }, 2500);
+        }
         var preference = "system";
         try {
           var stored = localStorage.getItem("theme");
@@ -100,5 +111,6 @@ const globalSchema = [organizationSchema(), websiteSchema(), ...schema];
       <slot />
     </main>
     <Footer />
+    <Reveal />
   </body>
 </html>

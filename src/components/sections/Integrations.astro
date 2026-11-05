@@ -16,10 +16,10 @@ import Button from "../ui/Button.astro";
 
   {/* De a 2 en tablet y de a 4 en desktop: con 4 integraciones, 3 columnas
       dejarían una tarjeta sola en la segunda fila. */}
-  <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+  <ul data-reveal-stagger class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
     {
       INTEGRATIONS.live.map((integration) => (
-        <li class="rounded-2xl border border-ink-900/10 bg-card p-7">
+        <li class="rounded-2xl border border-ink-900/10 bg-card p-7 card-hover">
           <div class="flex items-center gap-3">
             {/*
               Fondo blanco y no el verde de marca: cada logo trae sus propios
@@ -49,6 +49,7 @@ import Button from "../ui/Button.astro";
     una charla, así que no deberían leerse como equivalentes.
   */}
   <div
+    data-reveal
     class="mt-5 grid gap-7 rounded-2xl border border-ink-900/10 bg-surface-muted p-7 md:grid-cols-[1.6fr_1fr] md:items-center md:gap-10 md:p-9"
   >
     <div>

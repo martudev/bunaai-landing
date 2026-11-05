@@ -25,14 +25,14 @@ const {
 <Section id="faq" tone={tone}>
   <SectionHeading title={title} subtitle={subtitle} />
 
-  <div class="mx-auto mt-12 max-w-3xl divide-y divide-ink-900/10 border-y border-ink-900/10">
+  <div data-reveal-stagger class="mx-auto mt-12 max-w-3xl divide-y divide-ink-900/10 border-y border-ink-900/10">
     {
       faqs.map((faq) => (
-        <details class="group">
+        <details class="faq-item group">
           <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-5 font-sans text-[1.05rem] font-semibold text-ink-900 [&::-webkit-details-marker]:hidden">
             {faq.question}
             <span
-              class="mt-1 shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-45"
+              class="mt-1 shrink-0 text-brand-600 transition-transform duration-300 ease-[var(--ease-out)] group-open:rotate-45"
               aria-hidden="true"
             >
               <svg

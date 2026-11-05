@@ -260,6 +260,7 @@ html {
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
@@ -278,6 +279,34 @@ html {
 
   @media (width >= 48rem) {
     padding-inline: 2rem;
+  }
+}
+
+/* Hover de tarjetas. Las que son links se levantan 2px (invitan al click);
+   las informativas solo ganan sombra y un borde verde suave, para no
+   prometer un click que no existe. Solo en dispositivos con mouse: en touch
+   el hover queda "pegado" después del tap. */
+@utility card-hover {
+  transition:
+    box-shadow 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-brand-200);
+      box-shadow:
+        0 1px 2px rgba(5, 10, 52, 0.04),
+        0 16px 36px -22px rgba(5, 10, 52, 0.3);
+    }
+  }
+}
+
+@utility card-hover-lift {
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 }
 
@@ -306,4 +335,186 @@ html {
     color: white;
     border-radius: 0.5rem;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Movimiento
+
+   Reglas de la casa:
+   - Solo se anima `opacity` y `transform`: los corre la GPU, no mueven el
+     layout (cero CLS) y no traban el scroll.
+   - Todo arranca visible. Lo que se esconde para animarse cuelga de la clase
+     `.js` que pone el script inline del <head>, así que sin JS (o un bot que no
+     lo ejecuta) ve la página completa y estática.
+   - El H1 y el texto del hero no se animan: son el LCP y tienen que pintarse
+     en el primer frame.
+   - `prefers-reduced-motion` ya lo resuelve la regla de la capa base.
+--------------------------------------------------------------------------- */
+
+:root {
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Entrada al hacer scroll: [data-reveal] para un bloque, [data-reveal-stagger]
+   para que los hijos entren de a uno. El observer (Reveal.astro) agrega
+   `.is-visible` y pone `--i` en cada hijo; cuando termina agrega
+   `.reveal-done`, que suelta estas reglas para no pisar los hover. */
+.js [data-reveal]:not(.reveal-done),
+.js [data-reveal-stagger]:not(.reveal-done) > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Grillas pegadas con gap de 1px (La plataforma): desplazar las celdas dejaría
+   ver el fondo, así que ahí solo hay fundido. */
+.js [data-reveal-stagger="fade"]:not(.reveal-done) > * {
+  transform: none;
+}
+
+.js [data-reveal].is-visible:not(.reveal-done),
+.js [data-reveal-stagger].is-visible:not(.reveal-done) > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Secuencia de la demo del hero. Cada `.seq` entra con su propio `--d`
+   cuando el contenedor se vuelve visible. Sin JS queda todo a la vista. */
+@keyframes seq-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes seq-pop {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes seq-typing {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+@keyframes live-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.js [data-seq]:not(.is-visible) .seq,
+.js [data-seq]:not(.is-visible) .seq-pop {
+  opacity: 0;
+}
+
+.js [data-seq]:not(.is-visible) .seq-pop {
+  transform: scale(0);
+}
+
+.js [data-seq].is-visible .seq {
+  animation: seq-in 0.55s var(--ease-out) var(--d, 0ms) both;
+}
+
+.js [data-seq].is-visible .seq-pop {
+  animation: seq-pop 0.45s var(--ease-out) var(--d, 0ms) both;
+}
+
+/* Los puntitos de "escribiendo…" solo existen durante la animación. */
+.seq-typing {
+  opacity: 0;
+}
+
+.js [data-seq].is-visible .seq-typing {
+  animation: seq-typing var(--life, 1s) linear var(--d, 0ms) both;
+}
+
+.seq-typing > span {
+  animation: typing-dot 1s ease-in-out infinite;
+}
+
+.seq-typing > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.seq-typing > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* FAQ: <details> que se abre deslizando, sin JS. `::details-content` e
+   `interpolate-size` son recientes (Chrome/Edge 131+, Safari 18.4+); donde no
+   existen, el <details> abre de golpe como siempre y nada se rompe. La
+   respuesta sigue en el HTML desde el principio, que es lo que importa para
+   Google y para el FAQPage. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.35s var(--ease-out),
+    content-visibility 0.35s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+.faq-item > p {
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+
+.faq-item:not([open]) > p {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* Punto "en vivo" del encabezado de la demo. */
+.live-dot {
+  position: relative;
+}
+
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: live-ring 2.4s var(--ease-out) infinite;
 }

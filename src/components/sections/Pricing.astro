@@ -72,7 +72,7 @@ const {
     demasiado angostas para las listas de features, así que van una abajo de
     la otra.
   */}
-  <div class="mx-auto mt-12 grid max-w-6xl gap-5 lg:grid-cols-3">
+  <div data-reveal-stagger class="mx-auto mt-12 grid max-w-6xl gap-5 lg:grid-cols-3">
     {
       PLANS.map((plan) => (
         <div
@@ -80,7 +80,7 @@ const {
             "relative flex flex-col rounded-2xl border p-7",
             plan.featured
               ? "border-brand-300 bg-card shadow-[0_1px_2px_rgba(5,10,52,0.04),0_24px_56px_-28px_rgba(47,172,106,0.5)] lg:-my-3 lg:py-10"
-              : "border-ink-900/10 bg-card",
+              : "border-ink-900/10 bg-card card-hover",
           ]}
         >
           {plan.featured && (

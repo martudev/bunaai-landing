@@ -12,10 +12,10 @@ import Icon from "../ui/Icon.astro";
     subtitle="No son plantillas para elegir de una lista. Son frases que podés escribirle hoy y que se convierten en una automatización corriendo."
   />
 
-  <ul class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+  <ul data-reveal-stagger class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
     {
       USE_CASES.map((useCase) => (
-        <li class="flex flex-col rounded-2xl border border-ink-900/10 bg-card p-5 transition-shadow duration-200 hover:shadow-[0_1px_2px_rgba(5,10,52,0.04),0_16px_36px_-22px_rgba(5,10,52,0.3)]">
+        <li class="flex flex-col rounded-2xl border border-ink-900/10 bg-card p-5 card-hover">
           <p class="text-xs font-semibold tracking-wide text-brand-600 uppercase">
             {useCase.tag}
           </p>

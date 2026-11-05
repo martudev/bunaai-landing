@@ -1,0 +1,36 @@
+<script>
+  // Observer único para las entradas al hacer scroll ([data-reveal],
+  // [data-reveal-stagger]) y la secuencia de la demo del hero ([data-seq]).
+  // Cada elemento se anima una sola vez y deja de observarse.
+  document.documentElement.setAttribute("data-reveal-ready", "");
+
+  const targets = document.querySelectorAll<HTMLElement>(
+    "[data-reveal], [data-reveal-stagger], [data-seq]",
+  );
+
+  for (const el of document.querySelectorAll<HTMLElement>("[data-reveal-stagger]")) {
+    Array.from(el.children).forEach((child, i) => {
+      (child as HTMLElement).style.setProperty("--i", String(i));
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        el.classList.add("is-visible");
+        observer.unobserve(el);
+        // Al terminar la entrada se sueltan las reglas de reveal para que las
+        // transiciones propias (hover) vuelvan a ser las de cada componente.
+        if (!el.hasAttribute("data-seq")) {
+          const items = el.hasAttribute("data-reveal-stagger") ? el.children.length : 1;
+          setTimeout(() => el.classList.add("reveal-done"), 650 + items * 70);
+        }
+      }
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+  );
+
+  targets.forEach((el) => observer.observe(el));
+</script>

@@ -11,10 +11,10 @@ import SectionHeading from "../ui/SectionHeading.astro";
     subtitle="Cuatro pasos, y los cuatro pasan dentro del panel. No hay nada que instalar ni que configurar por afuera."
   />
 
-  <ol class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+  <ol data-reveal-stagger class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
     {
       STEPS.map((step, index) => (
-        <li class="relative rounded-2xl border border-ink-900/10 bg-card p-6">
+        <li class="relative rounded-2xl border border-ink-900/10 bg-card p-6 card-hover">
           <span
             class="flex size-9 items-center justify-center rounded-xl bg-brand-500 font-display text-base font-bold text-white"
             aria-hidden="true"
