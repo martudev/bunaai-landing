@@ -104,10 +104,11 @@ const chip =
 
   <div class={node} style={`left: ${BUNA.x}%; top: ${BUNA.y}%`}>
     <span
-      class="flow-node relative flex size-14 items-center justify-center rounded-2xl bg-contrast shadow-[0_12px_30px_-12px_rgba(47,172,106,0.6)] sm:size-16"
+      class="flow-node relative flex size-14 rounded-2xl shadow-[0_12px_30px_-12px_rgba(47,172,106,0.6)] sm:size-16"
       style="--d: 1s"
     >
-      <img src="/favicon.svg" alt="" width="30" height="30" loading="lazy" decoding="async" />
+      {/* El favicon ya es un cuadrado verde redondeado: ocupa todo el nodo, sin fondo. */}
+      <img src="/favicon.svg" alt="" width="64" height="64" class="size-full" loading="lazy" decoding="async" />
     </span>
     <span class={`${label} text-ink-700`}>Tu agente</span>
   </div>
