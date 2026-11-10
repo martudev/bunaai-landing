@@ -27,11 +27,11 @@ import IntegrationsFlow from "./IntegrationsFlow.astro";
             {/*
               Fondo blanco y no el verde de marca: cada logo trae sus propios
               colores y sobre el verde de BunaAI se ensuciarían, sobre todo el
-              de WhatsApp, que es un verde parecido. Es `bg-white` fijo y no
-              `bg-card` a propósito: en tema oscuro el azul de Tiendanube casi
-              no se ve sobre gris, y los logos se leen como íconos de app.
+              de WhatsApp, que es un verde parecido. En tema oscuro va un gris
+              un escalón más hundido que la tarjeta (una ficha blanca
+              encandilaba), aunque el azul de Tiendanube pierde algo de contraste.
             */}
-            <span class="flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)]">
+            <span class="flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)] dark:bg-surface-muted">
               <BrandLogo name={integration.logo} size={22} />
             </span>
             <h3 class="font-sans text-lg font-semibold text-ink-900">

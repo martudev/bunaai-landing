@@ -46,10 +46,13 @@ const COMETS = [
   { link: "slack", d: 5, rev: false },
 ] as const;
 
-const node =
-  "absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5";
+// El punto (x, y) es el centro del logo, que es donde terminan las líneas. La
+// etiqueta cuelga debajo en absoluto para no correr el logo hacia arriba.
+const node = "absolute -translate-x-1/2 -translate-y-1/2";
+const label =
+  "absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap text-[0.72rem] font-semibold";
 const logoBox =
-  "flow-node relative flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(5,10,52,0.06)] sm:size-12";
+  "flow-node relative flex size-11 items-center justify-center rounded-xl border border-ink-900/8 bg-card shadow-[0_1px_2px_rgba(5,10,52,0.06)] sm:size-12";
 const chip =
   "flow-chip absolute z-10 w-max max-w-[7.5rem] rounded-xl px-2.5 py-1.5 text-[0.72rem] leading-snug shadow-[0_6px_20px_-10px_rgba(5,10,52,0.35)] md:max-w-[13rem] md:text-[0.78rem]";
 ---
@@ -96,7 +99,7 @@ const chip =
   {/* Nodos */}
   <div class={node} style={`left: ${WA.x}%; top: ${WA.y}%`}>
     <span class={logoBox} style="--d: 4.8s"><BrandLogo name="whatsapp" size={22} /></span>
-    <span class="text-[0.72rem] font-semibold text-ink-500">Cliente</span>
+    <span class={`${label} text-ink-500`}>Cliente</span>
   </div>
 
   <div class={node} style={`left: ${BUNA.x}%; top: ${BUNA.y}%`}>
@@ -106,7 +109,7 @@ const chip =
     >
       <img src="/favicon.svg" alt="" width="30" height="30" loading="lazy" decoding="async" />
     </span>
-    <span class="text-[0.72rem] font-semibold text-ink-700">Tu agente</span>
+    <span class={`${label} text-ink-700`}>Tu agente</span>
   </div>
 
   <div class={node} style={`left: ${TN.x}%; top: ${TN.y}%`}>
