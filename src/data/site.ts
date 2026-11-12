@@ -15,6 +15,16 @@ export const SITE = {
   /** Imagen de Open Graph por defecto. 1200x630. */
   ogImage: "/og/default.png",
   email: "hola@buna.ai",
+  /**
+   * Titular del servicio, tal cual figura en la constancia de ARCA. Solo se
+   * muestra en /terminos y /privacidad: Meta (verificación del negocio y App
+   * Review de WhatsApp) cruza estos datos con la constancia.
+   */
+  legal: {
+    name: "AMENGUAL MARTIN GUSTAVO",
+    cuit: "20-41722685-1",
+    address: "Piedras 1080, C1070, Ciudad Autónoma de Buenos Aires, Argentina",
+  },
   /** Número de ventas, en formato internacional sin "+" para armar links de wa.me. */
   whatsapp: "5491134793609",
   app: {

@@ -1,0 +1,229 @@
+---
+import LegalPage from "../components/layout/LegalPage.astro";
+import { SITE } from "../data/site";
+
+/*
+  Esta URL es la "Política de privacidad" de la app de Meta (WhatsApp Business
+  Platform) y #eliminacion-de-datos es la URL de "Instrucciones para eliminar
+  datos". Si cambia el path o el id del ancla, hay que actualizarlos en el
+  panel de la app de Meta.
+*/
+---
+
+<LegalPage
+  title="Política de privacidad | BunaAI"
+  heading="Política de privacidad"
+  description="Qué datos trata BunaAI, para qué, con quién los comparte y cómo podés acceder a ellos, corregirlos o pedir que se eliminen."
+  path="/privacidad"
+  updated="12 de noviembre de 2026"
+>
+  <p>
+    Esta política explica cómo {SITE.name} trata los datos personales en su sitio web
+    (buna.ai), en su aplicación (app.buna.ai) y al prestar su servicio de automatizaciones
+    y agentes de inteligencia artificial para WhatsApp. Se rige por la Ley N.º 25.326 de
+    Protección de los Datos Personales de la República Argentina y su normativa
+    complementaria.
+  </p>
+
+  <h2 id="roles">1. Dos roles distintos</h2>
+  <ul>
+    <li>
+      <strong>Datos de nuestros clientes</strong> (los negocios que contratan {SITE.name} y
+      las personas de su equipo): {SITE.name} es el <strong>responsable</strong> de esos
+      datos.
+    </li>
+    <li>
+      <strong>Datos de los contactos de nuestros clientes</strong> (las personas que le
+      escriben a un negocio por WhatsApp): el negocio es el responsable y {SITE.name}
+      actúa como <strong>encargado del tratamiento</strong>. Los tratamos solo para
+      prestarle el servicio a ese negocio y según sus instrucciones. Si le escribiste a un
+      negocio que usa {SITE.name}, la política de privacidad que te aplica en primer lugar
+      es la de ese negocio.
+    </li>
+  </ul>
+
+  <h2 id="datos">2. Qué datos tratamos</h2>
+  <h3>De nuestros clientes y sus equipos</h3>
+  <ul>
+    <li>Datos de cuenta: nombre, email, teléfono, nombre del negocio y credenciales de acceso.</li>
+    <li>
+      Datos de facturación y pago. Los pagos se procesan con Mercado Pago: no guardamos
+      números de tarjeta.
+    </li>
+    <li>
+      Contenido que cargan en la plataforma: instrucciones para los agentes, archivos,
+      configuraciones, mensajes con el asistente de {SITE.name} y audios que dictan en la
+      aplicación (se transcriben a texto).
+    </li>
+    <li>
+      Datos de uso y técnicos: registros de actividad, consumo del servicio, dirección IP y
+      datos del navegador, que usamos para operar y proteger la plataforma.
+    </li>
+  </ul>
+
+  <h3>De los contactos de nuestros clientes (por cuenta del cliente)</h3>
+  <ul>
+    <li>Número de teléfono y nombre de perfil de WhatsApp.</li>
+    <li>
+      Mensajes y archivos intercambiados con el negocio (texto, imágenes, audios,
+      documentos), y su fecha y estado.
+    </li>
+    <li>
+      Datos que el negocio conecta desde sus propias herramientas, por ejemplo pedidos y
+      productos de su tienda online.
+    </li>
+  </ul>
+
+  <h3>Del sitio web</h3>
+  <p>
+    El sitio buna.ai no usa cookies de publicidad ni de analítica. Guarda en tu navegador
+    solo tu preferencia de tema (claro u oscuro). La aplicación usa almacenamiento del
+    navegador para mantener tu sesión iniciada.
+  </p>
+
+  <h2 id="finalidades">3. Para qué los usamos</h2>
+  <ul>
+    <li>Prestar el servicio: construir, desplegar y operar las automatizaciones de cada cliente.</li>
+    <li>
+      Recibir y responder mensajes de WhatsApp en nombre del cliente, de acuerdo con lo que
+      el cliente configuró.
+    </li>
+    <li>Cobrar, facturar y gestionar la cuenta.</li>
+    <li>Dar soporte, avisar cambios importantes y responder consultas.</li>
+    <li>Proteger la plataforma, prevenir abusos y cumplir obligaciones legales.</li>
+    <li>Medir y mejorar el funcionamiento del servicio.</li>
+  </ul>
+  <p>
+    <strong>No vendemos datos personales.</strong> No usamos los mensajes de los contactos
+    de un cliente para fines propios ni para entrenar modelos de inteligencia artificial.
+  </p>
+
+  <h2 id="whatsapp">4. WhatsApp e inteligencia artificial</h2>
+  <p>
+    WhatsApp es un servicio de Meta Platforms. Cuando un cliente conecta su número, los
+    mensajes pasan por la infraestructura de WhatsApp y su tratamiento por parte de Meta se
+    rige por las condiciones y políticas de WhatsApp. Cuando la conexión se hace mediante la
+    Plataforma de WhatsApp Business (API oficial), {SITE.name} accede a los mensajes y
+    datos de la cuenta de WhatsApp Business del cliente solo para prestarle el servicio.
+  </p>
+  <p>
+    Para generar respuestas y transcribir audios usamos proveedores de modelos de
+    inteligencia artificial (OpenAI y Anthropic) a través de sus servicios empresariales de
+    API. Les enviamos solo la información necesaria para cada tarea.
+  </p>
+
+  <h2 id="terceros">5. Con quién compartimos datos</h2>
+  <p>Compartimos datos únicamente con:</p>
+  <ul>
+    <li>
+      <strong>Proveedores que nos prestan servicios</strong>, bajo obligaciones de
+      confidencialidad y solo para esos fines: infraestructura y bases de datos en la nube
+      (por ejemplo Supabase, Fly.io y Vercel), modelos de IA (OpenAI y Anthropic), pagos
+      (Mercado Pago), correo (Google Workspace) y mensajería (Meta / WhatsApp).
+    </li>
+    <li>
+      <strong>Las integraciones que el cliente decide conectar</strong>, por ejemplo su
+      tienda online.
+    </li>
+    <li>
+      <strong>Autoridades</strong>, cuando una ley u orden judicial lo exija.
+    </li>
+  </ul>
+
+  <h2 id="transferencias">6. Transferencias internacionales</h2>
+  <p>
+    Algunos de esos proveedores procesan o alojan datos fuera de Argentina, principalmente
+    en los Estados Unidos. En esos casos trabajamos con proveedores que ofrecen garantías
+    adecuadas de protección y confidencialidad, conforme al artículo 12 de la Ley N.º 25.326.
+  </p>
+
+  <h2 id="conservacion">7. Cuánto tiempo los guardamos</h2>
+  <ul>
+    <li>Mientras la cuenta del cliente esté activa, conservamos los datos necesarios para prestar el servicio.</li>
+    <li>
+      Cuando el cliente da de baja su cuenta, eliminamos sus datos y los de sus contactos
+      dentro de los 30 días, salvo los que debamos conservar por obligaciones legales (por
+      ejemplo, la facturación).
+    </li>
+    <li>Las copias de seguridad se eliminan a medida que se renuevan.</li>
+  </ul>
+
+  <h2 id="seguridad">8. Seguridad</h2>
+  <p>
+    Aplicamos medidas técnicas y organizativas razonables para proteger los datos: cifrado
+    en tránsito, separación de los datos de cada cliente, control de accesos y acceso
+    limitado a las personas que lo necesitan para operar el servicio. Ningún sistema es
+    completamente invulnerable; si ocurriera un incidente que afecte tus datos, te lo
+    vamos a informar.
+  </p>
+
+  <h2 id="derechos">9. Tus derechos</h2>
+  <p>
+    Podés pedir acceso a tus datos, su rectificación, actualización o supresión escribiendo
+    a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Respondemos los pedidos de acceso
+    dentro de los 10 días corridos, y los de rectificación o supresión dentro de los 5 días
+    hábiles, como establece la ley. Si tus datos los tratamos por cuenta de un negocio
+    (porque le escribiste por WhatsApp), también podés dirigirte directamente a ese
+    negocio.
+  </p>
+  <p>
+    El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a
+    los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se
+    acredite un interés legítimo al efecto conforme lo establecido en el artículo 14,
+    inciso 3 de la Ley N.º 25.326. La AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, en su
+    carácter de Órgano de Control de la Ley N.º 25.326, tiene la atribución de atender las
+    denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por
+    incumplimiento de las normas vigentes en materia de protección de datos personales.
+  </p>
+
+  <h2 id="eliminacion-de-datos">10. Cómo pedir que eliminemos tus datos</h2>
+  <h3>Si sos cliente de {SITE.name}</h3>
+  <ol>
+    <li>
+      Escribinos a <a href={`mailto:${SITE.email}?subject=Eliminaci%C3%B3n%20de%20datos`}>{SITE.email}</a>{" "}
+      con el asunto "Eliminación de datos", desde el email de tu cuenta.
+    </li>
+    <li>Indicá si querés eliminar toda la cuenta o solo algunos datos.</li>
+    <li>
+      Te confirmamos el pedido y, dentro de los 5 días hábiles, eliminamos los datos de la
+      cuenta, de las automatizaciones y de los contactos asociados, y desconectamos el
+      número de WhatsApp de {SITE.name}. Te avisamos cuando esté hecho.
+    </li>
+  </ol>
+
+  <h3>Si le escribiste a un negocio que usa {SITE.name}</h3>
+  <ol>
+    <li>
+      Pedíselo al negocio, que es el responsable de tus datos; o escribinos a
+      {" "}<a href={`mailto:${SITE.email}?subject=Eliminaci%C3%B3n%20de%20datos`}>{SITE.email}</a>{" "}
+      indicando tu número de teléfono y el nombre del negocio.
+    </li>
+    <li>
+      Eliminamos tus mensajes y tus datos de contacto de los sistemas de {SITE.name} para
+      ese negocio dentro de los 5 días hábiles, y se lo informamos al negocio.
+    </li>
+  </ol>
+  <p>
+    Los mensajes que quedan en tu WhatsApp o en la aplicación de WhatsApp del negocio no
+    dependen de {SITE.name}: se gestionan desde WhatsApp.
+  </p>
+
+  <h2 id="menores">11. Menores de edad</h2>
+  <p>
+    {SITE.name} es un servicio para negocios y no está dirigido a menores de 18 años. No
+    recopilamos a sabiendas datos de menores como clientes.
+  </p>
+
+  <h2 id="cambios">12. Cambios en esta política</h2>
+  <p>
+    Si cambiamos esta política, publicamos la nueva versión en esta página con su fecha. Si
+    el cambio es importante, se lo avisamos a nuestros clientes por email antes de que
+    entre en vigencia.
+  </p>
+
+  <h2 id="contacto">13. Contacto</h2>
+  <p>
+    Por cualquier consulta sobre privacidad, escribinos a
+    {" "}<a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+</LegalPage>

@@ -1,0 +1,206 @@
+---
+import LegalPage from "../components/layout/LegalPage.astro";
+import { SITE } from "../data/site";
+---
+
+<LegalPage
+  title="Términos y condiciones | BunaAI"
+  heading="Términos y condiciones"
+  description="Las condiciones de uso de BunaAI: qué incluye el servicio, cómo se cobra, qué se puede y qué no se puede hacer, y cómo dar de baja la cuenta."
+  path="/terminos"
+  updated="12 de noviembre de 2026"
+>
+  <p>
+    Estos términos regulan el uso del sitio buna.ai, de la aplicación app.buna.ai y del
+    servicio {SITE.name} (en conjunto, el "Servicio"). Al crear una cuenta o usar el
+    Servicio, el negocio que lo contrata (el "Cliente") los acepta. Si usás {SITE.name} en
+    nombre de un negocio, declarás que tenés facultades para aceptarlos en su nombre.
+  </p>
+
+  <h2 id="servicio">1. El Servicio</h2>
+  <p>
+    {SITE.name} es una plataforma para crear, desplegar y operar automatizaciones y agentes
+    de inteligencia artificial que atienden, venden y hacen seguimiento por WhatsApp, y que
+    se integran con otras herramientas del Cliente, como su tienda online. Las funciones
+    disponibles dependen del plan contratado y se describen en
+    {" "}<a href="/precios">buna.ai/precios</a>.
+  </p>
+
+  <h2 id="cuenta">2. Cuenta</h2>
+  <ul>
+    <li>
+      La cuenta la crea el equipo de {SITE.name} para el Cliente. El Cliente debe dar
+      información verdadera y mantenerla actualizada.
+    </li>
+    <li>
+      El Cliente es responsable de las credenciales de acceso y de todo lo que hagan las
+      personas de su equipo a las que les dé acceso.
+    </li>
+    <li>
+      Si detectás un acceso no autorizado, avisanos enseguida a
+      {" "}<a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    </li>
+  </ul>
+
+  <h2 id="whatsapp">3. WhatsApp</h2>
+  <ul>
+    <li>
+      WhatsApp es un servicio de Meta Platforms. Para usar {SITE.name}, el Cliente conecta
+      un número de WhatsApp propio y debe cumplir las condiciones y políticas de WhatsApp,
+      incluidas la Política de WhatsApp Business y la Política de Comercio.
+    </li>
+    <li>
+      Meta puede limitar, suspender o bloquear números o cuentas según sus propias reglas.
+      {SITE.name} no controla esas decisiones y no es responsable por ellas.
+    </li>
+    <li>
+      Cuando la conexión se hace mediante la Plataforma de WhatsApp Business (API oficial),
+      los cargos que Meta cobre por mensajes los paga el Cliente directamente a Meta, con su
+      propio medio de pago, y no están incluidos en el precio de {SITE.name}.
+    </li>
+  </ul>
+
+  <h2 id="pagos">4. Planes, precios y pagos</h2>
+  <ul>
+    <li>
+      Los planes se cobran por adelantado, en pesos argentinos, con Mercado Pago, de forma
+      mensual o anual según lo que elija el Cliente. Los precios vigentes están en
+      {" "}<a href="/precios">buna.ai/precios</a>.
+    </li>
+    <li>
+      El uso de inteligencia artificial se descuenta de un crédito prepago que el Cliente
+      carga desde la aplicación. El crédito se consume a medida que se usa el Servicio y no
+      se recarga solo.
+    </li>
+    <li>
+      Si cambian los precios, se lo avisamos al Cliente por email al menos 30 días antes. El
+      nuevo precio se aplica desde el período siguiente.
+    </li>
+    <li>
+      Si un pago no se acredita, podemos suspender el Servicio hasta que se regularice, con
+      aviso previo.
+    </li>
+  </ul>
+
+  <h2 id="uso">5. Uso permitido</h2>
+  <p>El Cliente se compromete a no usar el Servicio para:</p>
+  <ul>
+    <li>
+      Enviar mensajes no solicitados (spam) o escribirles a personas que no dieron su
+      consentimiento para recibir mensajes del negocio.
+    </li>
+    <li>
+      Ofrecer productos o servicios ilegales o prohibidos por las políticas de WhatsApp, o
+      publicar contenido engañoso, ofensivo o que infrinja derechos de terceros.
+    </li>
+    <li>Suplantar a otras personas o negocios.</li>
+    <li>
+      Intentar acceder sin autorización a la plataforma o a datos de otros clientes,
+      interferir con su funcionamiento o usarla para desarrollar un servicio competidor.
+    </li>
+  </ul>
+  <p>
+    Si el Cliente incumple estas reglas, podemos suspender o cancelar la cuenta. Salvo casos
+    graves o urgentes, avisamos antes y damos un plazo para corregirlo.
+  </p>
+
+  <h2 id="datos">6. Datos de los contactos del Cliente</h2>
+  <ul>
+    <li>
+      El Cliente es el responsable de los datos de las personas que le escriben y debe
+      contar con una base legal para tratarlos, incluido el consentimiento cuando haga
+      falta.
+    </li>
+    <li>
+      {SITE.name} trata esos datos como encargado del tratamiento, solo para prestar el
+      Servicio y según las instrucciones del Cliente, como se explica en la
+      {" "}<a href="/privacidad">política de privacidad</a>.
+    </li>
+  </ul>
+
+  <h2 id="ia">7. Respuestas generadas con inteligencia artificial</h2>
+  <ul>
+    <li>
+      Los agentes responden de forma automática con modelos de inteligencia artificial.
+      Aunque trabajamos para que sean precisos, pueden cometer errores o dar información
+      incompleta.
+    </li>
+    <li>
+      El Cliente decide qué hacen sus agentes, revisa su configuración y es responsable de
+      la información que ofrece a sus contactos (precios, stock, condiciones, etc.).
+      Recomendamos usar la derivación a una persona en los casos sensibles.
+    </li>
+  </ul>
+
+  <h2 id="propiedad">8. Propiedad intelectual</h2>
+  <ul>
+    <li>
+      La plataforma, el software, las plantillas, la marca y los materiales de {SITE.name}
+      son de su titular. El Cliente recibe un derecho de uso no exclusivo e intransferible
+      mientras su cuenta esté activa.
+    </li>
+    <li>
+      Los datos, textos, imágenes y demás contenido que el Cliente carga siguen siendo del
+      Cliente. Nos autoriza a usarlos solo para prestarle el Servicio.
+    </li>
+  </ul>
+
+  <h2 id="disponibilidad">9. Disponibilidad</h2>
+  <p>
+    Trabajamos para que el Servicio esté disponible y funcione correctamente, pero no
+    garantizamos que funcione sin interrupciones ni errores. Puede haber mantenimientos y
+    fallas de servicios de terceros de los que depende (WhatsApp, proveedores de
+    infraestructura, de IA o las integraciones del Cliente). Cuando un problema dependa de
+    nosotros, vamos a resolverlo lo antes posible.
+  </p>
+
+  <h2 id="responsabilidad">10. Limitación de responsabilidad</h2>
+  <p>
+    En la medida que lo permita la ley, {SITE.name} no responde por lucro cesante, pérdida
+    de ventas o daños indirectos, ni por decisiones de Meta sobre el número del Cliente. La
+    responsabilidad total de {SITE.name} frente al Cliente se limita al importe que el
+    Cliente pagó por el Servicio en los 3 meses anteriores al hecho que la origina. Nada en
+    estos términos limita los derechos que la Ley N.º 24.240 de Defensa del Consumidor le
+    reconoce a quien contrate como consumidor.
+  </p>
+
+  <h2 id="baja">11. Baja</h2>
+  <ul>
+    <li>
+      El Cliente puede cancelar su plan cuando quiera desde Configuración en la aplicación o
+      escribiendo a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. La cancelación
+      frena los cobros siguientes y el Servicio sigue activo hasta el final del período ya
+      pagado.
+    </li>
+    <li>
+      Si el Cliente contrató como consumidor, puede revocar la contratación dentro de los
+      10 días corridos desde que la hizo, sin costo, conforme al artículo 34 de la Ley N.º
+      24.240.
+    </li>
+    <li>
+      Cuando la cuenta se da de baja, los datos se eliminan como se explica en la
+      {" "}<a href="/privacidad#eliminacion-de-datos">política de privacidad</a>.
+    </li>
+  </ul>
+
+  <h2 id="cambios">12. Cambios en estos términos</h2>
+  <p>
+    Podemos actualizar estos términos. Publicamos la nueva versión en esta página y, si el
+    cambio es importante, se lo avisamos al Cliente por email al menos 30 días antes de que
+    entre en vigencia. Si el Cliente no está de acuerdo, puede dar de baja la cuenta antes
+    de esa fecha.
+  </p>
+
+  <h2 id="ley">13. Ley aplicable</h2>
+  <p>
+    Estos términos se rigen por las leyes de la República Argentina. Cualquier controversia
+    se somete a los tribunales ordinarios de la Ciudad Autónoma de Buenos Aires, salvo que
+    el Cliente sea consumidor, en cuyo caso será competente el tribunal de su domicilio.
+  </p>
+
+  <h2 id="contacto">14. Contacto</h2>
+  <p>
+    Por cualquier consulta sobre estos términos, escribinos a
+    {" "}<a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+</LegalPage>

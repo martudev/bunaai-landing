@@ -34,6 +34,11 @@ const socialLabels: Record<string, string> = {
   youtube: "YouTube",
 };
 
+const legal = [
+  { label: "Términos", href: "/terminos" },
+  { label: "Privacidad", href: "/privacidad" },
+];
+
 const year = new Date().getFullYear();
 ---
 
@@ -124,6 +129,18 @@ const year = new Date().getFullYear();
         {/* El selector de tema vive acá para que el header quede liviano. */}
         <ThemeTrigger />
       </div>
+      {/* Meta revisa estas páginas para verificar el negocio: tienen que estar enlazadas desde todo el sitio. */}
+      <ul class="flex gap-5">
+        {
+          legal.map((item) => (
+            <li>
+              <a href={item.href} class="hover:text-brand-600 hover:underline">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       {
         social.length > 0 && (
           <ul class="flex gap-5">
