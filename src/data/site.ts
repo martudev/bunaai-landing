@@ -26,7 +26,7 @@ export const SITE = {
     address: "Piedras 1080, C1070, Ciudad Autónoma de Buenos Aires, Argentina",
   },
   /** Número de ventas, en formato internacional sin "+" para armar links de wa.me. */
-  whatsapp: "5491134793609",
+  whatsapp: "5491127114052",
   app: {
     base: "https://app.buna.ai",
     // Registro público deshabilitado: la cuenta la crea el equipo (alta por admin).
