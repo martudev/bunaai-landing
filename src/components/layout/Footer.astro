@@ -20,20 +20,8 @@ const producto = [
   { label: "Preguntas frecuentes", href: "/#faq" },
 ];
 
-// Las redes sin URL quedan en null y no se renderizan. El predicado excluye
-// null en vez de afirmar `string` porque SITE.social es `as const` y sus
-// valores son tipos literales.
-const social = Object.entries(SITE.social).filter(
-  (entry): entry is [string, Exclude<(typeof entry)[1], null>] => entry[1] !== null,
-);
-
-const socialLabels: Record<string, string> = {
-  linkedin: "LinkedIn",
-  instagram: "Instagram",
-  x: "X",
-  youtube: "YouTube",
-};
-
+// Las redes (SITE.social) no se muestran en el footer: solo alimentan el
+// `sameAs` del schema de la organización (src/data/schema.ts).
 const legal = [
   { label: "Términos", href: "/terminos" },
   { label: "Privacidad", href: "/privacidad" },
@@ -141,24 +129,6 @@ const year = new Date().getFullYear();
           ))
         }
       </ul>
-      {
-        social.length > 0 && (
-          <ul class="flex gap-5">
-            {social.map(([key, url]) => (
-              <li>
-                <a
-                  href={url}
-                  rel="noopener"
-                  target="_blank"
-                  class="hover:text-brand-600 hover:underline"
-                >
-                  {socialLabels[key] ?? key}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
-      }
     </div>
   </div>
 </footer>
